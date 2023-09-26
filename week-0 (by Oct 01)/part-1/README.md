@@ -56,4 +56,5 @@ Go to your **forked repository** in GitHub website. Find the **feature branch** 
 
 ## Sample PR
 
-![github com_AppWorks-School_Front-End-Class-Batch16_pull_121 (4)](https://user-images.githubusercontent.com/11663276/173797630-58573dba-d62b-40ea-905e-ea3331e96f59.png)
+![github com_AppWorks-School-Materials_Front-End-Class-Batch19_pulls_q=is%3Apr+is%3Aclosed](https://github.com/AppWorks-School-Materials/Front-End-Class-Batch22/assets/11663276/9f68b69e-0f72-43c7-982b-e2c919929a0e)
+
