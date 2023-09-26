@@ -1,4 +1,4 @@
-# Front End Class Batch 19
+# Front End Class Batch 22
 
 We are going to build an e-commerce website called `STYLiSH`. Here is the summary for you.
 
