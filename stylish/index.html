@@ -5,14 +5,50 @@
   <head>
     <meta charset = "utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>STYLish</title>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <title>STYLiSH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500&display=swap">
+    <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
 
   <body>
-    <h1>Welcome to STYLiSH!</h1>
-    <span>&copy;2023 credited to Po-Lien Lin</span>
-    <!-- <script type="text/javascript" src="script.js"></script> -->
+    <header>
+      <div class="headerWrapper">
+        
+        <a href="/" id="logoUrl"><img id="logo" src="./images/logo.png" alt="stylish" class="headerItems" ></a>
+        
+        <nav class="nav-wrapper headerItems">
+          <ul id="nav">
+            <li class="woman-menu"><a href="#">女裝</a></li>
+            <li class="nav-split">|</li>
+            <li class="man-menu"><a class='notSelected' href="#">男裝</a></li>
+            <li class="nav-split">|</li>
+            <li class="accessory-menu"><a class='notSelected' href="#">配件</a></li>
+          </ul>
+        </nav>
+        
+        <form action="/" method="post" class="mobileHide">
+          <input type="text" name="search" placeholder="search"> 
+          <input type="submit" class="search-icon" value="">
+          <a href="/" class="searchLogo"><img src="./images/search.png" alt="search"></a>
+        </form>
+        
+        <a href="/" class="searchLogo">
+          <img src="./images/search.png" alt="search">
+        </a>
+
+        <a href="/" id="cartURL" class="mobileHide">
+          <img id="cartLogo" src="./images/cart.png" alt="cart">
+        </a>
+
+        <a href="/" id="profileURL" class="mobileHide">
+          <img id="profileLogo" src="./images/member.png" alt="member">
+        </a>
+
+
+      </div>
+    </header>
   </body>
 
 </html>
