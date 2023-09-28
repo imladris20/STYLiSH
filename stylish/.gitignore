@@ -66,16 +66,12 @@ node_modules/
 .env
 
 # images file list
-cart-hover.png
 cart-mobile.png
 cart-remove-hover.png
 cart-remove.png
-cart.png
 facebook.png
 line.png
 loading.gif
-member-hover.png
 member-mobile.png
-member.png
 search-hover.png
 twitter.png
