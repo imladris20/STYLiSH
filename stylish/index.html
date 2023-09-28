@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 
 <html lang="zh-Hant">
-
   <head>
-    <meta charset = "utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>STYLiSH</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500&display=swap">
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500&display=swap"
+    />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
 
   <body>
     <header>
       <div class="headerWrapper">
-        
-        <a href="/" id="logoUrl"><img id="logo" src="./images/logo.png" alt="stylish" class="headerItems" ></a>
-        
-        <nav class="nav-wrapper headerItems">
-          <ul id="nav">
-            <li class="woman-menu"><a href="#">女裝</a></li>
-            <li class="nav-split">|</li>
-            <li class="man-menu"><a class='notSelected' href="#">男裝</a></li>
-            <li class="nav-split">|</li>
-            <li class="accessory-menu"><a class='notSelected' href="#">配件</a></li>
-          </ul>
-        </nav>
-        
-        <form action="/" method="post" class="mobileHide">
-          <input type="text" name="search" placeholder="search"> 
-          <input type="submit" class="search-icon" value="">
-          <a href="/" class="searchLogo"><img src="./images/search.png" alt="search"></a>
-        </form>
-        
-        <a href="/" class="searchLogo">
-          <img src="./images/search.png" alt="search">
+        <div class="logowrapper">
+          <a href="#" id="logoUrl" class="headerItems"
+            ><img id="logo" src="./images/logo.png" alt="stylish"
+          /></a>
+
+          <nav class="nav-wrapper headerItems">
+            <ul id="nav">
+              <li class="woman-menu"><a href="#">女裝</a></li>
+              <li class="nav-split">|</li>
+              <li class="man-menu"><a class="notSelected" href="#">男裝</a></li>
+              <li class="nav-split">|</li>
+              <li class="accessory-menu"><a class="notSelected" href="#">配件</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <a href="#" class="searchLogo widerHide">
+          <img src="./images/search.png" alt="search" />
         </a>
 
-        <a href="/" id="cartURL" class="mobileHide">
-          <img id="cartLogo" src="./images/cart.png" alt="cart">
+        <div class="search-block mobileHide">
+          <form action="#" method="post" class="searchForm">
+            <input
+              type="text"
+              class="search-field"
+              name="search"
+              placeholder="西裝"
+            />
+            <input type="submit" class="search-icon-button" value="" />
+          </form>
+        </div>
+
+        <a href="#" class="mobileHide cartURL">
+          <div class="cartImage"></div>
+          <div class="cartCounter">1</div>
         </a>
 
-        <a href="/" id="profileURL" class="mobileHide">
-          <img id="profileLogo" src="./images/member.png" alt="member">
+        <a href="#" class="mobileHide profileURL">
+          <div class="profileImage"></div>
         </a>
-
-
+        
       </div>
     </header>
   </body>
-
 </html>

@@ -1,90 +1,243 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-body,div, ul,ol,li,h1,h2,h3,h4,h5,form,input,p, header {
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+form,
+input,
+p,
+header {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
-
 
 body {
-	font-family: 'Noto Sans TC',sans-serif;
-	/* line-height: 1.6; */
-	color: #FFF;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #fff;
   text-align: center;
-	/* background: url("../img/background.jpg") top center / cover grey; */
-	/* display: flex;
-  	flex-direction: column;*/
- 	min-height: 100vh; 
+  min-height: 100vh;
 }
 
-nav,ul {
+nav,
+ul {
   list-style: none;
 }
 
-p, a {
+p,
+a {
   text-align: center;
 }
 
 a {
-	text-decoration: none;
-  color: #FFF;
+  text-decoration: none;
+  color: #fff;
 }
 
 /* Header */
-
-#logo {
-  width: 35vw;
-  height: auto;
-  margin-top: 14px;
-  margin-bottom: 14px;
-}
-
-.search-icon {
-  width: 30px;
-  height: 30px;
-  background: url('./images/search.png') no-repeat center center;
-  border: none;
-  cursor: pointer;
-}
 
 .headerWrapper {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.headerItems {
-  flex: 1;
+  flex-wrap: nowrap;
+  max-height: 140px;
 }
 
 .searchLogo {
-	position: fixed;
-	top: 15px;
-	right: 15px;
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
 }
 
 .searchLogo img {
-	height: 38px;
+  width: 40px;
+  height: 40px;
+}
+
+#logo {
+  width: 129px;
+  height: 24px;
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 #nav {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background-color: black;
+  background-color: #313538;
   height: 50px;
   padding: 12px 0 12px 0;
 }
 
-.notSelected, .nav-split {
+.notSelected,
+.nav-split {
   color: #828282;
+}
+
+input {
+  font-family: inherit;
+  color: #8b572a;
+  font-size: 20px;
+}
+
+input::placeholder {
+  color: #8b572a;
+  font-size: 20px;
 }
 
 .mobileHide {
   display: none;
+}
+
+/* ================================= 
+  Media Queries
+==================================== */
+
+@media (min-width: 1280px) {
+  .headerWrapper {
+    flex-direction: row;
+    gap: 20px;
+    border-bottom: 40px #313538 solid;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    padding-left: 60px;
+    padding-right: 56px;
+  }
+
+  .logowrapper {
+    display: flex;
+  }
+
+  #logo {
+    width: 258px;
+    height: 48px;
+    margin: 0;
+  }
+
+  #nav {
+    padding-bottom: 0;
+  }
+
+  #nav li {
+    align-self: flex-end;
+    font-size: 20px;
+  }
+
+  .widerHide {
+    display: none;
+  }
+
+  .mobileHide {
+    display: initial;
+  }
+
+  .search-block {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .searchForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    border-radius: 20px;
+    border: 1px #979797 solid;
+    width: 214px;
+    height: 44px;
+    padding: 6px;
+    align-items: center;
+  }
+
+  .search-field {
+    border: none;
+    padding-left: 5px;
+    width: 150px;
+    height: 25px;
+  }
+
+  .search-icon-button {
+    width: 44px;
+    height: 44px;
+    background: transparent url("./images/search.png") no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+    align-self: center;
+  }
+
+  #nav {
+    background-color: transparent;
+    width: 451px;
+  }
+
+  #nav a {
+    color: #8b572a;
+  }
+
+  #nav .notSelected,
+  #nav .nav-split {
+    color: #3f3a3a;
+  }
+
+  #cartLogo-hover {
+    display: none;
+  }
+
+  .cartURL, .profileURL {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cartImage {
+    width: 44px;
+    height: 44px;
+    background-image: url("./images/cart.png");
+    background-size: cover;
+    transition: background-image 0.3s ease;
+  }
+
+  .cartImage:hover {
+    background-image: url('./images/cart-hover.png');
+  }
+
+  .cartCounter {
+    position: absolute;
+    background: #8b572a;
+    height: 24px;
+    width: 24px;
+    border-radius: 100%;
+    place-items: center;
+    color: white;
+    font-size: 16px;
+    right: 0px;
+    bottom: 3px;
+  }
+
+  .profileImage {
+    width: 44px;
+    height: 44px;
+    background-image: url("./images/member.png");
+    background-size: cover;
+    transition: background-image 0.3s ease;
+  }
+
+  .profileImage:hover {
+    background-image: url('./images/member-hover.png');
+  }
 }
