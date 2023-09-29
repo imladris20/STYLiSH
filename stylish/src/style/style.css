@@ -118,6 +118,7 @@ header {
 
 .bottomListItem {
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -140,10 +141,6 @@ header {
   font-size: 16px;
   right: 0px;
   bottom: 3px;
-}
-
-.cartText {
-  margin-left: 2px;
 }
 
 #bottomProfileImage,
