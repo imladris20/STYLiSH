@@ -141,7 +141,7 @@ header {
 .profileImage {
   width: 44px;
   height: 44px;
-  background-image: url("./images/member-mobile.png");
+  background-image: url("../../public/member-mobile.png");
   background-size: cover;
   transition: background-image 0.3s ease;
 }
@@ -150,7 +150,7 @@ header {
 .cartImage {
   width: 44px;
   height: 44px;
-  background-image: url("./images/cart-mobile.png");
+  background-image: url("../../public/cart-mobile.png");
   background-size: cover;
   transition: background-image 0.3s ease;
 }
@@ -339,7 +339,7 @@ Media Queries
   .search-icon-button {
     width: 44px;
     height: 44px;
-    background: transparent url("./images/search.png") no-repeat center center;
+    background: transparent url("../../public/search.png") no-repeat center center;
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -357,19 +357,19 @@ Media Queries
   }
 
   .profileImage {
-    background-image: url("./images/member.png");
+    background-image: url("../../public/member.png");
   }
 
   .cartImage {
-    background-image: url("./images/cart.png");
+    background-image: url("../../public/cart.png");
   }
 
   .cartImage:hover {
-    background-image: url("./images/cart-hover.png");
+    background-image: url("../../public/cart-hover.png");
   }
 
   .profileImage:hover {
-    background-image: url("./images/member-hover.png");
+    background-image: url("../../public/member-hover.png");
   }
 
   footer {
