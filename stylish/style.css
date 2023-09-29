@@ -44,13 +44,8 @@ a {
 
 /* Header */
 
-.headerWrapper {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  max-height: 140px;
+header {
+  width: 100%;
 }
 
 .searchLogo {
@@ -66,6 +61,16 @@ a {
   height: 40px;
 }
 
+.headerWrapper {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  max-height: 140px;
+  width: 100%;
+}
+
 #logo {
   width: 129px;
   height: 24px;
@@ -73,13 +78,83 @@ a {
   margin-bottom: 14px;
 }
 
-#nav {
+#topNav,
+#bottomNav {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   background-color: #313538;
-  height: 50px;
+  align-items: center;
+}
+
+.logowrapper,
+.topNavWrapper {
+  width: 100%;
+}
+
+#topNav {
   padding: 12px 0 12px 0;
+  height: 50px;
+}
+
+.headerBottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+}
+
+#bottomNav {
+  padding: 8px 0 8px 0;
+}
+
+.bottomListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartURL,
+.profileURL {
+  cursor: pointer;
+  position: relative;
+}
+
+.cartCounter {
+  position: absolute;
+  background: #8b572a;
+  height: 24px;
+  width: 24px;
+  border-radius: 100%;
+  place-items: center;
+  color: white;
+  font-size: 16px;
+  right: 0px;
+  bottom: 3px;
+}
+
+.cartText {
+  margin-left: 2px;
+}
+
+#bottomProfileImage,
+.profileImage {
+  width: 44px;
+  height: 44px;
+  background-image: url("./images/member-mobile.png");
+  background-size: cover;
+  transition: background-image 0.3s ease;
+}
+
+#bottomCartImage,
+.cartImage {
+  width: 44px;
+  height: 44px;
+  background-image: url("./images/cart-mobile.png");
+  background-size: cover;
+  transition: background-image 0.3s ease;
 }
 
 .notSelected,
@@ -87,10 +162,15 @@ a {
   color: #828282;
 }
 
+.growOne {
+  flex-grow: 1;
+}
+
 input {
   font-family: inherit;
   color: #8b572a;
   font-size: 20px;
+  outline: none;
 }
 
 input::placeholder {
@@ -117,6 +197,10 @@ input::placeholder {
     padding-right: 56px;
   }
 
+  .topNavWrapper {
+    margin-left: 57px;
+  }
+
   .logowrapper {
     display: flex;
   }
@@ -127,13 +211,28 @@ input::placeholder {
     margin: 0;
   }
 
-  #nav {
+  #topNav {
     padding-bottom: 0;
+    background-color: transparent;
+    width: 451px;
   }
 
-  #nav li {
+  #topNav li {
     align-self: flex-end;
     font-size: 20px;
+    letter-spacing: 30px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  #topNav li a {
+    color: #8b572a;
+    text-align: center;
+  }
+
+  #topNav .notSelected,
+  #topNav .nav-split {
+    color: #3f3a3a;
   }
 
   .widerHide {
@@ -181,63 +280,29 @@ input::placeholder {
     align-self: center;
   }
 
-  #nav {
-    background-color: transparent;
-    width: 451px;
+  .topNavText a {
+    /* letter-spacing: 30px; */
+    text-align: center;
   }
 
-  #nav a {
-    color: #8b572a;
-  }
-
-  #nav .notSelected,
-  #nav .nav-split {
-    color: #3f3a3a;
-  }
-
-  #cartLogo-hover {
-    display: none;
-  }
-
-  .cartURL, .profileURL {
-    cursor: pointer;
-    position: relative;
-  }
-
-  .cartImage {
-    width: 44px;
-    height: 44px;
-    background-image: url("./images/cart.png");
-    background-size: cover;
-    transition: background-image 0.3s ease;
-  }
-
-  .cartImage:hover {
-    background-image: url('./images/cart-hover.png');
-  }
-
-  .cartCounter {
-    position: absolute;
-    background: #8b572a;
-    height: 24px;
-    width: 24px;
-    border-radius: 100%;
-    place-items: center;
-    color: white;
-    font-size: 16px;
-    right: 0px;
-    bottom: 3px;
+  .cartURL,
+  .profileURL {
+    margin-left: 22px;
   }
 
   .profileImage {
-    width: 44px;
-    height: 44px;
     background-image: url("./images/member.png");
-    background-size: cover;
-    transition: background-image 0.3s ease;
+  }
+
+  .cartImage {
+    background-image: url("./images/cart.png");
+  }
+
+  .cartImage:hover {
+    background-image: url("./images/cart-hover.png");
   }
 
   .profileImage:hover {
-    background-image: url('./images/member-hover.png');
+    background-image: url("./images/member-hover.png");
   }
 }

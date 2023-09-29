@@ -4,12 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>STYLiSH</title>
+    <title>STYLiSH (Po Lien Lin)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500&display=swap"
     />
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
@@ -17,18 +17,20 @@
   <body>
     <header>
       <div class="headerWrapper">
-        <div class="logowrapper">
-          <a href="#" id="logoUrl" class="headerItems"
-            ><img id="logo" src="./images/logo.png" alt="stylish"
-          /></a>
+        <div class="logowrapper headerItems">
+          <a href="#" id="logoUrl">
+            <img id="logo" src="./images/logo.png" alt="stylish" />
+          </a>
 
-          <nav class="nav-wrapper headerItems">
-            <ul id="nav">
+          <nav class="topNavWrapper">
+            <ul id="topNav">
               <li class="woman-menu"><a href="#">女裝</a></li>
               <li class="nav-split">|</li>
               <li class="man-menu"><a class="notSelected" href="#">男裝</a></li>
               <li class="nav-split">|</li>
-              <li class="accessory-menu"><a class="notSelected" href="#">配件</a></li>
+              <li class="accessory-menu">
+                <a class="notSelected" href="#">配件</a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -37,7 +39,26 @@
           <img src="./images/search.png" alt="search" />
         </a>
 
-        <div class="search-block mobileHide">
+        <nav class="headerItems headerBottom widerHide">
+          <ul id="bottomNav">
+            <li class="bottomListItem">
+              <a href="#" class="cartURL growOne">
+                <div id="bottomCartImage" class="cartImage"></div>
+                <div class="cartCounter">1</div>
+              </a>
+              <a class="cartText growOne" href="#">購物車</a>
+            </li>
+            <li class="nav-split">|</li>
+            <li class="bottomListItem">
+              <a href="#" class="profileURL growOne">
+                <div id="bottomProfileImage" class="profileImage"></div>
+              </a>
+              <a class="profileText growOne" href="#">會員</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="headerItems search-block mobileHide">
           <form action="#" method="post" class="searchForm">
             <input
               type="text"
@@ -49,16 +70,16 @@
           </form>
         </div>
 
-        <a href="#" class="mobileHide cartURL">
+        <a href="#" class="headerItems mobileHide cartURL">
           <div class="cartImage"></div>
           <div class="cartCounter">1</div>
         </a>
 
-        <a href="#" class="mobileHide profileURL">
+        <a href="#" class="headerItems mobileHide profileURL">
           <div class="profileImage"></div>
         </a>
-        
       </div>
     </header>
+    <main></main>
   </body>
 </html>
