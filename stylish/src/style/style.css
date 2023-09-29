@@ -5,17 +5,14 @@
 body,
 div,
 ul,
-ol,
 li,
-h1,
-h2,
-h3,
-h4,
-h5,
+nav,
 form,
 input,
-p,
-header {
+header,
+footer,
+main,
+a {
   margin: 0;
   padding: 0;
 }
@@ -40,6 +37,18 @@ a {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+input {
+  font-family: inherit;
+  color: #8b572a;
+  font-size: 20px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #8b572a;
+  font-size: 20px;
 }
 
 /* Header */
@@ -138,43 +147,30 @@ header {
 }
 
 #bottomProfileImage,
-.profileImage {
-  width: 44px;
-  height: 44px;
-  background-image: url("../../public/member-mobile.png");
-  background-size: cover;
-  transition: background-image 0.3s ease;
-}
-
+.profileImage,
 #bottomCartImage,
 .cartImage {
   width: 44px;
   height: 44px;
-  background-image: url("../../public/cart-mobile.png");
   background-size: cover;
   transition: background-image 0.3s ease;
 }
 
-.notSelected,
-.nav-split {
+#bottomProfileImage,
+.profileImage {
+  background-image: url("../../public/member-mobile.png");
+}
+
+#bottomCartImage,
+.cartImage {
+  background-image: url("../../public/cart-mobile.png");
+}
+
+.notSelected {
   color: #828282;
 }
 
-.growOne {
-  flex-grow: 1;
-}
-
-input {
-  font-family: inherit;
-  color: #8b572a;
-  font-size: 20px;
-  outline: none;
-}
-
-input::placeholder {
-  color: #8b572a;
-  font-size: 20px;
-}
+/* footer */
 
 footer {
   position: fixed;
@@ -252,11 +248,10 @@ Media Queries
 ==================================== */
 
 @media (min-width: 1280px) {
-  
   .widerHide {
     display: none;
   }
-  
+
   .mobileHide {
     display: initial;
   }
@@ -265,10 +260,7 @@ Media Queries
     flex-direction: row;
     gap: 20px;
     border-bottom: 40px #313538 solid;
-    padding-top: 26px;
-    padding-bottom: 26px;
-    padding-left: 60px;
-    padding-right: 56px;
+    padding: 26px 56px 26px 60px;
   }
 
   .topNavWrapper {
@@ -339,7 +331,8 @@ Media Queries
   .search-icon-button {
     width: 44px;
     height: 44px;
-    background: transparent url("../../public/search.png") no-repeat center center;
+    background: transparent url("../../public/search.png") no-repeat center
+      center;
     background-size: contain;
     cursor: pointer;
     border: none;
@@ -347,7 +340,6 @@ Media Queries
   }
 
   .topNavText a {
-    /* letter-spacing: 30px; */
     text-align: center;
   }
 
@@ -382,11 +374,11 @@ Media Queries
     padding-top: 0;
     padding-bottom: 0;
     flex-direction: row;
-    justify-content:flex-end;
+    justify-content: flex-end;
     gap: 30px;
   }
 
-  .footerContentBox{
+  .footerContentBox {
     height: auto;
     width: auto;
     gap: 101px;
@@ -402,7 +394,7 @@ Media Queries
     justify-content: space-evenly;
   }
 
-  .socialMediaIcons{
+  .socialMediaIcons {
     margin-top: 0;
     gap: 30px;
   }
@@ -411,10 +403,10 @@ Media Queries
     font-size: 12px;
   }
 
-  footer a, .footerContentBox div a img {
+  footer a,
+  .footerContentBox div a img {
     width: 50px;
     height: 50px;
-    color: #F5F5F5;
+    color: #f5f5f5;
   }
-
 }
