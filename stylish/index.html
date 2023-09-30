@@ -28,7 +28,9 @@
             <ul id="topNav">
               <li class="topNavItem"><a href="#">女裝</a></li>
               <li class="nav-split">|</li>
-              <li class="topNavItem"><a class="notSelected" href="#">男裝</a></li>
+              <li class="topNavItem">
+                <a class="notSelected" href="#">男裝</a>
+              </li>
               <li class="nav-split">|</li>
               <li class="topNavItem">
                 <a class="notSelected" href="#">配件</a>
@@ -85,9 +87,24 @@
     <!-- main -->
     <main>
       <div class="carousel">
-        <div class="carouselText">
-          <p>於是<br />我也想要給你<br />一個那麼美好的自己。</p>
-          <h1>不朽《與自己和好如初》</h1>
+        <img
+          src="./public/carousel-placeholder.jpeg"
+          alt="home banner"
+          class="carousel-image"
+        />
+        <div class="carouselTextContainer">
+          <div class="carouselText">
+            <p>於是<br />我也想要給你<br />一個那麼美好的自己。</p>
+            <h4>不朽《與自己和好如初》</h4>
+          </div>
+        </div>
+        <div class="dotsContainer">
+          <div class="dot selectedDot"></div>
+          <div class="dot unselectedDots"></div>
+          <div class="dot unselectedDots"></div>
+          <div class="dot unselectedDots"></div>
+          <div class="dot unselectedDots"></div>
+        </div>
         </div>
       </div>
       <div class="product-window"></div>

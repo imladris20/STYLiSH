@@ -1,3 +1,5 @@
+/** Initial common reset **/
+
 * {
   box-sizing: border-box;
 }
@@ -51,7 +53,7 @@ input::placeholder {
   font-size: 20px;
 }
 
-/* Header */
+/** Header **/
 
 header {
   width: 100%;
@@ -172,7 +174,67 @@ header {
   color: #828282;
 }
 
-/* footer */
+/** main **/
+
+.carousel {
+  position: relative;
+}
+
+.carousel-image {
+  height: 185px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carouselText {
+  color: black;
+  line-height: 28px;
+  text-align: left;
+  position: absolute;
+  left: 23px;
+  top: 36px;
+}
+
+.carouselText p {
+  font-size: 15px;
+  text-align: left;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.carouselText h4 {
+  font-size: 12px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.dotsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 55.2px;
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%)
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+}
+
+.selectedDot {
+  background: #8b572a;
+}
+
+.unselectedDots {
+  background: white;
+}
+
+/** footer **/
 
 footer {
   position: fixed;
@@ -250,6 +312,8 @@ Media Queries
 ==================================== */
 
 @media (min-width: 1280px) {
+
+  /** common **/
   .widerHide {
     display: none;
   }
@@ -257,6 +321,8 @@ Media Queries
   .mobileHide {
     display: initial;
   }
+
+  /** header **/
 
   .headerWrapper {
     flex-direction: row;
@@ -367,6 +433,8 @@ Media Queries
     background-image: url("../../public/member-hover.png");
   }
 
+  /** Footer **/
+
   footer {
     margin-bottom: 0;
   }
@@ -415,5 +483,69 @@ Media Queries
   
   .spreadContentItem {
     flex: 1;
+  }
+
+  /** main **/
+
+  .carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carousel-image {
+    height: 500px;
+    object-fit: none;
+  }
+
+  .carouselTextContainer {
+    width: 100%;
+    max-width: 1160px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    margin: 0 auto;
+  }
+
+  .carouselText {
+    color: #070707;
+    top: 166px;
+  }
+  
+  .carouselText p {
+    font-size: 30px;
+    line-height: 57px;
+  }
+  
+  .carouselText h4 {
+    font-size: 20px;
+    line-height: 64px;
+  }
+
+  .dotsContainer {
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    width: 138px;
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%)
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+  }
+  
+  .selectedDot {
+    background: #8b572a;
+  }
+  
+  .unselectedDots {
+    background: rgba(255,255,255,0.4);
   }
 }
