@@ -64,3 +64,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# images file list
+cart-remove-hover.png
+cart-remove.png
+loading.gif
+search-hover.png

@@ -1,18 +1,118 @@
 <!DOCTYPE html>
 
 <html lang="zh-Hant">
-
   <head>
-    <meta charset = "utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>STYLish</title>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STYLiSH (Po Lien Lin)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./src/style/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
   </head>
 
   <body>
-    <h1>Welcome to STYLiSH!</h1>
-    <span>&copy;2023 credited to Po-Lien Lin</span>
-    <!-- <script type="text/javascript" src="script.js"></script> -->
-  </body>
+    <header>
+      <div class="headerWrapper">
+        <div class="logowrapper">
+          <a href="#">
+            <img id="logo" src="./public/logo.png" alt="stylish" />
+          </a>
 
+          <nav class="topNavWrapper">
+            <ul id="topNav">
+              <li class="topNavItem"><a href="#">女裝</a></li>
+              <li class="nav-split">|</li>
+              <li class="topNavItem"><a class="notSelected" href="#">男裝</a></li>
+              <li class="nav-split">|</li>
+              <li class="topNavItem">
+                <a class="notSelected" href="#">配件</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <a href="#" class="searchLogo widerHide">
+          <img src="./public/search.png" alt="search" />
+        </a>
+
+        <nav class="headerBottom widerHide">
+          <ul id="bottomNav">
+            <li class="bottomListItem">
+              <a href="#" class="cartURL">
+                <div id="bottomCartImage" class="cartImage"></div>
+                <div class="cartCounter">1</div>
+              </a>
+              <a href="#">購物車</a>
+            </li>
+            <li class="nav-split">|</li>
+            <li class="bottomListItem">
+              <a href="#" class="profileURL">
+                <div id="bottomProfileImage" class="profileImage"></div>
+              </a>
+              <a href="#">會員</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="search-block mobileHide">
+          <form action="#" method="post" class="searchForm">
+            <input
+              type="text"
+              class="search-field"
+              name="search"
+              placeholder="西裝"
+            />
+            <input type="submit" class="search-icon-button" value="" />
+          </form>
+        </div>
+
+        <a href="#" class="mobileHide cartURL">
+          <div class="cartImage"></div>
+          <div class="cartCounter">1</div>
+        </a>
+
+        <a href="#" class="mobileHide profileURL">
+          <div class="profileImage"></div>
+        </a>
+      </div>
+    </header>
+    <main></main>
+    <footer>
+      <div class="footerWrapper">
+        <div class="footerContentBox">
+          <ul class="fcBoxItems widerHide">
+            <li><a href="#">關於 STYLiSH</a></li>
+            <li><a href="#">服務條款</a></li>
+            <li><a href="#">隱私政策</a></li>
+          </ul>
+          <ul class="fcBoxItems widerHide">
+            <li><a href="#">聯絡我們</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+          <ul id="spreadContent" class="fcBoxItems mobileHide">
+            <li class="spreadContentItem"><a href="#">關於 STYLiSH</a></li>
+            <li>|</li>
+            <li class="spreadContentItem"><a href="#">服務條款</a></li>
+            <li>|</li>
+            <li class="spreadContentItem"><a href="#">隱私政策</a></li>
+            <li>|</li>
+            <li class="spreadContentItem"><a href="#">聯絡我們</a></li>
+            <li>|</li>
+            <li class="spreadContentItem"><a href="#">FAQ</a></li>
+          </ul>
+          <div class="socialMediaIcons">
+            <a href="#"><img src="./public/line.png" alt="line" /></a>
+            <a href="#"><img src="./public/twitter.png" alt="twitter" /></a>
+            <a href="#"><img src="./public/facebook.png" alt="facebook" /></a>
+          </div>
+        </div>
+        <span>&copy; 2018. All rights reserved.</span>
+      </div>
+    </footer>
+  </body>
 </html>
