@@ -524,10 +524,6 @@ Media Queries
   }
 
   .dotsContainer {
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* justify-content: space-between; */
-    /* align-items: center; */
     width: 138px;
     position: absolute;
     bottom: 18px;
@@ -538,11 +534,6 @@ Media Queries
   .dot {
     width: 10px;
     height: 10px;
-    border-radius: 100%;
-  }
-  
-  .selectedDot {
-    background: #8b572a;
   }
   
   .unselectedDots {
