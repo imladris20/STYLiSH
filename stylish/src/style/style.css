@@ -173,54 +173,6 @@ input::placeholder {
   font-size: 20px;
 }
 
-/** Header **/
-
-.headerWrapper {
-  max-height: 140px;
-}
-
-.searchLogo {
-  top: 14px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
-}
-
-.searchLogo img {
-  width: 40px;
-  height: 40px;
-}
-
-.logo {
-  width: 129px;
-  height: 24px;
-  margin-top: 14px;
-  margin-bottom: 14px;
-}
-
-.topNav {
-  padding: 12px 0 12px 0;
-  height: 50px;
-}
-
-.headerBottom {
-  bottom: 0;
-  left: 0;
-  height: 60px;
-}
-
-.bottomNav {
-  padding: 8px 0 8px 0;
-}
-
-.cartCounter {
-  height: 24px;
-  width: 24px;
-  place-items: center;
-  right: 0px;
-  bottom: 3px;
-}
-
 .nav-icon {
   width: 44px;
   height: 44px;
@@ -228,43 +180,91 @@ input::placeholder {
   transition: background-image 0.3s ease;
 }
 
-.profileImage {
+/** Header **/
+
+.header__wrapper {
+  max-height: 140px;
+}
+
+.header__search {
+  top: 14px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+}
+
+.header__search img {
+  width: 40px;
+  height: 40px;
+}
+
+.header__logo {
+  width: 129px;
+  height: 24px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.topNav__list {
+  padding: 12px 0 12px 0;
+  height: 50px;
+}
+
+.header__nav--bottom {
+  bottom: 0;
+  left: 0;
+  height: 60px;
+}
+
+.bottomNav__list {
+  padding: 8px 0 8px 0;
+}
+
+.cartURL__counter {
+  height: 24px;
+  width: 24px;
+  place-items: center;
+  right: 0px;
+  bottom: 3px;
+}
+
+.profileURL__image {
   background-image: url("../../public/member-mobile.png");
 }
 
-.cartImage {
+.cartURL__image {
   background-image: url("../../public/cart-mobile.png");
 }
 
 /** main **/
 
-.carousel-image {
+.carousel__image {
   height: 185px;
   object-fit: cover;
 }
 
-.carouselText {
+.carousel__text {
   line-height: 28px;
   left: 23px;
   top: 36px;
 }
 
-.carouselText p {
+.carousel__text p {
   font-size: 15px;
 }
 
-.carouselText h4 {
+.carousel__text h4 {
   font-size: 12px;
 }
 
-.dotsContainer {
+.carousel__dotsContainer {
   width: 55.2px;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%)
 }
 
-.dot {
+.carousel__dot {
   width: 4px;
   height: 4px;
 }
@@ -281,34 +281,34 @@ footer a {
   height: 20px;
 }
 
-.footerWrapper {
+.footer__wrapper {
   height: 146px;
   padding-top: 23px;
   padding-bottom: 20px;
 }
 
-.footerWrapper span {
+.footer__wrapper span {
   font-size: 10px;
 }
 
-.footerContentBox {
+.footer__wrapper--link {
   width: 296px;
   height: 76px;
   font-size: 14px;
 }
 
-.footerContentBox div a img {
+.footer__wrapper--link div a img {
   width: 20px;
   height: 20px;
 }
 
-.fcBoxItems {
+.footer__linklist {
   justify-content: flex-start;
   gap: 8px;
   align-items: start;
 }
 
-.socialMediaIcons {
+.footer__socialmedia {
   gap: 14px;
   margin-top: 18px;
 }
@@ -372,39 +372,39 @@ Media Queries
 
   /** header **/
 
-  .headerWrapper {
+  .header__wrapper {
     gap: 20px;
     border-bottom: 40px #313538 solid;
     padding: 26px 56px 26px 60px;
   }
 
-  .topNavWrapper {
+  .header__nav--top {
     margin-left: 57px;
   }
 
-  .logo {
+  .header__logo {
     width: 258px;
     height: 48px;
     margin: 0;
   }
 
-  .topNav {
+  .topNav__list {
     padding-bottom: 0;
     background-color: transparent;
     width: 451px;
   }
 
-  .topNav li {
+  .topNav__list li {
     align-self: flex-end;
     letter-spacing: 30px;
     margin-right:-30px;
   }
 
-  .search-block {
+  .header__searchblock {
     justify-content: flex-end;
   }
 
-  .searchForm {
+  .search__form {
     justify-content: flex-start;
     border-radius: 20px;
     border: 1px #979797 solid;
@@ -413,14 +413,14 @@ Media Queries
     padding: 6px;
   }
 
-  .search-field {
+  .search__input {
     border: none;
     padding-left: 14px;
     width: 150px;
     height: 25px;
   }
 
-  .search-icon-button {
+  .search__submit {
     width: 44px;
     height: 44px;
     background: transparent url("../../public/search.png") no-repeat center
@@ -430,24 +430,23 @@ Media Queries
     align-self: center;
   }
 
-  .cartURL,
-  .profileURL {
+  .bottomNav__icon {
     margin-left: 22px;
   }
 
-  .profileImage {
-    background-image: url("../../public/member.png");
-  }
-
-  .cartImage {
+  .cartURL__image {
     background-image: url("../../public/cart.png");
   }
-
-  .cartImage:hover {
+  
+  .cartURL__image:hover {
     background-image: url("../../public/cart-hover.png");
   }
 
-  .profileImage:hover {
+  .profileURL__image {
+    background-image: url("../../public/member.png");
+  }
+
+  .profileURL__image:hover {
     background-image: url("../../public/member-hover.png");
   }
 
@@ -457,7 +456,7 @@ Media Queries
     margin-bottom: 0;
   }
 
-  .footerWrapper {
+  .footer__wrapper {
     height: 115px;
     max-width: 1160px;
     padding-top: 0;
@@ -466,69 +465,66 @@ Media Queries
     gap: 30px;
   }
 
-  .footerContentBox {
+  .footer__wrapper--link {
     height: auto;
     width: auto;
     gap: 101px;
     font-size: 16px;
   }
 
-  .spreadContent {
+  .footer__linklist--wide {
     width: 670px;
-  }
-
-  .socialMediaIcons {
-    margin-top: 0;
-    gap: 30px;
-  }
-
-  .footerWrapper span {
-    font-size: 12px;
-  }
-
-  footer a,
-  .footerContentBox div a img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .fcBoxItems {
     justify-content: space-evenly;
     align-items: center;
   }
 
+  .footer__socialmedia {
+    margin-top: 0;
+    gap: 30px;
+  }
+
+  .footer__wrapper span {
+    font-size: 12px;
+  }
+
+  footer a,
+  .footer__wrapper--link div a img {
+    width: 50px;
+    height: 50px;
+  }
+
   /** main **/
 
-  .carousel-image {
+  .carousel__image {
     height: 500px;
     object-fit: none;
   }
 
-  .carouselTextContainer {
+  .carousel__container {
     max-width: 1160px;
     height: 500px;
     top: 0;
     margin: 0 auto;
   }
 
-  .carouselText {
+  .carousel__text {
     top: 166px;
   }
   
-  .carouselText p {
+  .carousel__text p {
     font-size: 30px;
     line-height: 57px;
   }
   
-  .carouselText h4 {
+  .carousel__text h4 {
     line-height: 64px;
   }
 
-  .dotsContainer {
+  .carousel__dotsContainer {
     width: 138px;
   }
   
-  .dot {
+  .carousel__dot {
     width: 10px;
     height: 10px;
   }

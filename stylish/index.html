@@ -17,15 +17,15 @@
 
   <body>
     <!-- header -->
-    <header class="full-width">
-      <div class="headerWrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width">
+    <header class="header full-width">
+      <div class="header__wrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width">
         <div class="full-width wider-rowFlexBox">
           <a href="#">
-            <img class="logo" src="./public/logo.png" alt="stylish" />
+            <img class="header__logo" src="./public/logo.png" alt="stylish" />
           </a>
 
-          <nav class="topNavWrapper full-width">
-            <ul class="topNav rowFlexBox flex-space-evenly flex-align-center bg-dark">
+          <nav class="header__nav--top topNav full-width">
+            <ul class="topNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
               <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center"><a class="tx-white wider-tx-brown text-center" href="#">女裝</a></li>
               <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">|</li>
               <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
@@ -39,90 +39,90 @@
           </nav>
         </div>
 
-        <a href="#" class="searchLogo wider-hide fixed">
+        <a href="#" class="header__search wider-hide fixed">
           <img src="./public/search.png" alt="search" />
         </a>
 
-        <nav class="headerBottom wider-hide fixed full-width">
-          <ul class="bottomNav rowFlexBox flex-space-evenly flex-align-center bg-dark">
+        <nav class="header__nav--bottom bottomNav wider-hide fixed full-width">
+          <ul class="bottomNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
             <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
-              <a href="#" class="cartURL pointer relative">
-                <div class="cartImage nav-icon"></div>
-                <div class="cartCounter radius-100 absolute bg-brown tx-white">1</div>
+              <a href="#" class="bottomNav__icon cartURL pointer relative">
+                <div class="cartURL__image nav-icon"></div>
+                <div class="cartURL__counter radius-100 absolute bg-brown tx-white">1</div>
               </a>
               <a class="tx-white" href="#">購物車</a>
             </li>
             <li class="tx-grey">|</li>
             <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
-              <a href="#" class="profileURL pointer relative">
-                <div class="profileImage nav-icon"></div>
+              <a href="#" class="bottomNav__icon profileURL pointer relative">
+                <div class="profileURL__image nav-icon"></div>
               </a>
               <a class="tx-white" href="#">會員</a>
             </li>
           </ul>
         </nav>
 
-        <div class="search-block mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center">
-          <form action="#" method="post" class="searchForm wider-rowFlexBox relative flex-align-center">
+        <div class="header__searchblock search mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center">
+          <form action="#" method="post" class="search__form wider-rowFlexBox relative flex-align-center">
             <input
               type="text"
-              class="search-field tx-brown tx-size20"
+              class="search__input tx-brown tx-size20"
               name="search"
               placeholder="西裝"
             />
-            <input type="submit" class="search-icon-button pointer" value="" />
+            <input type="submit" class="search__submit pointer" value="" />
           </form>
         </div>
 
-        <a href="#" class="mobile-hide wider-show cartURL pointer relative">
-          <div class="cartImage nav-icon"></div>
-          <div class="cartCounter radius-100 absolute bg-brown tx-white">1</div>
+        <a href="#" class="cartURL mobile-hide wider-show cartURL pointer relative">
+          <div class="cartURL__image nav-icon"></div>
+          <div class="cartURL__counter radius-100 absolute bg-brown tx-white">1</div>
         </a>
 
-        <a href="#" class="mobile-hide wider-show profileURL pointer relative">
-          <div class="profileImage nav-icon"></div>
+        <a href="#" class="profileURL mobile-hide wider-show profileURL pointer relative">
+          <div class="profileURL__image nav-icon"></div>
         </a>
       </div>
     </header>
     <!-- main -->
     <main>
-      <div class="carousel relative wider-rowFlexBox flex-align-center flex-space-center">
+      <div class="main__carousel carousel relative wider-rowFlexBox flex-align-center flex-space-center">
         <img
           src="./public/carousel-placeholder.jpeg"
           alt="home banner"
-          class="carousel-image full-width"
+          class="carousel__image full-width"
         />
-        <div class="carouselTextContainer full-width wider-absolute">
-          <div class="carouselText absolute text-left tx-black wider-tx-black07">
+        <div class="carousel__container full-width wider-absolute">
+          <div class="carousel__text absolute text-left tx-black wider-tx-black07">
             <p class="text-left margin-block-none">於是<br />我也想要給你<br />一個那麼美好的自己。</p>
             <h4 class="wider-tx-size20 text-left margin-block-none">不朽《與自己和好如初》</h4>
           </div>
         </div>
-        <div class="dotsContainer rowFlexBox flex-space-between flex-align-center absolute">
-          <a href="#"><div class="dot radius-100 selectedDot bg-brown"></div></a>
-          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
-          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
-          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
-          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
+        <div class="carousel__dotsContainer rowFlexBox flex-space-between flex-align-center absolute">
+          <a href="#"><div class="carousel__dot radius-100 bg-brown"></div></a>
+          <a href="#"><div class="carousel__dot radius-100 bg-white wider-bg-white"></div></a>
+          <a href="#"><div class="carousel__dot radius-100 bg-white wider-bg-white"></div></a>
+          <a href="#"><div class="carousel__dot radius-100 bg-white wider-bg-white"></div></a>
+          <a href="#"><div class="carousel__dot radius-100 bg-white wider-bg-white"></div></a>
         </div>
         </div>
       </div>
-      <div class="product-window"></div>
+      <div class="main__product product"></div>
     </main>
     <!-- footer -->
     <footer class="fixed full-width bg-dark">
-      <div class="footerWrapper columnFlexBox flex-space-between flex-align-center margin-horizontal-center wider-rowFlexBox">
-        <div class="footerContentBox rowFlexBox flex-space-between relative">
-          <ul class="fcBoxItems columnFlexBox wider-hide">
+      <div class="footer__wrapper columnFlexBox flex-space-between flex-align-center margin-horizontal-center wider-rowFlexBox">
+        <div class="footer__wrapper--link rowFlexBox flex-space-between relative">
+          <ul class="footer__linklist columnFlexBox wider-hide">
             <li><a class="tx-lightgrey" href="#">關於 STYLiSH</a></li>
             <li><a class="tx-lightgrey" href="#">服務條款</a></li>
             <li><a class="tx-lightgrey" href="#">隱私政策</a></li>
           </ul>
-          <ul class="fcBoxItems columnFlexBox wider-hide">
+          <ul class="footer__linklist columnFlexBox wider-hide">
             <li><a class="tx-lightgrey" href="#">聯絡我們</a></li>
             <li><a class="tx-lightgrey" href="#">FAQ</a></li>
           </ul>
-          <ul class="spreadContent fcBoxItems columnFlexBox mobile-hide wider-show wider-rowFlexBox flex-align-center flex-space-evenly">
+          <ul class="footer__linklist--wide columnFlexBox mobile-hide wider-show wider-rowFlexBox flex-align-center flex-space-evenly">
             <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">關於 STYLiSH</a></li>
             <li class="tx-lightgrey">|</li>
             <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">服務條款</a></li>
@@ -133,7 +133,7 @@
             <li class="tx-lightgrey" >|</li>
             <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">FAQ</a></li>
           </ul>
-          <div class="socialMediaIcons rowFlexBox flex-space-between">
+          <div class="footer__socialmedia rowFlexBox flex-space-between">
             <a href="#"><img src="./public/line.png" alt="line" /></a>
             <a href="#"><img src="./public/twitter.png" alt="twitter" /></a>
             <a href="#"><img src="./public/facebook.png" alt="facebook" /></a>
