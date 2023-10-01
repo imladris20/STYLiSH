@@ -255,6 +255,10 @@ input::placeholder {
 
 /** main **/
 
+main {
+  padding-bottom: 205px;
+}
+
 .carousel__image {
   height: 185px;
   object-fit: cover;
@@ -287,22 +291,22 @@ input::placeholder {
 }
 
 .main__product {
-  margin: 15px 24px 47px 24px;
+  padding: 15px 24px 47px 24px;
   column-gap: 6px;
   row-gap: 24px;
-  /* border: red 5px solid; */
   grid-template-columns: repeat(2,calc(50% - 3px));
-  /* background-color: skyblue; */
 }
 
 .product__item {
-  /* background-color: lightgreen; */
-  /* border: black 2px dotted;   */
-  height: 270px;
+  height: auto;
+  min-height: 270px;
+  min-width: 153px;
+  gap: 8px
 }
 
 .product__color--container {
   width: 48px;
+  margin-bottom: 2px;
 }
 
 .product__color--grid {
