@@ -17,129 +17,129 @@
 
   <body>
     <!-- header -->
-    <header>
-      <div class="headerWrapper">
-        <div class="logowrapper">
+    <header class="full-width">
+      <div class="headerWrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width">
+        <div class="full-width wider-rowFlexBox">
           <a href="#">
-            <img id="logo" src="./public/logo.png" alt="stylish" />
+            <img class="logo" src="./public/logo.png" alt="stylish" />
           </a>
 
-          <nav class="topNavWrapper">
-            <ul id="topNav">
-              <li class="topNavItem"><a href="#">女裝</a></li>
-              <li class="nav-split">|</li>
-              <li class="topNavItem">
-                <a class="notSelected" href="#">男裝</a>
+          <nav class="topNavWrapper full-width">
+            <ul class="topNav rowFlexBox flex-space-evenly flex-align-center bg-dark">
+              <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center"><a class="tx-white wider-tx-brown text-center" href="#">女裝</a></li>
+              <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">|</li>
+              <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
+                <a class="tx-grey82 wider-tx-black3a" href="#">男裝</a>
               </li>
-              <li class="nav-split">|</li>
-              <li class="topNavItem">
-                <a class="notSelected" href="#">配件</a>
+              <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">|</li>
+              <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
+                <a class="tx-grey82 wider-tx-black3a" href="#">配件</a>
               </li>
             </ul>
           </nav>
         </div>
 
-        <a href="#" class="searchLogo widerHide">
+        <a href="#" class="searchLogo wider-hide fixed">
           <img src="./public/search.png" alt="search" />
         </a>
 
-        <nav class="headerBottom widerHide">
-          <ul id="bottomNav">
-            <li class="bottomListItem">
-              <a href="#" class="cartURL">
-                <div id="bottomCartImage" class="cartImage"></div>
-                <div class="cartCounter">1</div>
+        <nav class="headerBottom wider-hide fixed full-width">
+          <ul class="bottomNav rowFlexBox flex-space-evenly flex-align-center bg-dark">
+            <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
+              <a href="#" class="cartURL pointer relative">
+                <div class="cartImage nav-icon"></div>
+                <div class="cartCounter radius-100 absolute bg-brown tx-white">1</div>
               </a>
-              <a href="#">購物車</a>
+              <a class="tx-white" href="#">購物車</a>
             </li>
-            <li class="nav-split">|</li>
-            <li class="bottomListItem">
-              <a href="#" class="profileURL">
-                <div id="bottomProfileImage" class="profileImage"></div>
+            <li class="tx-grey">|</li>
+            <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
+              <a href="#" class="profileURL pointer relative">
+                <div class="profileImage nav-icon"></div>
               </a>
-              <a href="#">會員</a>
+              <a class="tx-white" href="#">會員</a>
             </li>
           </ul>
         </nav>
 
-        <div class="search-block mobileHide">
-          <form action="#" method="post" class="searchForm">
+        <div class="search-block mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center">
+          <form action="#" method="post" class="searchForm wider-rowFlexBox relative flex-align-center">
             <input
               type="text"
-              class="search-field"
+              class="search-field tx-brown tx-size20"
               name="search"
               placeholder="西裝"
             />
-            <input type="submit" class="search-icon-button" value="" />
+            <input type="submit" class="search-icon-button pointer" value="" />
           </form>
         </div>
 
-        <a href="#" class="mobileHide cartURL">
-          <div class="cartImage"></div>
-          <div class="cartCounter">1</div>
+        <a href="#" class="mobile-hide wider-show cartURL pointer relative">
+          <div class="cartImage nav-icon"></div>
+          <div class="cartCounter radius-100 absolute bg-brown tx-white">1</div>
         </a>
 
-        <a href="#" class="mobileHide profileURL">
-          <div class="profileImage"></div>
+        <a href="#" class="mobile-hide wider-show profileURL pointer relative">
+          <div class="profileImage nav-icon"></div>
         </a>
       </div>
     </header>
     <!-- main -->
     <main>
-      <div class="carousel">
+      <div class="carousel relative wider-rowFlexBox flex-align-center flex-space-center">
         <img
           src="./public/carousel-placeholder.jpeg"
           alt="home banner"
-          class="carousel-image"
+          class="carousel-image full-width"
         />
-        <div class="carouselTextContainer">
-          <div class="carouselText">
-            <p>於是<br />我也想要給你<br />一個那麼美好的自己。</p>
-            <h4>不朽《與自己和好如初》</h4>
+        <div class="carouselTextContainer full-width wider-absolute">
+          <div class="carouselText absolute text-left tx-black wider-tx-black07">
+            <p class="text-left margin-block-none">於是<br />我也想要給你<br />一個那麼美好的自己。</p>
+            <h4 class="wider-tx-size20 text-left margin-block-none">不朽《與自己和好如初》</h4>
           </div>
         </div>
-        <div class="dotsContainer">
-          <a href="#"><div class="dot selectedDot"></div></a>
-          <a href="#"><div class="dot unselectedDots"></div></a>
-          <a href="#"><div class="dot unselectedDots"></div></a>
-          <a href="#"><div class="dot unselectedDots"></div></a>
-          <a href="#"><div class="dot unselectedDots"></div></a>
+        <div class="dotsContainer rowFlexBox flex-space-between flex-align-center absolute">
+          <a href="#"><div class="dot radius-100 selectedDot bg-brown"></div></a>
+          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
+          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
+          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
+          <a href="#"><div class="dot radius-100 bg-white wider-bg-white"></div></a>
         </div>
         </div>
       </div>
       <div class="product-window"></div>
     </main>
     <!-- footer -->
-    <footer>
-      <div class="footerWrapper">
-        <div class="footerContentBox">
-          <ul class="fcBoxItems widerHide">
-            <li><a href="#">關於 STYLiSH</a></li>
-            <li><a href="#">服務條款</a></li>
-            <li><a href="#">隱私政策</a></li>
+    <footer class="fixed full-width bg-dark">
+      <div class="footerWrapper columnFlexBox flex-space-between flex-align-center margin-horizontal-center wider-rowFlexBox">
+        <div class="footerContentBox rowFlexBox flex-space-between relative">
+          <ul class="fcBoxItems columnFlexBox wider-hide">
+            <li><a class="tx-lightgrey" href="#">關於 STYLiSH</a></li>
+            <li><a class="tx-lightgrey" href="#">服務條款</a></li>
+            <li><a class="tx-lightgrey" href="#">隱私政策</a></li>
           </ul>
-          <ul class="fcBoxItems widerHide">
-            <li><a href="#">聯絡我們</a></li>
-            <li><a href="#">FAQ</a></li>
+          <ul class="fcBoxItems columnFlexBox wider-hide">
+            <li><a class="tx-lightgrey" href="#">聯絡我們</a></li>
+            <li><a class="tx-lightgrey" href="#">FAQ</a></li>
           </ul>
-          <ul id="spreadContent" class="fcBoxItems mobileHide">
-            <li class="spreadContentItem"><a href="#">關於 STYLiSH</a></li>
-            <li>|</li>
-            <li class="spreadContentItem"><a href="#">服務條款</a></li>
-            <li>|</li>
-            <li class="spreadContentItem"><a href="#">隱私政策</a></li>
-            <li>|</li>
-            <li class="spreadContentItem"><a href="#">聯絡我們</a></li>
-            <li>|</li>
-            <li class="spreadContentItem"><a href="#">FAQ</a></li>
+          <ul class="spreadContent fcBoxItems columnFlexBox mobile-hide wider-show wider-rowFlexBox flex-align-center flex-space-evenly">
+            <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">關於 STYLiSH</a></li>
+            <li class="tx-lightgrey">|</li>
+            <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">服務條款</a></li>
+            <li class="tx-lightgrey" >|</li>
+            <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">隱私政策</a></li>
+            <li class="tx-lightgrey" >|</li>
+            <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">聯絡我們</a></li>
+            <li class="tx-lightgrey" >|</li>
+            <li class="flexItem-evenly"><a class="wider-tx-whitesmoke" href="#">FAQ</a></li>
           </ul>
-          <div class="socialMediaIcons">
+          <div class="socialMediaIcons rowFlexBox flex-space-between">
             <a href="#"><img src="./public/line.png" alt="line" /></a>
             <a href="#"><img src="./public/twitter.png" alt="twitter" /></a>
             <a href="#"><img src="./public/facebook.png" alt="facebook" /></a>
           </div>
         </div>
-        <span>&copy; 2018. All rights reserved.</span>
+        <span class="tx-grey82">&copy; 2018. All rights reserved.</span>
       </div>
     </footer>
   </body>
