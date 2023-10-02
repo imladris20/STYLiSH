@@ -411,6 +411,10 @@ Media Queries
     flex-direction: column;
   }
 
+  .wider-flexItem-evenly {
+    flex: 1;
+  }
+
   .wider-absolute {
     position: absolute;
   }
@@ -556,7 +560,14 @@ Media Queries
 
   .footer__linklist {
     width: 670px;
+    height: 22px;
     align-content: center;
+    gap: 0px;
+    justify-content: unset;
+  }
+
+  .footer__linklist li {
+    line-height: 22px;
   }
 
   .footer__socialmedia {
