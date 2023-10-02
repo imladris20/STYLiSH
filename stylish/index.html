@@ -1,234 +1,336 @@
 <!DOCTYPE html>
 
 <html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STYLiSH (Po Lien Lin)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./src/style/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>STYLiSH (Po Lien Lin)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="./src/style/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
-</head>
+  <body>
+    <!-- header -->
+    <header class="header full-width">
+      <div
+        class="header__wrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width"
+      >
+        <div class="full-width wider-rowFlexBox">
+          <a href="#">
+            <img class="header__logo" src="./public/logo.png" alt="stylish" />
+          </a>
 
-<body>
-  <!-- header -->
-  <header class="header full-width">
-    <div class="header__wrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width">
-      <div class="full-width wider-rowFlexBox">
-        <a href="#">
-          <img class="header__logo" src="./public/logo.png" alt="stylish" />
+          <nav class="header__nav--top topNav full-width">
+            <ul
+              class="topNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark"
+            >
+              <li
+                class="wider-tx-size20 flexItem-evenly flex-space-center text-center"
+              >
+                <a class="tx-white wider-tx-brown text-center" href="#">女裝</a>
+              </li>
+              <li
+                class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center"
+              >
+                |
+              </li>
+              <li
+                class="wider-tx-size20 flexItem-evenly flex-space-center text-center"
+              >
+                <a class="tx-grey82 wider-tx-black3a" href="#">男裝</a>
+              </li>
+              <li
+                class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center"
+              >
+                |
+              </li>
+              <li
+                class="wider-tx-size20 flexItem-evenly flex-space-center text-center"
+              >
+                <a class="tx-grey82 wider-tx-black3a" href="#">配件</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <a href="#" class="header__search wider-hide fixed">
+          <img src="./public/search.png" alt="search" />
         </a>
 
-        <nav class="header__nav--top topNav full-width">
-          <ul class="topNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
-            <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
-              <a class="tx-white wider-tx-brown text-center" href="#">女裝</a>
+        <nav class="header__nav--bottom bottomNav wider-hide fixed full-width">
+          <ul
+            class="bottomNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark"
+          >
+            <li
+              class="rowFlexBox flexItem-evenly flex-align-center flex-space-center"
+            >
+              <a href="#" class="bottomNav__icon cartURL pointer relative">
+                <div class="cartURL__image nav-icon"></div>
+                <div
+                  class="cartURL__counter radius-100 absolute bg-brown tx-white"
+                >
+                  1
+                </div>
+              </a>
+              <a class="tx-white" href="#">購物車</a>
             </li>
-            <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">
-              |
-            </li>
-            <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
-              <a class="tx-grey82 wider-tx-black3a" href="#">男裝</a>
-            </li>
-            <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">
-              |
-            </li>
-            <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
-              <a class="tx-grey82 wider-tx-black3a" href="#">配件</a>
+            <li class="tx-grey">|</li>
+            <li
+              class="rowFlexBox flexItem-evenly flex-align-center flex-space-center"
+            >
+              <a href="#" class="bottomNav__icon profileURL pointer relative">
+                <div class="profileURL__image nav-icon"></div>
+              </a>
+              <a class="tx-white" href="#">會員</a>
             </li>
           </ul>
         </nav>
-      </div>
 
-      <a href="#" class="header__search wider-hide fixed">
-        <img src="./public/search.png" alt="search" />
-      </a>
-
-      <nav class="header__nav--bottom bottomNav wider-hide fixed full-width">
-        <ul class="bottomNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
-          <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
-            <a href="#" class="bottomNav__icon cartURL pointer relative">
-              <div class="cartURL__image nav-icon"></div>
-              <div class="cartURL__counter radius-100 absolute bg-brown tx-white">
-                1
-              </div>
-            </a>
-            <a class="tx-white" href="#">購物車</a>
-          </li>
-          <li class="tx-grey">|</li>
-          <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
-            <a href="#" class="bottomNav__icon profileURL pointer relative">
-              <div class="profileURL__image nav-icon"></div>
-            </a>
-            <a class="tx-white" href="#">會員</a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="header__searchblock search mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center">
-        <form action="#" method="post" class="search__form wider-rowFlexBox relative flex-align-center">
-          <input type="text" class="search__input tx-brown tx-size20" name="search" placeholder="西裝" />
-          <input type="submit" class="search__submit pointer" value="" />
-        </form>
-      </div>
-
-      <a href="#" class="cartURL mobile-hide wider-show cartURL pointer relative">
-        <div class="cartURL__image nav-icon"></div>
-        <div class="cartURL__counter radius-100 absolute bg-brown tx-white">
-          1
+        <div
+          class="header__searchblock search mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center"
+        >
+          <form
+            action="#"
+            method="post"
+            class="search__form wider-rowFlexBox relative flex-align-center"
+          >
+            <input
+              type="text"
+              class="search__input tx-brown tx-size20"
+              name="search"
+              placeholder="西裝"
+            />
+            <input type="submit" class="search__submit pointer" value="" />
+          </form>
         </div>
-      </a>
 
-      <a href="#" class="profileURL mobile-hide wider-show profileURL pointer relative">
-        <div class="profileURL__image nav-icon"></div>
-      </a>
-    </div>
-  </header>
-  <!-- main -->
-  <main>
-    <div class="main__carousel carousel relative wider-rowFlexBox flex-align-center flex-space-center">
-      <img src="./public/carousel-placeholder.jpeg" alt="home banner" class="carousel__image full-width" />
-      <div class="carousel__container full-width wider-absolute">
-        <div class="carousel__text absolute text-left tx-black wider-tx-black07">
-          <p class="text-left margin-block-none">
-            於是<br />我也想要給你<br />一個那麼美好的自己。
-          </p>
-          <h4 class="wider-tx-size20 text-left margin-block-none">
-            不朽《與自己和好如初》
-          </h4>
-        </div>
-      </div>
-      <div class="carousel__dotsContainer rowFlexBox flex-space-between flex-align-center absolute">
-        <a href="#">
-          <div class="carousel__dot radius-100 bg-brown"></div>
+        <a
+          href="#"
+          class="cartURL mobile-hide wider-show cartURL pointer relative"
+        >
+          <div class="cartURL__image nav-icon"></div>
+          <div class="cartURL__counter radius-100 absolute bg-brown tx-white">
+            1
+          </div>
         </a>
-        <a href="#">
-          <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
-        </a>
-        <a href="#">
-          <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
-        </a>
-        <a href="#">
-          <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
-        </a>
-        <a href="#">
-          <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
+
+        <a
+          href="#"
+          class="profileURL mobile-hide wider-show profileURL pointer relative"
+        >
+          <div class="profileURL__image nav-icon"></div>
         </a>
       </div>
-    </div>
-    <div class="main__product--container">
-      <div class="main__product product grid">
-        <div class="product__item columnFlexBox">
-          <img src="./public/product-placeholder.jpeg" alt="product-placeholder" class="full-width" />
-          <ul class="product__color--container rowFlexBox flex-space-between">
-            <li class="product__color--grid bd-lightgrey pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-lightgreen pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-greycc pointer"></li>
-          </ul>
-          <p class="product__description">前開衩扭結洋裝</p>
-          <p class="product__description">TWD.799</p>
+    </header>
+    <!-- main -->
+    <main>
+      <div
+        class="main__carousel carousel relative wider-rowFlexBox flex-align-center flex-space-center"
+      >
+        <img
+          src="./public/carousel-placeholder.jpeg"
+          alt="home banner"
+          class="carousel__image full-width"
+        />
+        <div class="carousel__container full-width wider-absolute">
+          <div
+            class="carousel__text absolute text-left tx-black wider-tx-black07"
+          >
+            <p class="text-left margin-block-none">
+              於是<br />我也想要給你<br />一個那麼美好的自己。
+            </p>
+            <h4 class="wider-tx-size20 text-left margin-block-none">
+              不朽《與自己和好如初》
+            </h4>
+          </div>
         </div>
-        <div class="product__item columnFlexBox">
-          <img src="./public/product-placeholder.jpeg" alt="product-placeholder" class="full-width" />
-          <ul class="product__color--container rowFlexBox flex-space-between">
-            <li class="product__color--grid bd-lightgrey pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-lightgreen pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-greycc pointer"></li>
-          </ul>
-          <p class="product__description">前開衩扭結洋裝</p>
-          <p class="product__description">TWD.799</p>
-        </div>
-        <div class="product__item columnFlexBox">
-          <img src="./public/product-placeholder.jpeg" alt="product-placeholder" class="full-width" />
-          <ul class="product__color--container rowFlexBox flex-space-between">
-            <li class="product__color--grid bd-lightgrey pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-lightgreen pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-greycc pointer"></li>
-          </ul>
-          <p class="product__description">前開衩扭結洋裝</p>
-          <p class="product__description">TWD.799</p>
-        </div>
-        <div class="product__item columnFlexBox">
-          <img src="./public/product-placeholder.jpeg" alt="product-placeholder" class="full-width" />
-          <ul class="product__color--container rowFlexBox flex-space-between">
-            <li class="product__color--grid bd-lightgrey pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-lightgreen pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-greycc pointer"></li>
-          </ul>
-          <p class="product__description">前開衩扭結洋裝</p>
-          <p class="product__description">TWD.799</p>
-        </div>
-        <div class="product__item columnFlexBox">
-          <img src="./public/product-placeholder.jpeg" alt="product-placeholder" class="full-width" />
-          <ul class="product__color--container rowFlexBox flex-space-between">
-            <li class="product__color--grid bd-lightgrey pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-lightgreen pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-greycc pointer"></li>
-          </ul>
-          <p class="product__description">前開衩扭結洋裝</p>
-          <p class="product__description">TWD.799</p>
-        </div>
-        <div class="product__item columnFlexBox">
-          <img src="./public/product-placeholder.jpeg" alt="product-placeholder" class="full-width" />
-          <ul class="product__color--container rowFlexBox flex-space-between">
-            <li class="product__color--grid bd-lightgrey pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-lightgreen pointer"></li>
-            <li class="product__color--grid bd-lightgrey bg-greycc pointer"></li>
-          </ul>
-          <p class="product__description">前開衩扭結洋裝</p>
-          <p class="product__description">TWD.799</p>
+        <div
+          class="carousel__dotsContainer rowFlexBox flex-space-between flex-align-center absolute"
+        >
+          <a href="#">
+            <div class="carousel__dot radius-100 bg-brown"></div>
+          </a>
+          <a href="#">
+            <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
+          </a>
+          <a href="#">
+            <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
+          </a>
+          <a href="#">
+            <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
+          </a>
+          <a href="#">
+            <div class="carousel__dot radius-100 bg-white wider-bg-white"></div>
+          </a>
         </div>
       </div>
-    </div>
-  </main>
-  <!-- footer -->
-  <footer class="fixed full-width bg-dark">
-    <div
-      class="footer__wrapper columnFlexBox flex-space-between flex-align-center margin-horizontal-center wider-rowFlexBox">
-      <div class="footer__wrapper--link rowFlexBox flex-space-between relative">
-        <ul class="footer__linklist columnFlexBox wider-hide">
-          <li><a class="tx-lightgrey" href="#">關於 STYLiSH</a></li>
-          <li><a class="tx-lightgrey" href="#">服務條款</a></li>
-          <li><a class="tx-lightgrey" href="#">隱私政策</a></li>
-        </ul>
-        <ul class="footer__linklist columnFlexBox wider-hide">
-          <li><a class="tx-lightgrey" href="#">聯絡我們</a></li>
-          <li><a class="tx-lightgrey" href="#">FAQ</a></li>
-        </ul>
-        <ul
-          class="footer__linklist--wide columnFlexBox mobile-hide wider-show wider-rowFlexBox flex-align-center flex-space-evenly">
-          <li class="flexItem-evenly">
-            <a class="wider-tx-whitesmoke" href="#">關於 STYLiSH</a>
-          </li>
-          <li class="tx-lightgrey">|</li>
-          <li class="flexItem-evenly">
-            <a class="wider-tx-whitesmoke" href="#">服務條款</a>
-          </li>
-          <li class="tx-lightgrey">|</li>
-          <li class="flexItem-evenly">
-            <a class="wider-tx-whitesmoke" href="#">隱私政策</a>
-          </li>
-          <li class="tx-lightgrey">|</li>
-          <li class="flexItem-evenly">
-            <a class="wider-tx-whitesmoke" href="#">聯絡我們</a>
-          </li>
-          <li class="tx-lightgrey">|</li>
-          <li class="flexItem-evenly">
-            <a class="wider-tx-whitesmoke" href="#">FAQ</a>
-          </li>
-        </ul>
-        <div class="footer__socialmedia rowFlexBox flex-space-between">
-          <a href="#"><img src="./public/line.png" alt="line" /></a>
-          <a href="#"><img src="./public/twitter.png" alt="twitter" /></a>
-          <a href="#"><img src="./public/facebook.png" alt="facebook" /></a>
+      <div class="main__product--container">
+        <div class="main__product product grid">
+          <div class="product__item columnFlexBox">
+            <img
+              src="./public/product-placeholder.jpeg"
+              alt="product-placeholder"
+              class="full-width"
+            />
+            <ul class="product__color--container rowFlexBox flex-space-between">
+              <li class="product__color--grid bd-lightgrey pointer"></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-lightgreen pointer"
+              ></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-greycc pointer"
+              ></li>
+            </ul>
+            <p class="product__description">前開衩扭結洋裝</p>
+            <p class="product__description">TWD.799</p>
+          </div>
+          <div class="product__item columnFlexBox">
+            <img
+              src="./public/product-placeholder.jpeg"
+              alt="product-placeholder"
+              class="full-width"
+            />
+            <ul class="product__color--container rowFlexBox flex-space-between">
+              <li class="product__color--grid bd-lightgrey pointer"></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-lightgreen pointer"
+              ></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-greycc pointer"
+              ></li>
+            </ul>
+            <p class="product__description">前開衩扭結洋裝</p>
+            <p class="product__description">TWD.799</p>
+          </div>
+          <div class="product__item columnFlexBox">
+            <img
+              src="./public/product-placeholder.jpeg"
+              alt="product-placeholder"
+              class="full-width"
+            />
+            <ul class="product__color--container rowFlexBox flex-space-between">
+              <li class="product__color--grid bd-lightgrey pointer"></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-lightgreen pointer"
+              ></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-greycc pointer"
+              ></li>
+            </ul>
+            <p class="product__description">前開衩扭結洋裝</p>
+            <p class="product__description">TWD.799</p>
+          </div>
+          <div class="product__item columnFlexBox">
+            <img
+              src="./public/product-placeholder.jpeg"
+              alt="product-placeholder"
+              class="full-width"
+            />
+            <ul class="product__color--container rowFlexBox flex-space-between">
+              <li class="product__color--grid bd-lightgrey pointer"></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-lightgreen pointer"
+              ></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-greycc pointer"
+              ></li>
+            </ul>
+            <p class="product__description">前開衩扭結洋裝</p>
+            <p class="product__description">TWD.799</p>
+          </div>
+          <div class="product__item columnFlexBox">
+            <img
+              src="./public/product-placeholder.jpeg"
+              alt="product-placeholder"
+              class="full-width"
+            />
+            <ul class="product__color--container rowFlexBox flex-space-between">
+              <li class="product__color--grid bd-lightgrey pointer"></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-lightgreen pointer"
+              ></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-greycc pointer"
+              ></li>
+            </ul>
+            <p class="product__description">前開衩扭結洋裝</p>
+            <p class="product__description">TWD.799</p>
+          </div>
+          <div class="product__item columnFlexBox">
+            <img
+              src="./public/product-placeholder.jpeg"
+              alt="product-placeholder"
+              class="full-width"
+            />
+            <ul class="product__color--container rowFlexBox flex-space-between">
+              <li class="product__color--grid bd-lightgrey pointer"></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-lightgreen pointer"
+              ></li>
+              <li
+                class="product__color--grid bd-lightgrey bg-greycc pointer"
+              ></li>
+            </ul>
+            <p class="product__description">前開衩扭結洋裝</p>
+            <p class="product__description">TWD.799</p>
+          </div>
         </div>
       </div>
-      <span class="tx-grey82">&copy; 2018. All rights reserved.</span>
-    </div>
-  </footer>
-</body>
-
+    </main>
+    <!-- footer -->
+    <footer class="fixed full-width bg-dark">
+      <div
+        class="footer__wrapper columnFlexBox flex-space-between flex-align-center margin-horizontal-center wider-rowFlexBox"
+      >
+        <div
+          class="footer__wrapper--link rowFlexBox flex-space-between relative"
+        >
+          <ul class="footer__linklist columnFlexBox wider-hide">
+            <li><a class="tx-lightgrey" href="#">關於 STYLiSH</a></li>
+            <li><a class="tx-lightgrey" href="#">服務條款</a></li>
+            <li><a class="tx-lightgrey" href="#">隱私政策</a></li>
+          </ul>
+          <ul class="footer__linklist columnFlexBox wider-hide">
+            <li><a class="tx-lightgrey" href="#">聯絡我們</a></li>
+            <li><a class="tx-lightgrey" href="#">FAQ</a></li>
+          </ul>
+          <ul
+            class="footer__linklist--wide columnFlexBox mobile-hide wider-show wider-rowFlexBox flex-align-center flex-space-evenly"
+          >
+            <li class="flexItem-evenly">
+              <a class="wider-tx-whitesmoke" href="#">關於 STYLiSH</a>
+            </li>
+            <li class="tx-lightgrey">|</li>
+            <li class="flexItem-evenly">
+              <a class="wider-tx-whitesmoke" href="#">服務條款</a>
+            </li>
+            <li class="tx-lightgrey">|</li>
+            <li class="flexItem-evenly">
+              <a class="wider-tx-whitesmoke" href="#">隱私政策</a>
+            </li>
+            <li class="tx-lightgrey">|</li>
+            <li class="flexItem-evenly">
+              <a class="wider-tx-whitesmoke" href="#">聯絡我們</a>
+            </li>
+            <li class="tx-lightgrey">|</li>
+            <li class="flexItem-evenly">
+              <a class="wider-tx-whitesmoke" href="#">FAQ</a>
+            </li>
+          </ul>
+          <div class="footer__socialmedia rowFlexBox flex-space-between">
+            <a href="#"><img src="./public/line.png" alt="line" /></a>
+            <a href="#"><img src="./public/twitter.png" alt="twitter" /></a>
+            <a href="#"><img src="./public/facebook.png" alt="facebook" /></a>
+          </div>
+        </div>
+        <span class="tx-grey82">&copy; 2018. All rights reserved.</span>
+      </div>
+    </footer>
+  </body>
 </html>
