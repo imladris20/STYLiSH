@@ -1,37 +1,30 @@
-const options = {
-  method: 'POST', // HTTP Method (如 GET, POST, PUT, DELETE 等)
-  headers: {
-    'Content-Type': 'application/json'
+async function fetchData(url){
+  try {
+    const response = await fetch(url);
+    const data =  await response.json();
+    return data;
+  } catch (error) {
+    console.error('Fetching calculating error:', error);
+    throw error;
   }
-};
-
-const getProductList = (URL, setting) => {
-  fetch(URL, setting)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => {
-      console.error('Fetching calculating error:', error);
-    });
 }
 
-getProductList("https://api.appworks-school.tw/api/1.0/products/all", options);
+const api = "https://api.appworks-school.tw/api";
+const apiVersion = "/1.0";
+const apiFunction = "/products";
+const apiProductCategories = ["/all", "/women", "/men", "/accessories"]
+const apiProductPaging = "";
 
+const productObject = {};
 
+const getProduct = ({data, next_paging}) => {
+  const arr = data;
+  const page = next_paging
+  console.log(arr);
+  console.log(page);
+};
 
-/* document.getElementById('submitNumber').addEventListener('click', () => {
-  const targetnumber = document.getElementById('targetnumber').value;
-  fetch('/getData?number=' + targetnumber)
-      .then(response => response.json())
-      .then(data => {
-          console.log(data);
-          const resultElement = document.getElementById('result');
-          resultElement.innerHTML = `
-            <h2>${data.status}</h2>
-            <h2>${data.sum? `Result is: ${data.sum}`: "" }</h2>
-            <p>${data.countingDescription}</p>
-          `;
-      })
-      .catch(error => {
-          console.error('Fetching calculating error:', error);
-      });
-}); */
+fetchData(`${api}${apiVersion}${apiFunction}${apiProductCategories[0]}`)
+  .then(data => {
+    getProduct(data)
+  });
