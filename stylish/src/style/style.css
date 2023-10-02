@@ -606,6 +606,7 @@ Media Queries
 
   .carousel__dotsContainer {
     width: 138px;
+    bottom: 34px;
   }
 
   .carousel__dot {
