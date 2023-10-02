@@ -16,7 +16,7 @@
 <body>
   <!-- header -->
   <header class="header full-width">
-    <div class="header__wrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width">
+    <div class="header__wrapper columnFlexBox wider-rowFlexBox flex-no-wrap full-width fixed topLayer bg-white">
       <div class="full-width wider-rowFlexBox">
         <a href="#">
           <img class="header__logo" src="./public/logo.png" alt="stylish" />
@@ -47,7 +47,7 @@
         <img src="./public/search.png" alt="search" />
       </a>
 
-      <nav class="header__nav--bottom bottomNav wider-hide fixed full-width">
+      <nav class="header__nav--bottom bottomNav wider-hide fixed topLayer full-width">
         <ul class="bottomNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
           <li class="rowFlexBox flexItem-evenly flex-align-center flex-space-center">
             <a href="#" class="bottomNav__icon cartURL pointer relative">
@@ -87,6 +87,7 @@
       </a>
     </div>
   </header>
+  <div class="section__space"></div>
   <!-- main -->
   <main>
     <div class="main__carousel carousel relative wider-rowFlexBox flex-align-center flex-space-center">
@@ -185,7 +186,7 @@
     </div>
   </main>
   <!-- footer -->
-  <footer class="fixed full-width bg-dark">
+  <footer class="full-width bg-dark">
     <div
       class="footer__wrapper columnFlexBox flex-space-between flex-align-center margin-horizontal-center wider-rowFlexBox">
       <div class="footer__wrapper--link rowFlexBox flex-space-between relative">

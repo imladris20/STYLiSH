@@ -50,6 +50,8 @@ input::placeholder {
   font-size: 20px;
 }
 
+/** Common CSS setting **/
+
 .full-width {
   width: 100%;
 }
@@ -197,14 +199,23 @@ input::placeholder {
   display: grid;
 }
 
+.topLayer {
+  z-index: 999;
+}
+
 /** Header **/
 
+.section__space {
+  height: 102px;
+}
+
 .header__wrapper {
-  max-height: 140px;
+  height: 102px;
+  top: 0;
 }
 
 .header__search {
-  top: 14px;
+  top: 6px;
   right: 16px;
   width: 40px;
   height: 40px;
@@ -286,22 +297,18 @@ input::placeholder {
   height: 4px;
 }
 
-main {
-  padding-bottom: 205px;
-}
-
 .main__product {
   padding: 15px 24px 47px 24px;
   column-gap: 6px;
   row-gap: 24px;
-  grid-template-columns: repeat(2,calc(50% - 3px));
+  grid-template-columns: repeat(2, calc(50% - 3px));
 }
 
 .product__item {
   height: auto;
   min-height: 270px;
   min-width: 153px;
-  gap: 8px
+  gap: 8px;
 }
 
 .product__color--container {
@@ -313,7 +320,7 @@ main {
   width: 12px;
   height: 12px;
   border-style: solid;
-  border-width: 1px;  
+  border-width: 1px;
 }
 
 .product__description {
@@ -321,7 +328,6 @@ main {
   text-align: left;
   letter-spacing: 2.4px;
 }
-
 
 /** footer **/
 
@@ -376,7 +382,7 @@ Media Queries
 ==================================== */
 
 @media (min-width: 1280px) {
-  /** common **/
+  /** Wider Common CSS setting **/
   .wider-hide {
     display: none;
   }
@@ -425,7 +431,12 @@ Media Queries
 
   /** header **/
 
+  .section__space {
+    height: 140px;
+  }
+
   .header__wrapper {
+    height: 140px;
     gap: 20px;
     border-bottom: 40px #313538 solid;
     padding: 26px 56px 26px 60px;
@@ -583,10 +594,6 @@ Media Queries
     height: 10px;
   }
 
-  main {
-    padding-bottom: 114px;
-  }
-
   .main__product--container {
     max-width: 1160px;
     margin: 0 auto;
@@ -596,24 +603,24 @@ Media Queries
     padding: 70px 0px 110px 0px;
     column-gap: 40px;
     row-gap: 64px;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .product__item {
-    gap: 10px
+    gap: 10px;
   }
-  
+
   .product__color--container {
     width: 92px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  
+
   .product__color--grid {
     width: 24px;
-    height: 24px;  
+    height: 24px;
   }
-  
+
   .product__description {
     font-size: 20px;
     letter-spacing: 4px;
