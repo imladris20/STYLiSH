@@ -253,7 +253,7 @@ input::placeholder {
   width: 24px;
   place-items: center;
   right: 0px;
-  bottom: 3px;
+  bottom: 0px;
 }
 
 .profileURL__image {
@@ -349,6 +349,7 @@ footer a {
 
 .footer__wrapper span {
   font-size: 10px;
+  transform: scale(0.833);
 }
 
 .footer__wrapper--link {
@@ -364,8 +365,17 @@ footer a {
 
 .footer__linklist {
   justify-content: flex-start;
-  gap: 8px;
+  row-gap: 8px;
+  column-gap: 36px;
+  align-content: space-between;
   align-items: start;
+  flex-wrap: wrap;
+  width: 177px;
+  height: 76px;
+}
+
+.footer__linklist li {
+  line-height: 20px;
 }
 
 .footer__socialmedia {
@@ -536,10 +546,9 @@ Media Queries
     font-size: 16px;
   }
 
-  .footer__linklist--wide {
+  .footer__linklist {
     width: 670px;
-    justify-content: space-evenly;
-    align-items: center;
+    align-content: center;
   }
 
   .footer__socialmedia {
@@ -549,6 +558,7 @@ Media Queries
 
   .footer__wrapper span {
     font-size: 12px;
+    transform: none;
   }
 
   footer a,
