@@ -553,6 +553,7 @@ Media Queries
 
   .footer__socialmedia {
     margin-top: 0;
+    margin-bottom: 0;
     gap: 30px;
   }
 
