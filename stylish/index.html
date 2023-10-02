@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 
 <html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>STYLiSH (Po Lien Lin)</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="./src/style/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
-  </head>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STYLiSH (Po Lien Lin)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="./src/style/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
+</head>
 
 <body>
   <!-- header -->
@@ -24,42 +22,30 @@
           <img class="header__logo" src="./public/logo.png" alt="stylish" />
         </a>
 
-          <nav class="header__nav--top topNav full-width">
-            <ul
-              class="topNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark"
-            >
-              <li
-                class="wider-tx-size20 flexItem-evenly flex-space-center text-center"
-              >
-                <a class="tx-white wider-tx-brown text-center" href="#">女裝</a>
-              </li>
-              <li
-                class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center"
-              >
-                |
-              </li>
-              <li
-                class="wider-tx-size20 flexItem-evenly flex-space-center text-center"
-              >
-                <a class="tx-grey82 wider-tx-black3a" href="#">男裝</a>
-              </li>
-              <li
-                class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center"
-              >
-                |
-              </li>
-              <li
-                class="wider-tx-size20 flexItem-evenly flex-space-center text-center"
-              >
-                <a class="tx-grey82 wider-tx-black3a" href="#">配件</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <nav class="header__nav--top topNav full-width">
+          <ul class="topNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
+            <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
+              <a class="tx-white wider-tx-brown text-center" href="#">女裝</a>
+            </li>
+            <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">
+              |
+            </li>
+            <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
+              <a class="tx-grey82 wider-tx-black3a" href="#">男裝</a>
+            </li>
+            <li class="wider-tx-size20 tx-grey wider-tx-black3a flex-space-center text-center">
+              |
+            </li>
+            <li class="wider-tx-size20 flexItem-evenly flex-space-center text-center">
+              <a class="tx-grey82 wider-tx-black3a" href="#">配件</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-        <a href="#" class="header__search wider-hide fixed">
-          <img src="./public/search.png" alt="search" />
-        </a>
+      <a href="#" class="header__search wider-hide fixed">
+        <img src="./public/search.png" alt="search" />
+      </a>
 
       <nav class="header__nav--bottom bottomNav wider-hide fixed topLayer full-width">
         <ul class="bottomNav__list rowFlexBox flex-space-evenly flex-align-center bg-dark">
@@ -82,33 +68,19 @@
         </ul>
       </nav>
 
-        <div
-          class="header__searchblock search mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center"
-        >
-          <form
-            action="#"
-            method="post"
-            class="search__form wider-rowFlexBox relative flex-align-center"
-          >
-            <input
-              type="text"
-              class="search__input tx-brown tx-size20"
-              name="search"
-              placeholder="西裝"
-            />
-            <input type="submit" class="search__submit pointer" value="" />
-          </form>
-        </div>
+      <div class="header__searchblock search mobile-hide wider-show wider-rowFlexBox flexItem-evenly flex-align-center">
+        <form action="#" method="post" class="search__form wider-rowFlexBox relative flex-align-center">
+          <input type="text" class="search__input tx-brown tx-size20" name="search" placeholder="西裝" />
+          <input type="submit" class="search__submit pointer" value="" />
+        </form>
+      </div>
 
-        <a
-          href="#"
-          class="cartURL mobile-hide wider-show cartURL pointer relative"
-        >
-          <div class="cartURL__image nav-icon"></div>
-          <div class="cartURL__counter radius-100 absolute bg-brown tx-white">
-            1
-          </div>
-        </a>
+      <a href="#" class="cartURL mobile-hide wider-show cartURL pointer relative">
+        <div class="cartURL__image nav-icon"></div>
+        <div class="cartURL__counter radius-100 absolute bg-brown tx-white">
+          1
+        </div>
+      </a>
 
       <a href="#" class="profileURL mobile-hide wider-show profileURL pointer relative">
         <div class="profileURL__image nav-icon"></div>
