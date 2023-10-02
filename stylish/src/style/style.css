@@ -456,6 +456,10 @@ Media Queries
     margin-left: 57px;
   }
 
+  .header__logo--wrapper {
+    width: unset;
+  }
+
   .header__logo {
     width: 258px;
     height: 48px;
@@ -469,7 +473,6 @@ Media Queries
   }
 
   .topNav__list li {
-    align-self: flex-end;
     letter-spacing: 30px;
     margin-right: -30px;
   }
