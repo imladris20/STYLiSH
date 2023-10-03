@@ -1,7 +1,7 @@
-async function fetchData(url){
+async function fetchData(url) {
   try {
     const response = await fetch(url);
-    const data =  await response.json();
+    const data = await response.json();
     return data;
   } catch (error) {
     console.error('Fetching calculating error:', error);
@@ -16,55 +16,44 @@ const apiProductCategories = ["/all", "/women", "/men", "/accessories"]
 const apiProductPaging = "";
 
 document.addEventListener('DOMContentLoaded', () => {
-  
+
   const productList = Array.from(document.querySelectorAll('.product__item'));
-  // console.log(productList);
+  console.log(productList);
 
   const productItemColorBoxes = Array.from(document.querySelectorAll('.product__color--container'));
   // console.log(productItemColorBoxes);
 
-  const renderProduct = ({data, next_paging}) => {
+  const renderProduct = ({ data, next_paging }) => {
 
     const arr = data;
     const page = next_paging;
-    
+
     // console.log(arr);
 
-    //  Render images
-    productList.map( productItem => productItem.querySelector('img'))
-      .forEach ( (image, number) => {
-        image.src = arr[number].main_image;
-      })
+    for (const [index, productItem] of productList.entries()) {
+      const image = productItem.querySelector('img');
+      const title = productItem.querySelector('.product__title');
+      const price = productItem.querySelector('.product__price');
+      const colorSelections = Array.from(productItem.querySelectorAll('ul li'));
 
-    //  Render titles
-    productList.map( productItem => productItem.querySelector('.product__title'))
-      .forEach ( (title, number) => {
-        title.textContent = arr[number].title; 
-      })
-
-    // Render prices
-    productList.map( productItem => productItem.querySelector('.product__price'))
-      .forEach ((price, number) => {
-        price.textContent = `TWD.${arr[number].price}`;
-      })
-
-    // Render colors selection
-    productItemColorBoxes.map( (productItemColorbox, number) => {
-      const selections = Array.from(productItemColorbox.querySelectorAll('li'));
-      console.log("selections Array", selections);
-      
-      for (let j = 0 ; j < 3 ; j++) {
-        if (arr[number].colors[j]) {
-          console.log(arr[number].colors[j].code);
-          console.log("origin-dom", selections[j].style.backgroundColor);
-          selections[j].style.backgroundColor = `#${arr[number].colors[j].code}`; 
+      //  Render images
+      image.src = arr[index].main_image;
+      /*  Render Colors
+          colorIndex: 0,1,2
+          color: bg of li   */
+      for (const [colorIndex, color] of colorSelections.entries()) {
+        if (arr[index].colors[colorIndex]) {
+          color.style.backgroundColor = `#${arr[index].colors[colorIndex].code}`;
         } else {
-          console.log('none');
-          selections[j].style.display = "none";
+          color.style.display = 'none';
         }
       }
-    })
+      //  Render titles
+      title.textContent = arr[index].title;
+      //  Render prices
+      price.textContent = `TWD.${arr[index].price}`;
 
+    }
   };
 
   // fetch: https://api.appworks-school.tw/api/1.0/products/all
@@ -72,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       renderProduct(data)
     })
-    .catch (error => {
+    .catch(error => {
       console.error("Something went wrong while getting production information", error);
     });
 
