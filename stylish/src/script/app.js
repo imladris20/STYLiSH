@@ -12,7 +12,7 @@ async function fetchData(url) {
 const displayElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
   target.style.display = "block";
-} 
+}
 
 const hideElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
@@ -20,7 +20,7 @@ const hideElement = (elementWithClass) => {
 }
 
 const createClassedElement = (element, className) => {
-  const newElement =document.createElement(element);
+  const newElement = document.createElement(element);
   newElement.className = className;
   return newElement;
 }
@@ -30,7 +30,7 @@ const renderProduct = (apiSourceData) => {
   const productContainer = createClassedElement("div", "main__product--container");
   const productGrid = createClassedElement('div', "main__product product grid");
 
-  apiSourceData.forEach ( ({main_image, colors, title, price}) => {
+  apiSourceData.forEach(({ main_image, colors, title, price }) => {
     const productItem = createClassedElement('div', "product__item columnFlexBox");
     const productItem_img = createClassedElement('img', "full-width");
     const productItem_colorBox = createClassedElement('ul', "product__color--container rowFlexBox flex-space-between");
@@ -40,9 +40,9 @@ const renderProduct = (apiSourceData) => {
     //  Set image
     productItem_img.src = main_image;
     productItem_img.alt = "product item"
-    
+
     //  Produce and set colors
-    colors.forEach( color => {
+    colors.forEach(color => {
       const productItem_color = createClassedElement('li', "product__color--grid bd-lightgrey pointer");
       productItem_color.style.backgroundColor = `#${color.code}`;
       productItem_colorBox.append(productItem_color);
@@ -55,13 +55,37 @@ const renderProduct = (apiSourceData) => {
     productItem_price.textContent = `TWD.${price}`;
 
     productItem.append(productItem_img, productItem_colorBox, productItem_title, productItem_price);
-
-    productGrid.append(productItem);
+    -
+      productGrid.append(productItem);
   })
-  
+
   productContainer.append(productGrid);
 
   main.append(productContainer)
 };
 
-export {fetchData, renderProduct, displayElement, hideElement};
+const switchQueryString = (elementClicked) => {
+
+  const text = document.querySelector(`#${elementClicked}`)
+  const women = document.querySelector('.women');
+  const men = document.querySelector('.men');
+  const accessories = document.querySelector('.accessories');
+
+  const newQueryString = `category=${elementClicked}`;
+
+  // 獲取當前網址
+  const currentUrl = window.location.href;
+
+  // 檢查當前網址是否已經包含 query string
+  if (currentUrl.includes('?')) {
+    // 如果已經包含 query string，則替換它
+    const updatedUrl = currentUrl.replace(/category=[^&]+/, newQueryString);
+    window.history.pushState({}, '', updatedUrl);
+  } else {
+    // 如果尚未包含 query string，則新增它
+    const updatedUrl = currentUrl + '?' + newQueryString;
+    window.history.pushState({}, '', updatedUrl);
+  }
+}
+
+export { fetchData, renderProduct, displayElement, hideElement, switchQueryString };
