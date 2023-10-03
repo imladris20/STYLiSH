@@ -314,6 +314,8 @@ input::placeholder {
 .product__color--container {
   width: 48px;
   margin-bottom: 2px;
+  justify-content: flex-start;
+  gap: 6px;
 }
 
 .product__color--grid {
@@ -645,6 +647,7 @@ Media Queries
     width: 92px;
     margin-top: 10px;
     margin-bottom: 10px;
+    gap: 10px;
   }
 
   .product__color--grid {
