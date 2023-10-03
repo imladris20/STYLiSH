@@ -9,7 +9,7 @@ async function fetchData(url){
   }
 }
 
-const api = "https://api.appworks-school.tw/api";
+const apiHost = "https://api.appworks-school.tw/api";
 const apiVersion = "/1.0";
 const apiFunction = "/products";
 const apiProductCategories = ["/all", "/women", "/men", "/accessories"]
@@ -67,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   };
 
-  fetchData(`${api}${apiVersion}${apiFunction}${apiProductCategories[0]}`)
+  // fetch: https://api.appworks-school.tw/api/1.0/products/all
+  fetchData(`${apiHost}${apiVersion}${apiFunction}${apiProductCategories[0]}`)
     .then(data => {
       renderProduct(data)
     })
