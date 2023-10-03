@@ -297,6 +297,14 @@ input::placeholder {
   height: 4px;
 }
 
+.loadingGif {
+  display: block;
+  margin: 490px auto;
+  width: 64px;
+  height: 64px;
+  background: url("../../public/loading.gif") center/cover no-repeat;
+}
+
 .main__product {
   padding: 15px 24px 47px 24px;
   column-gap: 6px;
@@ -625,6 +633,12 @@ Media Queries
   .carousel__dot {
     width: 10px;
     height: 10px;
+  }
+
+  .loadingGif {
+    margin: 747px auto;
+    width: 128px;
+    height: 128px;
   }
 
   .main__product--container {

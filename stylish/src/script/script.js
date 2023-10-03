@@ -9,60 +9,62 @@ async function fetchData(url) {
   }
 }
 
-const apiHost = "https://api.appworks-school.tw/api";
-const apiVersion = "/1.0";
-const apiFunction = "/products";
-const apiProductCategories = ["/all", "/women", "/men", "/accessories"]
-const apiProductPaging = "";
+const displayElement = (elementWithClass) => {
+  const target = document.querySelector(`.${elementWithClass}`);
+  target.style.display = "block";
+} 
 
-document.addEventListener('DOMContentLoaded', () => {
+const hideElement = (elementWithClass) => {
+  const target = document.querySelector(`.${elementWithClass}`);
+  target.style.display = 'none'
+}
 
-  const productList = Array.from(document.querySelectorAll('.product__item'));
-  console.log(productList);
+const createClassedElement = (element, className) => {
+  const newElement =document.createElement(element);
+  newElement.className = className;
+  return newElement;
+}
 
-  const productItemColorBoxes = Array.from(document.querySelectorAll('.product__color--container'));
-  // console.log(productItemColorBoxes);
+const renderProduct = (apiSourceData) => {
 
-  const renderProduct = ({ data, next_paging }) => {
+  apiSourceData.forEach ( ({main_image, colors, title, price}) => {
 
-    const arr = data;
-    const page = next_paging;
+    const main = document.querySelector('main');
 
-    // console.log(arr);
+    const productContainer = createClassedElement("div", "main__product--container");
+    const productGrid = createClassedElement('div', "main__product product grid");
+    const productItem = createClassedElement('div', "product__item columnFlexBox");
+    const productItem_img = createClassedElement('img', "full-width");
+    const productItem_colorBox = createClassedElement('ul', "product__color--container rowFlexBox flex-space-between");
+    const productItem_title = createClassedElement('p', "product__description product__productItem_");
+    const productItem_price = createClassedElement('p', "product__description product__price");
 
-    for (const [index, productItem] of productList.entries()) {
-      const image = productItem.querySelector('img');
-      const title = productItem.querySelector('.product__title');
-      const price = productItem.querySelector('.product__price');
-      const colorSelections = Array.from(productItem.querySelectorAll('ul li'));
-
-      //  Render images
-      image.src = arr[index].main_image;
-      /*  Render Colors
-          colorIndex: 0,1,2
-          color: bg of li   */
-      for (const [colorIndex, color] of colorSelections.entries()) {
-        if (arr[index].colors[colorIndex]) {
-          color.style.backgroundColor = `#${arr[index].colors[colorIndex].code}`;
-        } else {
-          color.style.display = 'none';
-        }
-      }
-      //  Render titles
-      title.textContent = arr[index].title;
-      //  Render prices
-      price.textContent = `TWD.${arr[index].price}`;
-
-    }
-  };
-
-  // fetch: https://api.appworks-school.tw/api/1.0/products/all
-  fetchData(`${apiHost}${apiVersion}${apiFunction}${apiProductCategories[0]}`)
-    .then(data => {
-      renderProduct(data)
-    })
-    .catch(error => {
-      console.error("Something went wrong while getting production information", error);
+    //  Set image
+    productItem_img.src = main_image;
+    productItem_img.alt = "product item"
+    
+    //  Produce and set colors
+    colors.forEach( color => {
+      const productItem_color = createClassedElement('li', "product__color--grid bd-lightgrey pointer");
+      productItem_color.style.backgroundColor = `#${color.code}`;
+      productItem_colorBox.append(productItem_color);
     });
 
-});
+    //  Set title
+    productItem_title.textContent = title;
+
+    //  Set price
+    productItem_price.textContent = `TWD.${price}`;
+
+    productItem.append(productItem_img, productItem_colorBox, productItem_title, productItem_price);
+
+    productGrid.append(productItem);
+
+    productContainer.append(productGrid);
+
+    main.append(productContainer)
+  })
+
+};
+
+export {fetchData, renderProduct, displayElement, hideElement};
