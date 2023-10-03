@@ -14,13 +14,11 @@ async function fetchData(url) {
 const displayElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
   target.style.display = "block";
-  console.log("first set");
 } 
 
 const hideElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
-  target.style.display = 'none'
-  console.log("final set")
+  target.style.display = 'none';
 }
 
 const createClassedElement = (element, className) => {
@@ -77,7 +75,6 @@ const apiFunction = "/products";
 const apiProductPaging = "";
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("123");
   
   displayElement("loadingGif");
 
