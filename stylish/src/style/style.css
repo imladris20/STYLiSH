@@ -297,6 +297,14 @@ input::placeholder {
   height: 4px;
 }
 
+.loadingGif {
+  display: block;
+  margin: 490px auto;
+  width: 64px;
+  height: 64px;
+  background: url("../../public/loading.gif") center/cover no-repeat;
+}
+
 .main__product {
   padding: 15px 24px 47px 24px;
   column-gap: 6px;
@@ -314,6 +322,8 @@ input::placeholder {
 .product__color--container {
   width: 48px;
   margin-bottom: 2px;
+  justify-content: flex-start;
+  gap: 6px;
 }
 
 .product__color--grid {
@@ -625,6 +635,12 @@ Media Queries
     height: 10px;
   }
 
+  .loadingGif {
+    margin: 747px auto;
+    width: 128px;
+    height: 128px;
+  }
+
   .main__product--container {
     max-width: 1160px;
     margin: 0 auto;
@@ -645,6 +661,7 @@ Media Queries
     width: 92px;
     margin-top: 10px;
     margin-bottom: 10px;
+    gap: 10px;
   }
 
   .product__color--grid {
