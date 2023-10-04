@@ -19,6 +19,15 @@ const hideElement = (elementWithClass) => {
   target.style.display = 'none'
 }
 
+const removeClassedElement = (elementClassName) => {
+  const elementToRemove = document.querySelector(`.${elementClassName}`);
+  console.log("try removing");
+  if (elementToRemove) {
+    console.log('It will remove');
+    elementToRemove.remove();
+  }
+}
+
 const createClassedElement = (element, className) => {
   const newElement = document.createElement(element);
   newElement.className = className;
@@ -73,10 +82,10 @@ const switchQueryString = (elementClicked) => {
 
   const newQueryString = `category=${elementClicked}`;
 
-  // 獲取當前網址
+  // 獲取網址
   const currentUrl = window.location.href;
 
-  // 檢查當前網址是否已經包含 query string
+  // 檢查網址是否已經包含 query string
   if (currentUrl.includes('?')) {
     // 如果已經包含 query string，則替換它
     const updatedUrl = currentUrl.replace(/category=[^&]+/, newQueryString);
@@ -88,4 +97,21 @@ const switchQueryString = (elementClicked) => {
   }
 }
 
-export { fetchData, renderProduct, displayElement, hideElement, switchQueryString };
+const fetchProduct = (category) => {
+  const apiHost = "https://api.appworks-school.tw/api";
+  const apiVersion = "/1.0";
+  const apiFunction = "/products";
+
+  fetchData(`${apiHost}${apiVersion}${apiFunction}/${category}`)
+    .then(({ data, next_paging }) => {
+      renderProduct(data);
+    })
+    .catch(error => {
+      console.error("Something went wrong while getting production information", error);
+    })
+    .finally(() => {
+      hideElement("loadingGif");
+    })
+}
+
+export { fetchData, fetchProduct, renderProduct, displayElement, hideElement, removeClassedElement, switchQueryString };
