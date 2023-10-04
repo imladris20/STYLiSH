@@ -36,28 +36,22 @@ const renderProduct = (apiSourceData) => {
   const main = document.querySelector("main");
   const productContainer = createClassedElement(
     "div",
-    "main__product--container"
+    "main__product-container"
   );
-  const productGrid = createClassedElement("div", "main__product product grid");
+  const productGrid = createClassedElement("div", "product-list grid");
 
   apiSourceData.forEach(({ main_image, colors, title, price }) => {
-    const productItem = createClassedElement(
-      "div",
-      "product__item columnFlexBox"
+    const productItem = createClassedElement("div", "product-item column-flex");
+    const productItem_img = createClassedElement(
+      "img",
+      "product-item__img full-width"
     );
-    const productItem_img = createClassedElement("img", "full-width");
     const productItem_colorBox = createClassedElement(
       "ul",
-      "product__color--container rowFlexBox flex-space-between"
+      "product-item__color-container row-flex flex-space-between"
     );
-    const productItem_title = createClassedElement(
-      "p",
-      "product__description product__productItem_"
-    );
-    const productItem_price = createClassedElement(
-      "p",
-      "product__description product__price"
-    );
+    const productItem_title = createClassedElement("p", "product-item__title");
+    const productItem_price = createClassedElement("p", "product-item__price");
 
     //  Set image
     productItem_img.src = main_image;
@@ -67,7 +61,7 @@ const renderProduct = (apiSourceData) => {
     colors.forEach((color) => {
       const productItem_color = createClassedElement(
         "li",
-        "product__color--grid bd-lightgrey pointer"
+        "product-item__color-grid bd-lightgrey pointer"
       );
       productItem_color.style.backgroundColor = `#${color.code}`;
       productItem_colorBox.append(productItem_color);
@@ -93,10 +87,10 @@ const renderProduct = (apiSourceData) => {
   main.append(productContainer);
 };
 
-const fetchProduct = ({ host, version, endpoint }, category) => {
-  fetchData(`${host}/${version}/${endpoint}/${category}`)
+const fetchProduct = ({ host, version, products }, category) => {
+  fetchData(`${host}/${version}/${products}/${category}`)
     .then(({ data, next_paging }) => {
-      removeClassedElement("main__product--container");
+      removeClassedElement("main__product-container");
       renderProduct(data);
     })
     .catch((error) => {
@@ -106,23 +100,16 @@ const fetchProduct = ({ host, version, endpoint }, category) => {
       );
     })
     .finally(() => {
-      hideElement("loadingGif");
+      hideElement("loading-gif");
     });
 };
 
 const switchCategoryQuery = (categoryValue) => {
-  const newQueryString = `category=${categoryValue}`;
-  const currentUrl = window.location.href;
-
-  if (currentUrl.includes("?")) {
-    //  replace existed category value in query string
-    const updatedUrl = currentUrl.replace(/category=[^&]+/, newQueryString);
-    window.history.pushState({}, "", updatedUrl);
-  } else {
-    //  if not, add new
-    const updatedUrl = currentUrl + "?" + newQueryString;
-    window.history.pushState({}, "", updatedUrl);
-  }
+  const currentUrl = new URL(window.location.href);
+  const searchParams = new URLSearchParams(currentUrl.search);
+  searchParams.set("category", categoryValue);
+  currentUrl.search = searchParams.toString();
+  window.history.pushState({}, "", currentUrl.toString());
 };
 
 const resetClassList = () => {
@@ -134,7 +121,7 @@ const resetClassList = () => {
 };
 
 const fetchProductByCategory = (sourceAPI) => {
-  displayElement("loadingGif");
+  displayElement("loading-gif");
 
   const urlParams = new URLSearchParams(window.location.search);
   const categoryValue = urlParams.get("category");

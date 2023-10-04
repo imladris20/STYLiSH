@@ -7,7 +7,8 @@ import {
 const stylishAPI = {
   host: "https://api.appworks-school.tw/api",
   version: "1.0",
-  endpoint: "products",
+  products: 'products',
+  search: 'products/search',
   endpointPaging: "1",
 };
 
@@ -20,10 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("click", (event) => {
   const categoryToChange = event.target.id;
   const productType = ["women", "men", "accessories", "all"];
-  // console.log("you click: ", categoryToChange);
   if (productType.includes(categoryToChange)) {
     switchCategoryQuery(categoryToChange);
-    displayElement("loadingGif");
+    displayElement("loading-gif");
     fetchProductByCategory(stylishAPI);
   }
 });
