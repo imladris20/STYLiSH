@@ -169,10 +169,6 @@ const fetchProductByCategoryQuery = (sourceAPI) => {
   }
 };
 
-//  two word test1: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E6%B4%8B%E8%A3%9D
-//  two word test2: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E8%A5%BF%E8%A3%9D
-//  one word test: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E7%99%BE
-//  no result test: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E7%9A%AE%E5%8D%A1
 const searchProduct = ({ host, version, search }, keywordValue) => {
   fetchData(`${host}/${version}/${search}?keyword=${keywordValue}`)
     .then(({ data, next_paging }) => {
