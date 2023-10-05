@@ -9,6 +9,20 @@ async function fetchData(url) {
   }
 }
 
+const header__right_section_wrapper = document.getElementById(
+  "header__right-section-wrapper"
+);
+const search_container = document.getElementById("search-container");
+const search_form = document.getElementById("search-form");
+const search_form__input = document.getElementById("search-form__input");
+
+const searchElements = [
+  header__right_section_wrapper,
+  search_container,
+  search_form,
+  search_form__input,
+];
+
 const displayElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
   target.style.display = "block";
@@ -16,7 +30,9 @@ const displayElement = (elementWithClass) => {
 
 const hideElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
-  target.style.display = "none";
+  if (target) {
+    target.style.display = "none";
+  }
 };
 
 const removeClassedElement = (elementClassName) => {
@@ -108,10 +124,12 @@ const switchCategoryQuery = (categoryValue) => {
   //  get curent website URL
   const currentUrl = new URL(window.location.href);
   //  get the queries of currentUrl
-  const searchParams = new URLSearchParams(currentUrl.search);
+  const currentParams = new URLSearchParams(currentUrl.search);
   //  add category key and value into ueries of currentUrl
-  searchParams.set("category", categoryValue);
-  currentUrl.search = searchParams.toString();
+  hideElement("keyword-not-exist");
+  currentParams.delete('keyword');
+  currentParams.set("category", categoryValue);
+  currentUrl.search = currentParams.toString();
   window.history.pushState({}, "", currentUrl.toString());
 };
 
@@ -123,7 +141,7 @@ const resetClassList = () => {
   });
 };
 
-const fetchProductByCategory = (sourceAPI) => {
+const fetchProductByCategoryQuery = (sourceAPI) => {
   displayElement("loading-gif");
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -157,10 +175,32 @@ const fetchProductByCategory = (sourceAPI) => {
 //  no result test: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E7%9A%AE%E5%8D%A1
 const searchProduct = ({ host, version, search }, keywordValue) => {
   fetchData(`${host}/${version}/${search}?keyword=${keywordValue}`)
-    .then((data) => {
+    .then(({ data, next_paging }) => {
       removeClassedElement("main__product-container");
-      console.log("search result: ", data);
-      renderProduct(data);
+      if (data.length !== 0) {
+        renderProduct(data);
+      } else {
+        const main = document.querySelector("main");
+        const notExistBlock = createClassedElement("div","keyword-not-exist");
+        const notExistText = createClassedElement("h1", "keyword-not-exist__text");
+        const notExistImg = createClassedElement("img", "keyword-not-exist__img");
+
+        //  Set image
+        notExistImg.src = "./public/no-product.png";
+        notExistImg.alt = "invalid keyword";
+
+        //  Set text
+        notExistText.textContent = `找不到符合「${keywordValue}」的商品`;
+
+        notExistBlock.append(
+          notExistText,
+          notExistImg
+        );
+
+        main.append(notExistBlock);
+
+        console.error("There is no result for this keyword")
+      }
     })
     .catch((error) => {
       console.error("Something went wrong while searching", error);
@@ -170,19 +210,12 @@ const searchProduct = ({ host, version, search }, keywordValue) => {
     });
 };
 
-const header__right_section_wrapper = document.getElementById(
-  "header__right-section-wrapper"
-);
-const search_container = document.getElementById("search-container");
-const search_form = document.getElementById("search-form");
-const search_form__input = document.getElementById("search-form__input");
+const fetchProductByKeywordQuery = (sourceAPI) => {
+  const currentParams = new URLSearchParams(window.location.search);
+  const keywordValue = currentParams.get("keyword");
 
-const searchElements = [
-  header__right_section_wrapper,
-  search_container,
-  search_form,
-  search_form__input,
-];
+  searchProduct(sourceAPI, keywordValue);
+}
 
 const widerEnsure = (spinlock, elementsToChange) => {
 
@@ -194,12 +227,13 @@ const widerEnsure = (spinlock, elementsToChange) => {
   } else {
     spinlock = false;
   }
-}
+} 
 
 export {
   fetchData,
   fetchProduct,
-  fetchProductByCategory,
+  fetchProductByCategoryQuery,
+  fetchProductByKeywordQuery,
   renderProduct,
   displayElement,
   hideElement,

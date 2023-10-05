@@ -379,6 +379,17 @@ input::placeholder {
   background: url("../../public/loading.gif") center/cover no-repeat;
 }
 
+.keyword-not-exist {
+  display: block;
+  margin: 50px auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.keyword-not-exist__img {
+  width: 100%;
+}
+
 .product-list {
   padding: 15px 24px 47px 24px;
   column-gap: 6px;

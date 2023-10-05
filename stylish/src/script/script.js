@@ -1,11 +1,13 @@
 import {
-  fetchProductByCategory,
+  fetchProductByCategoryQuery,
+  fetchProductByKeywordQuery,
   displayElement,
   switchCategoryQuery,
   fetchData,
   searchElements,
   search_form,
-  widerEnsure
+  widerEnsure,
+  fetchProduct
 } from "./app.js";
 
 const stylishAPI = {
@@ -16,9 +18,19 @@ const stylishAPI = {
   endpointPaging: "1",
 };
 
-/** Initial fetching Product according to category query */
+/** Initial fetching Product according to queries */
 document.addEventListener("DOMContentLoaded", () => {
-  fetchProductByCategory(stylishAPI);
+  const currentParams = new URLSearchParams(window.location.search);
+  if (currentParams.get("keyword")){
+    console.log("initial by keyword");
+    fetchProductByKeywordQuery(stylishAPI)
+  } else if (currentParams.get("category")){
+    console.log("initial by category");
+    fetchProductByCategoryQuery(stylishAPI);
+  } else {
+    console.log("All queries are invalid.");
+    fetchProduct(stylishAPI, 'all')
+  }
 });
 
 /** Fetching product again when Categories be clicked */
@@ -28,13 +40,13 @@ document.addEventListener("click", (event) => {
   if (productType.includes(categoryToChange)) {
     switchCategoryQuery(categoryToChange);
     displayElement("loading-gif");
-    fetchProductByCategory(stylishAPI);
+    fetchProductByCategoryQuery(stylishAPI);
   }
 });
 
 /** Make sure previous and next button still functioning */
 window.addEventListener("popstate", () => {
-  fetchProductByCategory(stylishAPI);
+  fetchProductByCategoryQuery(stylishAPI);
 });
 
 /** Make mobile version search form block show and hide */
@@ -64,6 +76,7 @@ search_button.addEventListener("click", () => {
   }
 });
 
+/** Ensure searchBlock display well when resize window width */
 window.addEventListener("resize", () => {
   widerEnsure(isSearchBarShowed, searchElements)
 });

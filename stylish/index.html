@@ -74,10 +74,9 @@
         <div
           id="search-container"
           class="search-container row-flex flex-item-evenly flex-align-center flex-x-end">
-          <form action="" method="" id="search-form" class="search-form row-flex relative flex-align-center flex-space-between">
-            <input type="text" id="search-form__input" class="search-form__input tx-brown tx-size20" name="search" placeholder="西裝" />
+          <form action="" method="get" id="search-form" class="search-form row-flex relative flex-align-center flex-space-between">
+            <input type="text" id="search-form__input" class="search-form__input tx-brown tx-size20" name="keyword" placeholder="西裝" />
             <input id="search-form__submit" type="submit" class="search-form__submit pointer" value="" />
-            <!-- <div id="search-form__submit" class="search-form__submit pointer"></div> -->
           </form>
         </div>
 
@@ -128,6 +127,10 @@
       </div>
     </div>
     <div class="loading-gif mobile-hide wider-hide"></div>
+    <!-- <div class="keyword-not-exist">
+      <h1 class="keyword-not-exist__text">找不到符合keyword的商品</h1>
+      <img class="keyword-not-exist__img" src="./public/no-product.png" alt="invalid keyword">
+    </div> -->
     <!--<div class="main__product-container">
       <div class="product-list grid">
         <div class="product-item column-flex">
