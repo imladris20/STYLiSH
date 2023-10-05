@@ -1,24 +1,34 @@
-import {fetchData, renderProduct, displayElement, hideElement} from './app.js';
+import {
+  fetchProductByCategory,
+  displayElement,
+  switchCategoryQuery,
+} from "./app.js";
 
-const apiHost = "https://api.appworks-school.tw/api";
-const apiVersion = "/1.0";
-const apiFunction = "/products";
-const apiProductPaging = "";
+const stylishAPI = {
+  host: "https://api.appworks-school.tw/api",
+  version: "1.0",
+  products: 'products',
+  search: 'products/search',
+  endpointPaging: "1",
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-  
-  displayElement("loadingGif");
+/** Initial fetching Product according to category query */
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProductByCategory(stylishAPI);
+});
 
-  // fetch: https://api.appworks-school.tw/api/1.0/products/all
-  fetchData(`${apiHost}${apiVersion}${apiFunction}/all`)
-    .then(({data, next_paging}) => {
-      renderProduct(data);
-    })
-    .catch(error => {
-      console.error("Something went wrong while getting production information", error);
-    })
-    .finally(()=> {
-      hideElement("loadingGif");
-    })
+/** Fetching product again when Categories be clicked */
+document.addEventListener("click", (event) => {
+  const categoryToChange = event.target.id;
+  const productType = ["women", "men", "accessories", "all"];
+  if (productType.includes(categoryToChange)) {
+    switchCategoryQuery(categoryToChange);
+    displayElement("loading-gif");
+    fetchProductByCategory(stylishAPI);
+  }
+});
 
+/** Make sure previous and next button still functioning */
+window.addEventListener("popstate", () => {
+  fetchProductByCategory(stylishAPI);
 });
