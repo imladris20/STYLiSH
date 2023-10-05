@@ -105,8 +105,11 @@ const fetchProduct = ({ host, version, products }, category) => {
 };
 
 const switchCategoryQuery = (categoryValue) => {
+  //  get curent website URL
   const currentUrl = new URL(window.location.href);
+  //  get the queries of currentUrl
   const searchParams = new URLSearchParams(currentUrl.search);
+  //  add category key and value into ueries of currentUrl
   searchParams.set("category", categoryValue);
   currentUrl.search = searchParams.toString();
   window.history.pushState({}, "", currentUrl.toString());
@@ -148,6 +151,28 @@ const fetchProductByCategory = (sourceAPI) => {
   }
 };
 
+//  two word test1: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E6%B4%8B%E8%A3%9D
+//  two word test2: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E8%A5%BF%E8%A3%9D
+//  one word test: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E7%99%BE
+//  no result test: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E7%9A%AE%E5%8D%A1
+const searchProduct = ({ host, version, search }, keywordValue) => {
+  fetchData(`${host}/${version}/${search}?keyword=${keywordValue}`)
+    .then( data => {
+      removeClassedElement("main__product-container");
+      console.log("search result: ", data);
+      renderProduct(data);
+    })
+    .catch((error) => {
+      console.error(
+        "Something went wrong while searching",
+        error
+      );
+    })
+    .finally(() => {
+      hideElement("loading-gif");
+    });
+};
+
 export {
   fetchData,
   fetchProduct,
@@ -157,4 +182,5 @@ export {
   hideElement,
   removeClassedElement,
   switchCategoryQuery,
+  searchProduct
 };
