@@ -48,7 +48,7 @@ const renderProduct = (apiSourceData) => {
     );
     const productItem_colorBox = createClassedElement(
       "ul",
-      "product-item__color-container row-flex flex-space-between"
+      "product-item__color-container row-flex flex-x-start"
     );
     const productItem_title = createClassedElement("p", "product-item__title");
     const productItem_price = createClassedElement("p", "product-item__price");
