@@ -2,6 +2,7 @@ import {
   fetchProductByCategory,
   displayElement,
   switchCategoryQuery,
+  fetchData
 } from "./app.js";
 
 const stylishAPI = {
@@ -32,3 +33,20 @@ document.addEventListener("click", (event) => {
 window.addEventListener("popstate", () => {
   fetchProductByCategory(stylishAPI);
 });
+
+/** Testing search function of API */
+/* fetchData(`https://api.appworks-school.tw/api/1.0/products/search?keyword=幹`)
+.then( data => {
+  // removeClassedElement("main__product-container");
+  console.log("search result: ", data);
+  // renderProduct(data);
+})
+.catch((error) => {
+  console.error(
+    "Something went wrong while searching",
+    error
+  );
+})
+.finally(() => {
+  // hideElement("loading-gif");
+}); */
