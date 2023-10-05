@@ -303,47 +303,40 @@ input::placeholder {
   align-self: center;
 }
 
-/* after search icon was clicked
+/** after search icon was clicked */
 
-.header__right-section-wrapper {
+.header__right-section-wrapper--clicked {
   top: 6px;
   right: 10px;
-
-  width:100%
+  width:100%;
 }
 
-.search-container {
+.search-container--clicked {
   background-color: white;
   width: inherit;
   justify-content: flex-start;
-  margin-left: 20px 或 14px;
+  margin-left: 20px;
 }
 
-.search-form {
-    width: 214px;
+.search-form--clicked {
+  width: inherit;
   height: 40px;
   padding-left: 6px;
   padding-right: 6px;
-
   border-radius: 20px;
   border: 1px #979797 solid;
-  width: inherit;
   gap: 5px;
 }
 
-.search-form__input {
+.search-form__input--clicked {
   border: none;
   line-height: 24px;
   padding-left: 14px;
   width: 150px;
   height: 25px;
-  visibility: hidden;
-
-  改visibility: unset;
+  visibility: unset;
   flex-grow: 1;
 }
-
-*/
 
 /** main **/
 
@@ -589,6 +582,7 @@ Media Queries
     height: 44px;
     padding-right: 10px;
     border: 1px #979797 solid;
+    border-radius: 20px;
   }
 
   

@@ -157,21 +157,44 @@ const fetchProductByCategory = (sourceAPI) => {
 //  no result test: https://api.appworks-school.tw/api/1.0/products/search?keyword=%E7%9A%AE%E5%8D%A1
 const searchProduct = ({ host, version, search }, keywordValue) => {
   fetchData(`${host}/${version}/${search}?keyword=${keywordValue}`)
-    .then( data => {
+    .then((data) => {
       removeClassedElement("main__product-container");
       console.log("search result: ", data);
       renderProduct(data);
     })
     .catch((error) => {
-      console.error(
-        "Something went wrong while searching",
-        error
-      );
+      console.error("Something went wrong while searching", error);
     })
     .finally(() => {
       hideElement("loading-gif");
     });
 };
+
+const header__right_section_wrapper = document.getElementById(
+  "header__right-section-wrapper"
+);
+const search_container = document.getElementById("search-container");
+const search_form = document.getElementById("search-form");
+const search_form__input = document.getElementById("search-form__input");
+
+const searchElements = [
+  header__right_section_wrapper,
+  search_container,
+  search_form,
+  search_form__input,
+];
+
+const widerEnsure = (spinlock, elementsToChange) => {
+
+  if (window.innerWidth > 1279) {
+    spinlock = true;
+    elementsToChange.forEach((element) => {
+      element.classList.remove(element.id + "--clicked");
+    });
+  } else {
+    spinlock = false;
+  }
+}
 
 export {
   fetchData,
@@ -182,5 +205,8 @@ export {
   hideElement,
   removeClassedElement,
   switchCategoryQuery,
-  searchProduct
+  searchProduct,
+  searchElements,
+  search_form,
+  widerEnsure
 };

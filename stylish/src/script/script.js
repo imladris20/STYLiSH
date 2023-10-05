@@ -2,14 +2,17 @@ import {
   fetchProductByCategory,
   displayElement,
   switchCategoryQuery,
-  fetchData
+  fetchData,
+  searchElements,
+  search_form,
+  widerEnsure
 } from "./app.js";
 
 const stylishAPI = {
   host: "https://api.appworks-school.tw/api",
   version: "1.0",
-  products: 'products',
-  search: 'products/search',
+  products: "products",
+  search: "products/search",
   endpointPaging: "1",
 };
 
@@ -34,19 +37,33 @@ window.addEventListener("popstate", () => {
   fetchProductByCategory(stylishAPI);
 });
 
-/** Testing search function of API */
-/* fetchData(`https://api.appworks-school.tw/api/1.0/products/search?keyword=幹`)
-.then( data => {
-  // removeClassedElement("main__product-container");
-  console.log("search result: ", data);
-  // renderProduct(data);
-})
-.catch((error) => {
-  console.error(
-    "Something went wrong while searching",
-    error
-  );
-})
-.finally(() => {
-  // hideElement("loading-gif");
-}); */
+/** Make mobile version search form block show and hide */
+const search_button = document.getElementById("search-form__submit");
+let isSearchBarShowed = false;
+let width = window.innerWidth;
+
+search_button.addEventListener("click", () => {
+  if (width > 1279) {
+    isSearchBarShowed = true;
+  }
+
+  if (!isSearchBarShowed) {
+    isSearchBarShowed = !isSearchBarShowed;
+    search_form.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+  } else {
+    isSearchBarShowed = !isSearchBarShowed;
+    search_form.submit();
+  }
+
+  if (width < 1280) {
+    searchElements.forEach((element) => {
+      element.classList.toggle(element.id + "--clicked");
+    });
+  }
+});
+
+window.addEventListener("resize", () => {
+  widerEnsure(isSearchBarShowed, searchElements)
+});
