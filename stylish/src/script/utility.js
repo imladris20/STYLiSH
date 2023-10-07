@@ -3,6 +3,7 @@ const search_form = document.getElementById("search-form");
 const header__right_section_wrapper = document.getElementById("header__right-section-wrapper");
 const search_container = document.getElementById("search-container");
 const search_form__input = document.getElementById("search-form__input");
+const search_button = document.getElementById("search-form__submit");
 
 const searchElements = [
   search_form,

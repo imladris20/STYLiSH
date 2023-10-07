@@ -23,12 +23,7 @@ const mutex = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initialRender(stylishAPI, mutex);
-});
-
-window.addEventListener("popstate", () => {
-  mutex.currentPage = 0;
-  initialRender(stylishAPI, mutex);
+  initialRender(stylishAPI);
 });
 
 /** Fetching product again when Categories be clicked */
