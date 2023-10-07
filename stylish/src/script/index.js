@@ -8,7 +8,7 @@ import {
   search_form,
   widerEnsure,
   fetchProduct
-} from "./app.js";
+} from "./utility.js";
 
 const stylishAPI = {
   host: "https://api.appworks-school.tw/api",
