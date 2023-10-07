@@ -1,28 +1,17 @@
-async function fetchData(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetching calculating error:", error);
-    throw error;
-  }
-}
-
-const header__right_section_wrapper = document.getElementById(
-  "header__right-section-wrapper"
-);
-const search_container = document.getElementById("search-container");
+const search_button = document.getElementById("search-form__submit");
 const search_form = document.getElementById("search-form");
+const header__right_section_wrapper = document.getElementById("header__right-section-wrapper");
+const search_container = document.getElementById("search-container");
 const search_form__input = document.getElementById("search-form__input");
 
 const searchElements = [
+  search_form,
   header__right_section_wrapper,
   search_container,
-  search_form,
   search_form__input,
 ];
 
+//* Common functions */
 const displayElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
   target.style.display = "block";
@@ -48,7 +37,51 @@ const createClassedElement = (element, className) => {
   return newElement;
 };
 
+const notFound = () => {
+  removeClassedElement("main__product-container");
+
+  const main = document.querySelector("main");
+  const notExistBlock = createClassedElement("div", "keyword-not-exist");
+  const notExistImg = createClassedElement("img", "keyword-not-exist__img");
+
+  //  Set image
+  notExistImg.src = "./public/no-product.png";
+  notExistImg.alt = "invalid keyword";
+
+  notExistBlock.append(notExistImg);
+  main.append(notExistBlock);
+  console.error("There is no result for this url.")
+}
+
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (Error) {
+    console.error("Queries are invalid.", Error);
+    throw Error;
+  }
+}
+
+const fetchProduct = async ({ host, version, endpoints }, currentParamKey, queryValue, pageToFetch) => {
+  // displayElement("loading-gif");
+  switch (currentParamKey) {
+    case "category":
+      return await (fetchData(`${host}/${version}/${endpoints.productList}/${queryValue}?paging=${pageToFetch}`))
+    case "search":
+      return await (fetchData(`${host}/${version}/${endpoints.productSearch}?keyword=${queryValue}&paging=${pageToFetch}`))
+    default:
+      console.error("fetchProduct failed")
+  }
+};
+
+//* Initial Products Rendering related */
+
 const renderProduct = (apiSourceData) => {
+  displayElement("loading-gif");
+  removeClassedElement("main__product-container");
+
   const main = document.querySelector("main");
   const productContainer = createClassedElement(
     "div",
@@ -58,14 +91,8 @@ const renderProduct = (apiSourceData) => {
 
   apiSourceData.forEach(({ main_image, colors, title, price }) => {
     const productItem = createClassedElement("div", "product-item column-flex");
-    const productItem_img = createClassedElement(
-      "img",
-      "product-item__img full-width"
-    );
-    const productItem_colorBox = createClassedElement(
-      "ul",
-      "product-item__color-container row-flex flex-x-start"
-    );
+    const productItem_img = createClassedElement("img", "product-item__img full-width");
+    const productItem_colorBox = createClassedElement("ul", "product-item__color-container row-flex flex-x-start");
     const productItem_title = createClassedElement("p", "product-item__title");
     const productItem_price = createClassedElement("p", "product-item__price");
 
@@ -95,7 +122,7 @@ const renderProduct = (apiSourceData) => {
       productItem_title,
       productItem_price
     );
-    -productGrid.append(productItem);
+    productGrid.append(productItem);
   });
 
   productContainer.append(productGrid);
@@ -103,21 +130,84 @@ const renderProduct = (apiSourceData) => {
   main.append(productContainer);
 };
 
-const fetchProduct = ({ host, version, products }, category) => {
-  fetchData(`${host}/${version}/${products}/${category}`)
-    .then(({ data, next_paging }) => {
-      removeClassedElement("main__product-container");
-      renderProduct(data);
-    })
-    .catch((error) => {
-      console.error(
-        "Something went wrong while getting production information",
-        error
-      );
-    })
-    .finally(() => {
-      hideElement("loading-gif");
-    });
+const handleRenderSuccess = (data) => {
+  renderProduct(data);
+  hideElement("loading-gif");
+}
+
+const handleRenderFail = (error) => {
+  console.error("Something went wrong", error);
+  hideElement("loading-gif");
+}
+
+const initialRender = (stylishAPI, mutex) => {
+  const categoryTypesList = ["women", "men", "accessories", "all"];
+  const currentParams = new URLSearchParams(window.location.search);
+  const currentParamKey = Array.from(currentParams.keys());
+  const categoryValue = currentParams.get("category");
+  const keywordValue = currentParams.get("keyword");
+  const pagingValue = currentParams.get("paging");
+
+  if (pagingValue) {
+    mutex.currentPage = pagingValue;
+  }
+
+  if (currentParamKey.includes("keyword")) {
+    fetchProduct(stylishAPI, "search", keywordValue, mutex.currentPage)
+      .then(({ data, next_paging }) => {
+        if (next_paging) {
+          mutex.next_paging = next_paging;
+        }
+        handleKeywordRender(data, keywordValue)
+      })
+      .catch(handleRenderFail);
+  }
+
+  else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
+    fetchProduct(stylishAPI, "category", categoryValue, mutex.currentPage)
+      .then(({ data, next_paging }) => {
+        if (next_paging) {
+          mutex.next_paging = next_paging;
+        }
+        handleCategoryRender(data, categoryValue);
+      })
+      .catch(handleRenderFail);
+  }
+
+  else {
+    console.error("There's no valid queries.");
+    fetchProduct(stylishAPI, "category", "all", mutex.currentPage)
+      .then(({ data, next_paging }) => {
+        if (next_paging) {
+          mutex.next_paging = next_paging;
+        }
+        handleRenderSuccess(data)
+      })
+      .catch(handleRenderFail);
+  }
+}
+
+//* Category related */
+const highlightCategoryTagStyle = (categoryToChange) => {
+  const categoryTypesList = ["women", "men", "accessories"];
+  resetCategoryTagClassList();
+  if (categoryTypesList.includes(categoryToChange)) {
+    const selectedElement = document.querySelector(`#${categoryToChange}`);
+    selectedElement.classList.replace("tx-grey82", "tx-white");
+    selectedElement.classList.replace("wider-tx-black3a", "wider-tx-brown");
+  }
+}
+
+const resetCategoryTagClassList = () => {
+  const women = document.getElementById("women");
+  const men = document.getElementById("men");
+  const accessories = document.getElementById("accessories");
+
+  const elements = [women, men, accessories];
+  elements.forEach((element) => {
+    element.classList.replace("tx-white", "tx-grey82");
+    element.classList.replace("wider-tx-brown", "wider-tx-black3a");
+  });
 };
 
 const switchCategoryQuery = (categoryValue) => {
@@ -128,115 +218,103 @@ const switchCategoryQuery = (categoryValue) => {
   //  add category key and value into ueries of currentUrl
   hideElement("keyword-not-exist");
   currentParams.delete('keyword');
+  currentParams.delete('paging');
   currentParams.set("category", categoryValue);
   currentUrl.search = currentParams.toString();
   window.history.pushState({}, "", currentUrl.toString());
 };
 
-const resetClassList = () => {
-  const elements = [women, men, accessories];
-  elements.forEach((element) => {
-    element.classList.replace("tx-white", "tx-grey82");
-    element.classList.replace("wider-tx-brown", "wider-tx-black3a");
-  });
-};
-
-const fetchProductByCategoryQuery = (sourceAPI) => {
-  displayElement("loading-gif");
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const categoryValue = urlParams.get("category");
-
-  switch (categoryValue) {
-    case "women":
-    case "men":
-    case "accessories":
-      resetClassList();
-      const selectedElement = document.querySelector(`#${categoryValue}`);
-      selectedElement.classList.replace("tx-grey82", "tx-white");
-      selectedElement.classList.replace("wider-tx-black3a", "wider-tx-brown");
-      fetchProduct(sourceAPI, categoryValue);
-      break;
-    case "all":
-    case null:
-      resetClassList();
-      fetchProduct(sourceAPI, "all");
-      break;
-    default:
-      resetClassList();
-      fetchProduct(sourceAPI, "all");
-      console.error("Invalid Query");
+const handleCategoryRender = (data, categoryValue) => {
+  removeClassedElement("keyword-not-exist")
+  if (data.length) {
+    highlightCategoryTagStyle(categoryValue);
+    handleRenderSuccess(data);
+  } else {
+    console.error("Invalid paging number");
+    notFound();
   }
-};
-
-const searchProduct = ({ host, version, search }, keywordValue) => {
-  fetchData(`${host}/${version}/${search}?keyword=${keywordValue}`)
-    .then(({ data, next_paging }) => {
-      removeClassedElement("main__product-container");
-      if (data.length !== 0) {
-        renderProduct(data);
-      } else {
-        const main = document.querySelector("main");
-        const notExistBlock = createClassedElement("div","keyword-not-exist");
-        const notExistText = createClassedElement("h1", "keyword-not-exist__text");
-        const notExistImg = createClassedElement("img", "keyword-not-exist__img");
-
-        //  Set image
-        notExistImg.src = "./public/no-product.png";
-        notExistImg.alt = "invalid keyword";
-
-        //  Set text
-        notExistText.textContent = `找不到符合「${keywordValue}」的商品`;
-
-        notExistBlock.append(
-          notExistText,
-          notExistImg
-        );
-
-        main.append(notExistBlock);
-
-        console.error("There is no result for this keyword")
-      }
-    })
-    .catch((error) => {
-      console.error("Something went wrong while searching", error);
-    })
-    .finally(() => {
-      hideElement("loading-gif");
-    });
-};
-
-const fetchProductByKeywordQuery = (sourceAPI) => {
-  const currentParams = new URLSearchParams(window.location.search);
-  const keywordValue = currentParams.get("keyword");
-
-  searchProduct(sourceAPI, keywordValue);
 }
 
-const widerEnsure = (spinlock, elementsToChange) => {
+const handleCategoryClicked = (stylishAPI, mutex, event) => {
+  const categoryTypesList = ["women", "men", "accessories", "all"];
+  const categoryToChange = event.target.id;
 
+  if (categoryTypesList.includes(categoryToChange)) {
+    switchCategoryQuery(categoryToChange);
+    displayElement("loading-gif");
+    fetchProduct(stylishAPI, "category", categoryToChange, mutex.currentPage)
+      .then(({ data, next_paging }) => {
+        mutex.next_paging = next_paging;
+        handleCategoryRender(data, categoryToChange);
+      })
+      .catch(handleRenderFail);
+  }
+}
+
+//* Searching related */
+const widerEnsure = (mutex, elementsToChange) => {
   if (window.innerWidth > 1279) {
-    spinlock = true;
+    mutex.isSearchBarShowed = true;
     elementsToChange.forEach((element) => {
       element.classList.remove(element.id + "--clicked");
     });
   } else {
-    spinlock = false;
+    mutex.isSearchBarShowed = false;
   }
-} 
+}
+
+const showInvalidKeyword = (keywordValue) => {
+
+  const main = document.querySelector("main");
+  const notExistBlock = createClassedElement("div", "keyword-not-exist");
+  const notExistText = createClassedElement("h1", "keyword-not-exist__text");
+  const notExistImg = createClassedElement("img", "keyword-not-exist__img");
+
+  //  Set image
+  notExistImg.src = "./public/no-product.png";
+  notExistImg.alt = "invalid keyword";
+
+  //  Set text
+  notExistText.textContent = `找不到符合「${keywordValue}」的商品`;
+  notExistBlock.append(notExistText, notExistImg);
+  main.append(notExistBlock);
+  console.error("There is no result for this keyword")
+};
+
+const switchSearchBar = (mutex, event, elementsToChange) => {
+  if (window.innerWidth > 1279) {
+    elementsToChange[0].submit();
+  } else {
+    if (!mutex.isSearchBarShowed) {
+      elementsToChange.forEach((element) => {
+        element.classList.toggle(element.id + "--clicked");
+      });
+      mutex.isSearchBarShowed = !mutex.isSearchBarShowed;
+      event.preventDefault();
+    } else {
+      mutex.isSearchBarShowed = !mutex.isSearchBarShowed;
+      elementsToChange[0].submit();
+    }
+  }
+}
+
+const handleKeywordRender = (data, keywordValue) => {
+  if (!data || data.length === 0) {
+    hideElement("loading-gif");
+    removeClassedElement("keyword-not-exist")
+    removeClassedElement("main__product-container");
+    showInvalidKeyword(keywordValue);
+  } else {
+    removeClassedElement("main__product-container");
+    handleRenderSuccess(data)
+  }
+}
 
 export {
-  fetchData,
-  fetchProduct,
-  fetchProductByCategoryQuery,
-  fetchProductByKeywordQuery,
-  renderProduct,
-  displayElement,
-  hideElement,
-  removeClassedElement,
-  switchCategoryQuery,
-  searchProduct,
+  initialRender,
+  handleCategoryClicked,
+  widerEnsure,
   searchElements,
-  search_form,
-  widerEnsure
+  search_button,
+  switchSearchBar,
 };
