@@ -5,6 +5,7 @@ import {
   searchElements,
   search_button,
   switchSearchBar,
+  handleScrolling
 } from "./utility.js";
 
 const stylishAPI = {
@@ -20,20 +21,31 @@ const mutex = {
   isSearchBarShowed: false,
   currentPage: 0,
   next_paging: 0,
+  isScrolled: false
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initialRender(stylishAPI);
+  console.log("initial Render 觸發");
+  initialRender(stylishAPI, mutex);
+});
+
+window.addEventListener("popstate", () => {
+  console.log("popstate Render 觸發");
+  mutex.currentPage = 0;
+  initialRender(stylishAPI, mutex);
 });
 
 /** Fetching product again when Categories be clicked */
 document.addEventListener("click", (event) => {
   mutex.currentPage = 0;
   handleCategoryClicked(stylishAPI, mutex, event);
+  mutex.currentPage = 0;
+  handleCategoryClicked(stylishAPI, mutex, event);
 });
 
 /** Ensure search form block display well when resize window width */
 window.addEventListener("resize", () => {
+  console.log("resize ensure 觸發");
   widerEnsure(mutex, searchElements);
 });
 
@@ -41,3 +53,18 @@ window.addEventListener("resize", () => {
 search_button.addEventListener("click", (event) => {
   switchSearchBar(mutex, event, searchElements);
 });
+
+/** Make scrolling could trigger fetching more products if they exist */
+window.addEventListener("scroll", () => {
+
+  const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+
+  if(scrollTop+clientHeight >= (scrollHeight-5) && mutex.next_paging > 0) {
+    if(mutex.isScrolled){
+      return;
+    }
+    console.log("Next page before handling: ", mutex.next_paging);
+    console.log("Current Page before handling: ", mutex.currentPage);    
+    handleScrolling(stylishAPI, mutex);
+  }
+}, {passive: true});

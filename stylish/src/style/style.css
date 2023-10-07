@@ -489,10 +489,6 @@ Scroll Loader
   position: relative;
   width: 80px;
   height: 80px;
-  opacity: 0;
-}
-
-.scroll-loader.show {
   opacity: 1;
 }
 
@@ -501,7 +497,6 @@ Scroll Loader
   position: absolute;
   left: 8px;
   width: 16px;
-  background: #f4f4f4;
   animation: scroll-loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 

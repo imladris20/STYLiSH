@@ -3,7 +3,6 @@ const search_form = document.getElementById("search-form");
 const header__right_section_wrapper = document.getElementById("header__right-section-wrapper");
 const search_container = document.getElementById("search-container");
 const search_form__input = document.getElementById("search-form__input");
-const search_button = document.getElementById("search-form__submit");
 
 const searchElements = [
   search_form,
@@ -16,6 +15,11 @@ const searchElements = [
 const displayElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
   target.style.display = "block";
+};
+
+const displayInlineBlock = (elementWithClass) => {
+  const target = document.querySelector(`.${elementWithClass}`);
+  target.style.display = "inline-block";
 };
 
 const hideElement = (elementWithClass) => {
@@ -128,17 +132,19 @@ const renderProduct = (apiSourceData) => {
 
   productContainer.append(productGrid);
 
-  main.append(productContainer);
+  main.insertBefore(productContainer,document.querySelector(".scroll-loader"));
 };
 
 const handleRenderSuccess = (data) => {
   renderProduct(data);
   hideElement("loading-gif");
+  hideElement("scroll-loader");
 }
 
 const handleRenderFail = (error) => {
   console.error("Something went wrong", error);
   hideElement("loading-gif");
+  hideElement("scroll-loader");
 }
 
 const initialRender = (stylishAPI, mutex) => {
@@ -147,18 +153,11 @@ const initialRender = (stylishAPI, mutex) => {
   const currentParamKey = Array.from(currentParams.keys());
   const categoryValue = currentParams.get("category");
   const keywordValue = currentParams.get("keyword");
-  const pagingValue = currentParams.get("paging");
-
-  if (pagingValue) {
-    mutex.currentPage = pagingValue;
-  }
 
   if (currentParamKey.includes("keyword")) {
     fetchProduct(stylishAPI, "search", keywordValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
-        if (next_paging) {
-          mutex.next_paging = next_paging;
-        }
+        mutex.next_paging = next_paging;
         handleKeywordRender(data, keywordValue)
       })
       .catch(handleRenderFail);
@@ -167,11 +166,9 @@ const initialRender = (stylishAPI, mutex) => {
   else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
     fetchProduct(stylishAPI, "category", categoryValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
-        if (next_paging) {
-          mutex.next_paging = next_paging;
-        }
+        mutex.next_paging = next_paging;
         handleCategoryRender(data, categoryValue);
-      })
+      }) 
       .catch(handleRenderFail);
   }
 
@@ -179,9 +176,7 @@ const initialRender = (stylishAPI, mutex) => {
     console.error("There's no valid queries.");
     fetchProduct(stylishAPI, "category", "all", mutex.currentPage)
       .then(({ data, next_paging }) => {
-        if (next_paging) {
-          mutex.next_paging = next_paging;
-        }
+        mutex.next_paging = next_paging;
         handleRenderSuccess(data)
       })
       .catch(handleRenderFail);
@@ -203,7 +198,7 @@ const resetCategoryTagClassList = () => {
   const women = document.getElementById("women");
   const men = document.getElementById("men");
   const accessories = document.getElementById("accessories");
-
+  
   const elements = [women, men, accessories];
   elements.forEach((element) => {
     element.classList.replace("tx-white", "tx-grey82");
@@ -227,22 +222,16 @@ const switchCategoryQuery = (categoryValue) => {
 
 const handleCategoryRender = (data, categoryValue) => {
   removeClassedElement("keyword-not-exist")
-  if (data.length) {
-    highlightCategoryTagStyle(categoryValue);
-    handleRenderSuccess(data);
-  } else {
-    console.error("Invalid paging number");
-    notFound();
-  }
+  highlightCategoryTagStyle(categoryValue);
+  handleRenderSuccess(data);
 }
 
 const handleCategoryClicked = (stylishAPI, mutex, event) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const categoryToChange = event.target.id;
-
   if (categoryTypesList.includes(categoryToChange)) {
     switchCategoryQuery(categoryToChange);
-    displayElement("loading-gif");
+    // displayElement("loading-gif");
     fetchProduct(stylishAPI, "category", categoryToChange, mutex.currentPage)
       .then(({ data, next_paging }) => {
         mutex.next_paging = next_paging;
@@ -253,7 +242,7 @@ const handleCategoryClicked = (stylishAPI, mutex, event) => {
 }
 
 //* Searching related */
-const widerEnsure = (mutex, elementsToChange) => {
+const widerEnsure = ( mutex, elementsToChange) => {
   if (window.innerWidth > 1279) {
     mutex.isSearchBarShowed = true;
     elementsToChange.forEach((element) => {
@@ -302,6 +291,7 @@ const switchSearchBar = (mutex, event, elementsToChange) => {
 const handleKeywordRender = (data, keywordValue) => {
   if (!data || data.length === 0) {
     hideElement("loading-gif");
+    hideElement("scroll-loader")
     removeClassedElement("keyword-not-exist")
     removeClassedElement("main__product-container");
     showInvalidKeyword(keywordValue);
@@ -311,6 +301,103 @@ const handleKeywordRender = (data, keywordValue) => {
   }
 }
 
+//* Infinite Scrolling related  */
+
+const fetchNextPaging = async (stylishAPI, next_paging) => {
+  const categoryTypesList = ["women", "men", "accessories", "all"];
+  const currentParams = new URLSearchParams(window.location.search);
+  const currentParamKey = Array.from(currentParams.keys());
+  const categoryValue = currentParams.get("category");
+  const keywordValue = currentParams.get("keyword");
+
+  if (currentParamKey.includes("keyword")) {
+    const response = await fetchProduct(stylishAPI, "search", keywordValue, next_paging);
+    console.log("response in keyword in fetchNextPaging", response);
+    return response
+  }
+
+  else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
+    const response = await fetchProduct(stylishAPI, "category", categoryValue, next_paging);
+    console.log("response in category in fetchNextPaging", response);
+    return response
+  }
+
+  else {
+    const response = await fetchProduct(stylishAPI, "category", "all", next_paging);
+    console.log("response in general in fetchNextPaging", response);
+    return response;
+  }
+}
+
+const renderMoreProducts = ({data}) => {
+
+  const productList = document.querySelector(".product-list");
+
+  console.log("Now in productList: ", productList);
+
+  data.forEach(({ main_image, colors, title, price }) => {
+    const productItem = createClassedElement("div", "product-item column-flex");
+    const productItem_img = createClassedElement("img", "product-item__img full-width");
+    const productItem_colorBox = createClassedElement("ul", "product-item__color-container row-flex flex-x-start");
+    const productItem_title = createClassedElement("p", "product-item__title");
+    const productItem_price = createClassedElement("p", "product-item__price");
+
+    //  Set image
+    productItem_img.src = main_image;
+    productItem_img.alt = "product item";
+
+    //  Produce and set colors
+    colors.forEach((color) => {
+      const productItem_color = createClassedElement(
+        "li",
+        "product-item__color-grid bd-lightgrey pointer"
+      );
+      productItem_color.style.backgroundColor = `#${color.code}`;
+      productItem_colorBox.append(productItem_color);
+    });
+
+    //  Set title
+    productItem_title.textContent = title;
+
+    //  Set price
+    productItem_price.textContent = `TWD.${price}`;
+
+    productItem.append(
+      productItem_img,
+      productItem_colorBox,
+      productItem_title,
+      productItem_price
+    );
+    productList.append(productItem);
+  });
+}
+
+const handleScrolling = (stylishAPI, mutex) => {
+  mutex.isScrolled = true;
+  displayInlineBlock('scroll-loader');
+  setTimeout(async () => {
+    try {
+      console.log("It's handling scrolling.")
+      const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
+      mutex.currentPage++;
+      console.log("before render", nextPageData);
+      if(nextPageData.next_paging){
+        mutex.next_paging = nextPageData.next_paging
+      } else {
+        mutex.next_paging = 0
+      }
+      renderMoreProducts(nextPageData);
+    } catch (Error) {
+      console.error("Handling failed. Message: ", Error);
+    } finally {
+      hideElement('scroll-loader');
+      mutex.isScrolled = false;
+      console.log("Next page after handling: ", mutex.next_paging);
+      console.log("Current Page after handling: ", mutex.currentPage);
+    }
+  }, 1500);
+}
+
 export {
   initialRender,
   handleCategoryClicked,
@@ -318,4 +405,7 @@ export {
   searchElements,
   search_button,
   switchSearchBar,
+  renderMoreProducts,
+  fetchNextPaging,
+  handleScrolling,
 };
