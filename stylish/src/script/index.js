@@ -1,0 +1,48 @@
+import {
+  initialRender,
+  handleCategoryClicked,
+  widerEnsure,
+  searchElements,
+  search_button,
+  switchSearchBar,
+} from "./utility.js";
+
+const stylishAPI = {
+  host: "https://api.appworks-school.tw/api",
+  version: "1.0",
+  endpoints: {
+    productList: "products",
+    productSearch: "products/search"
+  }
+};
+
+const mutex = {
+  isSearchBarShowed: false,
+  currentPage: 0,
+  next_paging: 0,
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initialRender(stylishAPI, mutex);
+});
+
+window.addEventListener("popstate", () => {
+  mutex.currentPage = 0;
+  initialRender(stylishAPI, mutex);
+});
+
+/** Fetching product again when Categories be clicked */
+document.addEventListener("click", (event) => {
+  mutex.currentPage = 0;
+  handleCategoryClicked(stylishAPI, mutex, event);
+});
+
+/** Ensure search form block display well when resize window width */
+window.addEventListener("resize", () => {
+  widerEnsure(mutex, searchElements);
+});
+
+/** Make mobile version search form block show and hide */
+search_button.addEventListener("click", (event) => {
+  switchSearchBar(mutex, event, searchElements);
+});
