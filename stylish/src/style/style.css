@@ -339,22 +339,22 @@ input::placeholder {
 
 /** main **/
 
-.carousel__image {
+.campaignItem__image {
   height: 185px;
   object-fit: cover;
 }
 
-.carousel__text {
+.campaignItem__story {
   line-height: 28px;
   left: 23px;
   top: 36px;
 }
 
-.carousel__text p {
+.campaignItem__story-description {
   font-size: 15px;
 }
 
-.carousel__text h4 {
+.campaignItem__story-quote {
   font-size: 12px;
 }
 
@@ -525,6 +525,24 @@ Scroll Loader
   100% {
     top: 24px;
     height: 32px;
+  }
+}
+
+/* =================================
+Carousel Fading
+==================================== */
+
+.fade {
+  animation-name: fade;
+  animation-duration: 2.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -725,28 +743,28 @@ Media Queries
 
   /** main **/
 
-  .carousel__image {
+  .campaignItem__image {
     height: 500px;
     object-fit: none;
   }
 
-  .carousel__text-container {
+  .campaignItem__story-container {
     max-width: 1160px;
     height: 500px;
     top: 0;
     margin: 0 auto;
   }
 
-  .carousel__text {
+  .campaignItem__story {
     top: 166px;
   }
 
-  .carousel__text p {
+  .campaignItem__story-description {
     font-size: 30px;
     line-height: 57px;
   }
 
-  .carousel__text h4 {
+  .campaignItem__story-quote {
     line-height: 64px;
     font-size: 20px;
   }

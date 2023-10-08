@@ -5,7 +5,12 @@ import {
   searchElements,
   search_button,
   switchSearchBar,
-  handleScrolling
+  handleScrolling,
+  fetchCampaigns,
+  renderCarousel,
+  createDots,
+  showCampaign,
+  autoSwitch
 } from "./utility.js";
 
 const stylishAPI = {
@@ -13,7 +18,8 @@ const stylishAPI = {
   version: "1.0",
   endpoints: {
     productList: "products",
-    productSearch: "products/search"
+    productSearch: "products/search",
+    campaigns: "marketing/campaigns"
   }
 };
 
@@ -21,11 +27,28 @@ const mutex = {
   isSearchBarShowed: false,
   currentPage: 0,
   next_paging: 0,
-  isScrolled: false
+  isScrolled: false,
+  campaignIndex: 1,
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initialRender(stylishAPI, mutex);
+let autoInterval;
+
+function startAutoSwitch() {
+  console.log("starting Auto slide");
+  autoInterval = setInterval( () => autoSwitch(mutex), 5000);
+}
+  
+function stopAutoSwitch() {
+  clearInterval(autoInterval);
+}
+
+document.addEventListener("DOMContentLoaded", async() => {
+  const response = await fetchCampaigns(stylishAPI);
+  await renderCarousel(response);
+  await createDots(response, mutex);
+  await initialRender(stylishAPI, mutex);
+  await showCampaign(1, mutex);
+  await startAutoSwitch();
 });
 
 window.addEventListener("popstate", () => {
@@ -61,3 +84,9 @@ window.addEventListener("scroll", () => {
     handleScrolling(stylishAPI, mutex);
   }
 }, { passive: true });
+
+/** carousel campaigns show */
+
+document.querySelector(".carousel").addEventListener("mouseenter", stopAutoSwitch);
+
+document.querySelector(".carousel").addEventListener("mouseleave", startAutoSwitch);

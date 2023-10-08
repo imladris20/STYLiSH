@@ -148,6 +148,7 @@ const handleRenderFail = (error) => {
 }
 
 const initialRender = (stylishAPI, mutex) => {
+  console.log("Initial Rendering Products");
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const currentParams = new URLSearchParams(window.location.search);
   const categoryValue = currentParams.get("category");
@@ -402,6 +403,123 @@ const handleScrolling = async (stylishAPI, mutex) => {
   }
 }
 
+//* Campaigns Carousel related */
+
+const fetchCampaigns = async ({ host, version, endpoints }) => {
+  const data = await (fetchData(`${host}/${version}/${endpoints.campaigns}`))
+  console.log("Fetching Campaigns");
+  return data;
+}
+
+const renderCarousel = ({data}) => {
+  console.log("Rendering Carousel");
+  const carousel = document.querySelector('.carousel');
+
+  data.forEach(({picture, story}) => {
+    const campaignItem = createClassedElement("div", "campaignItem fade relative wider-row-flex flex-align-center flex-space-center");
+    const campaignItem__image = createClassedElement("img", "campaignItem__image full-width");
+    const campaignItem__story_container = createClassedElement("div", "campaignItem__story-container full-width wider-absolute")
+    const campaignItem__story = createClassedElement("div","campaignItem__story absolute text-left tx-black wider-tx-black07");
+    const campaignItem__story_description = createClassedElement("p", "campaignItem__story-description text-left margin-block-none");
+    const campaignItem__story_quote = createClassedElement("h4", "campaignItem__story-quote wider-tx-size20 text-left margin-block-none");
+
+    //  set Image
+    campaignItem__image.src = picture;
+    campaignItem__image.alt = "campaign item";
+
+    //  set Story
+    story = story.replace(/\r\n/g, "<br />");
+    const lastIndexOfLineBreak = story.lastIndexOf("<br />");
+    if (lastIndexOfLineBreak !== -1) {
+      campaignItem__story_description.innerHTML = `<p class="campaignItem__story-description text-left margin-block-none">${story.slice(0, lastIndexOfLineBreak)}</p>`;
+      campaignItem__story_quote.textContent = story.slice(lastIndexOfLineBreak + 6);
+    } else {
+      console.error("Campaign Story is not as expected.");
+    }
+
+    campaignItem__story.append(campaignItem__story_description, campaignItem__story_quote);
+    campaignItem__story_container.append(campaignItem__story);
+    campaignItem.append(campaignItem__image, campaignItem__story_container);
+    carousel.append(campaignItem);
+  })
+}
+
+const createDots = ({data}, mutex) => {
+  console.log("Creating Dots");
+  const carousel = document.querySelector('.carousel');
+  
+  const carousel__dots_container = createClassedElement("div","carousel__dots-container row-flex flex-space-between flex-align-center absolute");
+  
+  for ( let i = 0 ; i<data.length ; i++){
+    const carousel__dot_link = createClassedElement("a","carousel__dot-link pointer");
+    const carousel__dot = createClassedElement("div", "carousel__dot radius-100 bg-white wider-bg-white");
+
+    carousel__dot_link.append(carousel__dot);
+    carousel__dot_link.addEventListener("click", () => {
+      switchCampaign(i+1, mutex);
+    })
+    carousel__dots_container.append(carousel__dot_link);
+  }
+
+  carousel.append(carousel__dots_container);
+}
+
+const nextCampaign = (number, mutex) => {
+  mutex.campaignIndex += number;
+  console.log("now mutex.campaignIndex", mutex.campaignIndex);
+  showCampaign(mutex.campaignIndex, mutex);
+}
+
+function switchCampaign (number, mutex) {
+  mutex.campaignIndex = number;
+  showCampaign(mutex.campaignIndex, mutex);
+}
+
+const autoSwitch = (mutex) => {
+  console.log("Autoswiching......")
+  nextCampaign(1, mutex);
+}
+
+// const startAutoSwitch = (mutex) => {
+//   console.log("auto switch start");
+//   mutex.autoInterval = setInterval(autoSwitch(mutex), 100);
+//   console.log("mutex.autoInterval: ", mutex.autoInterval);
+// }
+
+// const stopAutoSwitch = (mutex) => {
+//   clearInterval(mutex.autoInterval);
+// }
+
+const showCampaign = (number, mutex) => {
+  console.log("Showing Campaigns");
+  let campaigns = document.getElementsByClassName("campaignItem");
+  let dots = document.getElementsByClassName("carousel__dot");
+
+  //  超過數量自動回第一個
+  if (number > campaigns.length) {
+    mutex.campaignIndex = 1;
+  }
+
+  //  重設全部campaign
+  for ( let i = 0 ; i < campaigns.length ; i++ ){
+    campaigns[i].classList.remove("wider-row-flex");
+    campaigns[i].classList.add("mobile-hide", "wider-hide");
+  }
+
+  //  重設全部dots
+  for( let i = 0 ; i < dots.length ; i++) {
+    dots[i].classList.remove("bg-brown");
+    dots[i].classList.add("bg-white","wider-bg-white");
+  }
+
+  //  顯示目前index的dot跟campagin
+  campaigns[mutex.campaignIndex - 1].classList.remove("wider-hide", "mobile-hide");
+  campaigns[mutex.campaignIndex - 1].classList.add("wider-row-flex");
+  dots[mutex.campaignIndex - 1].classList.remove("bg-white","wider-bg-white");
+  dots[mutex.campaignIndex - 1].classList.add("bg-brown");
+
+}
+
 export {
   initialRender,
   handleCategoryClicked,
@@ -409,7 +527,10 @@ export {
   searchElements,
   search_button,
   switchSearchBar,
-  renderMoreProducts,
-  fetchNextPaging,
   handleScrolling,
+  fetchCampaigns,
+  renderCarousel,
+  createDots,
+  showCampaign,
+  autoSwitch
 };
