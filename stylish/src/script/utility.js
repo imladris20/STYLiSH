@@ -329,19 +329,16 @@ const fetchNextPaging = async (stylishAPI, next_paging) => {
 
   if (currentParamKey.includes("keyword")) {
     const response = await fetchProduct(stylishAPI, "search", keywordValue, next_paging);
-    console.log("response in keyword in fetchNextPaging", response);
     return response
   }
 
   else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
     const response = await fetchProduct(stylishAPI, "category", categoryValue, next_paging);
-    console.log("response in category in fetchNextPaging", response);
     return response
   }
 
   else {
     const response = await fetchProduct(stylishAPI, "category", "all", next_paging);
-    console.log("response in general in fetchNextPaging", response);
     return response;
   }
 }
@@ -349,8 +346,6 @@ const fetchNextPaging = async (stylishAPI, next_paging) => {
 const renderMoreProducts = ({ data }) => {
 
   const productList = document.querySelector(".product-list");
-
-  console.log("Now in productList: ", productList);
 
   data.forEach(({ main_image, colors, title, price }) => {
     const productItem = createClassedElement("div", "product-item column-flex");
@@ -394,10 +389,8 @@ const handleScrolling = (stylishAPI, mutex) => {
   displayInlineBlock('scroll-loader');
   setTimeout(async () => {
     try {
-      console.log("It's handling scrolling.")
       const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
       mutex.currentPage++;
-      console.log("before render", nextPageData);
       if (nextPageData.next_paging) {
         mutex.next_paging = nextPageData.next_paging
       } else {
@@ -409,8 +402,6 @@ const handleScrolling = (stylishAPI, mutex) => {
     } finally {
       hideElement('scroll-loader');
       mutex.isScrolled = false;
-      console.log("Next page after handling: ", mutex.next_paging);
-      console.log("Current Page after handling: ", mutex.currentPage);
     }
   }, 1500);
 }

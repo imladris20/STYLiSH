@@ -25,12 +25,10 @@ const mutex = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // console.log("initial Render 觸發");
   initialRender(stylishAPI, mutex);
 });
 
 window.addEventListener("popstate", () => {
-  // console.log("popstate Render 觸發");
   mutex.currentPage = 0;
   initialRender(stylishAPI, mutex);
 });
@@ -45,7 +43,6 @@ document.addEventListener("click", (event) => {
 
 /** Ensure search form block display well when resize window width */
 window.addEventListener("resize", () => {
-  // console.log("resize ensure 觸發");
   widerEnsure(mutex, searchElements);
 });
 
@@ -63,8 +60,6 @@ window.addEventListener("scroll", () => {
     if (mutex.isScrolled) {
       return;
     }
-    // console.log("Next page before handling: ", mutex.next_paging);
-    // console.log("Current Page before handling: ", mutex.currentPage);    
     handleScrolling(stylishAPI, mutex);
   }
 }, { passive: true });
