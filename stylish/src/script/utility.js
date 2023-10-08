@@ -165,6 +165,7 @@ const handleRenderFail = (error) => {
 };
 
 const initialRender = (stylishAPI, mutex) => {
+  console.log("Initial Rendering Products");
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const currentParams = new URLSearchParams(window.location.search);
   const categoryValue = currentParams.get("category");
