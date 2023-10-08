@@ -132,7 +132,7 @@ const renderProduct = (apiSourceData) => {
 
   productContainer.append(productGrid);
 
-  main.insertBefore(productContainer,document.querySelector(".scroll-loader"));
+  main.insertBefore(productContainer, document.querySelector(".scroll-loader"));
 };
 
 const handleRenderSuccess = (data) => {
@@ -153,11 +153,18 @@ const initialRender = (stylishAPI, mutex) => {
   const currentParamKey = Array.from(currentParams.keys());
   const categoryValue = currentParams.get("category");
   const keywordValue = currentParams.get("keyword");
+  const pagingValue = currentParams.get("paging");
+
+  if (pagingValue) {
+    mutex.currentPage = pagingValue;
+  }
 
   if (currentParamKey.includes("keyword")) {
     fetchProduct(stylishAPI, "search", keywordValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
-        mutex.next_paging = next_paging;
+        if (next_paging) {
+          mutex.next_paging = next_paging;
+        }
         handleKeywordRender(data, keywordValue)
       })
       .catch(handleRenderFail);
@@ -166,9 +173,11 @@ const initialRender = (stylishAPI, mutex) => {
   else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
     fetchProduct(stylishAPI, "category", categoryValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
-        mutex.next_paging = next_paging;
+        if (next_paging) {
+          mutex.next_paging = next_paging;
+        }
         handleCategoryRender(data, categoryValue);
-      }) 
+      })
       .catch(handleRenderFail);
   }
 
@@ -176,7 +185,9 @@ const initialRender = (stylishAPI, mutex) => {
     console.error("There's no valid queries.");
     fetchProduct(stylishAPI, "category", "all", mutex.currentPage)
       .then(({ data, next_paging }) => {
-        mutex.next_paging = next_paging;
+        if (next_paging) {
+          mutex.next_paging = next_paging;
+        }
         handleRenderSuccess(data)
       })
       .catch(handleRenderFail);
@@ -198,7 +209,7 @@ const resetCategoryTagClassList = () => {
   const women = document.getElementById("women");
   const men = document.getElementById("men");
   const accessories = document.getElementById("accessories");
-  
+
   const elements = [women, men, accessories];
   elements.forEach((element) => {
     element.classList.replace("tx-white", "tx-grey82");
@@ -222,16 +233,22 @@ const switchCategoryQuery = (categoryValue) => {
 
 const handleCategoryRender = (data, categoryValue) => {
   removeClassedElement("keyword-not-exist")
-  highlightCategoryTagStyle(categoryValue);
-  handleRenderSuccess(data);
+  if (data.length) {
+    highlightCategoryTagStyle(categoryValue);
+    handleRenderSuccess(data);
+  } else {
+    console.error("Invalid paging number");
+    notFound();
+  }
 }
 
 const handleCategoryClicked = (stylishAPI, mutex, event) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const categoryToChange = event.target.id;
+
   if (categoryTypesList.includes(categoryToChange)) {
     switchCategoryQuery(categoryToChange);
-    // displayElement("loading-gif");
+    displayElement("loading-gif");
     fetchProduct(stylishAPI, "category", categoryToChange, mutex.currentPage)
       .then(({ data, next_paging }) => {
         mutex.next_paging = next_paging;
@@ -242,7 +259,7 @@ const handleCategoryClicked = (stylishAPI, mutex, event) => {
 }
 
 //* Searching related */
-const widerEnsure = ( mutex, elementsToChange) => {
+const widerEnsure = (mutex, elementsToChange) => {
   if (window.innerWidth > 1279) {
     mutex.isSearchBarShowed = true;
     elementsToChange.forEach((element) => {
@@ -329,7 +346,7 @@ const fetchNextPaging = async (stylishAPI, next_paging) => {
   }
 }
 
-const renderMoreProducts = ({data}) => {
+const renderMoreProducts = ({ data }) => {
 
   const productList = document.querySelector(".product-list");
 
@@ -381,7 +398,7 @@ const handleScrolling = (stylishAPI, mutex) => {
       const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
       mutex.currentPage++;
       console.log("before render", nextPageData);
-      if(nextPageData.next_paging){
+      if (nextPageData.next_paging) {
         mutex.next_paging = nextPageData.next_paging
       } else {
         mutex.next_paging = 0
