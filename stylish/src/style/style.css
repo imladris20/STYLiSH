@@ -296,8 +296,7 @@ input::placeholder {
 .search-form__submit {
   width: 40px;
   height: 40px;
-  background: transparent url("../../public/search.png") no-repeat center
-    center;
+  background: transparent url("../../public/search.png") no-repeat center center;
   background-size: contain;
   border: none;
   align-self: center;
@@ -308,7 +307,7 @@ input::placeholder {
 .header__right-section-wrapper--clicked {
   top: 6px;
   right: 10px;
-  width:100%;
+  width: 100%;
 }
 
 .search-container--clicked {
@@ -486,6 +485,7 @@ Media Queries
 ==================================== */
 
 @media (min-width: 1280px) {
+
   /** Wider Common CSS setting **/
   .wider-hide {
     display: none;
@@ -596,7 +596,7 @@ Media Queries
     border-radius: 20px;
   }
 
-  
+
   .search-form__input {
     visibility: unset;
   }
