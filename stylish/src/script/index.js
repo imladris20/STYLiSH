@@ -10,7 +10,8 @@ import {
   renderCarousel,
   createDots,
   showCampaign,
-  autoSwitch
+  startAutoSwitch,
+  stopAutoSwitch
 } from "./utility.js";
 
 const stylishAPI = {
@@ -29,17 +30,7 @@ const mutex = {
   next_paging: 0,
   isScrolled: false,
   campaignIndex: 1,
-}
-
-let autoInterval;
-
-function startAutoSwitch() {
-  console.log("starting Auto slide");
-  autoInterval = setInterval( () => autoSwitch(mutex), 5000);
-}
-  
-function stopAutoSwitch() {
-  clearInterval(autoInterval);
+  autoInterval: null
 }
 
 document.addEventListener("DOMContentLoaded", async() => {
@@ -48,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async() => {
   await createDots(response, mutex);
   await initialRender(stylishAPI, mutex);
   await showCampaign(1, mutex);
-  await startAutoSwitch();
+  await startAutoSwitch(mutex);
 });
 
 window.addEventListener("popstate", () => {
@@ -85,8 +76,6 @@ window.addEventListener("scroll", () => {
   }
 }, { passive: true });
 
-/** carousel campaigns show */
-
-document.querySelector(".carousel").addEventListener("mouseenter", stopAutoSwitch);
-
-document.querySelector(".carousel").addEventListener("mouseleave", startAutoSwitch);
+/** carousel campaigns optional effects */
+document.querySelector(".carousel").addEventListener("mouseenter", () => stopAutoSwitch(mutex));
+document.querySelector(".carousel").addEventListener("mouseleave", () => startAutoSwitch(mutex));

@@ -148,7 +148,6 @@ const handleRenderFail = (error) => {
 }
 
 const initialRender = (stylishAPI, mutex) => {
-  console.log("Initial Rendering Products");
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const currentParams = new URLSearchParams(window.location.search);
   const categoryValue = currentParams.get("category");
@@ -407,21 +406,24 @@ const handleScrolling = async (stylishAPI, mutex) => {
 
 const fetchCampaigns = async ({ host, version, endpoints }) => {
   const data = await (fetchData(`${host}/${version}/${endpoints.campaigns}`))
-  console.log("Fetching Campaigns");
   return data;
 }
 
 const renderCarousel = ({data}) => {
-  console.log("Rendering Carousel");
   const carousel = document.querySelector('.carousel');
 
   data.forEach(({picture, story}) => {
-    const campaignItem = createClassedElement("div", "campaignItem fade relative wider-row-flex flex-align-center flex-space-center");
+    const campaignItem = createClassedElement("div", "campaignItem fade relative wider-row-flex flex-align-center flex-space-center pointer");
     const campaignItem__image = createClassedElement("img", "campaignItem__image full-width");
     const campaignItem__story_container = createClassedElement("div", "campaignItem__story-container full-width wider-absolute")
     const campaignItem__story = createClassedElement("div","campaignItem__story absolute text-left tx-black wider-tx-black07");
     const campaignItem__story_description = createClassedElement("p", "campaignItem__story-description text-left margin-block-none");
     const campaignItem__story_quote = createClassedElement("h4", "campaignItem__story-quote wider-tx-size20 text-left margin-block-none");
+
+    //  make campaignItem redirect to corresponding link after clicked
+    campaignItem.addEventListener("click", () => {
+      window.open(picture, "_blank");
+    });
 
     //  set Image
     campaignItem__image.src = picture;
@@ -431,7 +433,7 @@ const renderCarousel = ({data}) => {
     story = story.replace(/\r\n/g, "<br />");
     const lastIndexOfLineBreak = story.lastIndexOf("<br />");
     if (lastIndexOfLineBreak !== -1) {
-      campaignItem__story_description.innerHTML = `<p class="campaignItem__story-description text-left margin-block-none">${story.slice(0, lastIndexOfLineBreak)}</p>`;
+      campaignItem__story_description.innerHTML = `${story.slice(0, lastIndexOfLineBreak)}`;
       campaignItem__story_quote.textContent = story.slice(lastIndexOfLineBreak + 6);
     } else {
       console.error("Campaign Story is not as expected.");
@@ -445,7 +447,6 @@ const renderCarousel = ({data}) => {
 }
 
 const createDots = ({data}, mutex) => {
-  console.log("Creating Dots");
   const carousel = document.querySelector('.carousel');
   
   const carousel__dots_container = createClassedElement("div","carousel__dots-container row-flex flex-space-between flex-align-center absolute");
@@ -464,9 +465,8 @@ const createDots = ({data}, mutex) => {
   carousel.append(carousel__dots_container);
 }
 
-const nextCampaign = (number, mutex) => {
-  mutex.campaignIndex += number;
-  console.log("now mutex.campaignIndex", mutex.campaignIndex);
+const nextCampaign = (amount, mutex) => {
+  mutex.campaignIndex += amount;
   showCampaign(mutex.campaignIndex, mutex);
 }
 
@@ -476,43 +476,39 @@ function switchCampaign (number, mutex) {
 }
 
 const autoSwitch = (mutex) => {
-  console.log("Autoswiching......")
   nextCampaign(1, mutex);
 }
 
-// const startAutoSwitch = (mutex) => {
-//   console.log("auto switch start");
-//   mutex.autoInterval = setInterval(autoSwitch(mutex), 100);
-//   console.log("mutex.autoInterval: ", mutex.autoInterval);
-// }
-
-// const stopAutoSwitch = (mutex) => {
-//   clearInterval(mutex.autoInterval);
-// }
+function startAutoSwitch(mutex) {
+  mutex.autoInterval = setInterval( () => autoSwitch(mutex), 5000);
+}
+  
+function stopAutoSwitch(mutex) {
+  clearInterval(mutex.autoInterval);
+}
 
 const showCampaign = (number, mutex) => {
-  console.log("Showing Campaigns");
   let campaigns = document.getElementsByClassName("campaignItem");
   let dots = document.getElementsByClassName("carousel__dot");
 
-  //  超過數量自動回第一個
+  //  if overflow, reset
   if (number > campaigns.length) {
     mutex.campaignIndex = 1;
   }
 
-  //  重設全部campaign
+  //  hide all campaigns
   for ( let i = 0 ; i < campaigns.length ; i++ ){
     campaigns[i].classList.remove("wider-row-flex");
     campaigns[i].classList.add("mobile-hide", "wider-hide");
   }
 
-  //  重設全部dots
+  //  set all dots to white
   for( let i = 0 ; i < dots.length ; i++) {
     dots[i].classList.remove("bg-brown");
     dots[i].classList.add("bg-white","wider-bg-white");
   }
 
-  //  顯示目前index的dot跟campagin
+  //  display only currentindex and color corresponding dot to brown.
   campaigns[mutex.campaignIndex - 1].classList.remove("wider-hide", "mobile-hide");
   campaigns[mutex.campaignIndex - 1].classList.add("wider-row-flex");
   dots[mutex.campaignIndex - 1].classList.remove("bg-white","wider-bg-white");
@@ -532,5 +528,6 @@ export {
   renderCarousel,
   createDots,
   showCampaign,
-  autoSwitch
+  startAutoSwitch,
+  stopAutoSwitch
 };
