@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "stylish-polien-w2p1",
-    "public": "./",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -10,7 +10,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/newindex.html"
       }
     ]
   }
