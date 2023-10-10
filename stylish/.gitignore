@@ -68,5 +68,6 @@ node_modules/
 # images file list
 cart-remove-hover.png
 cart-remove.png
-loading.gif
 search-hover.png
+
+dist

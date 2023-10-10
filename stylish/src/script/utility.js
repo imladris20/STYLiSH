@@ -150,7 +150,6 @@ const handleRenderFail = (error) => {
 const initialRender = (stylishAPI, mutex) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const currentParams = new URLSearchParams(window.location.search);
-  const currentParamKey = Array.from(currentParams.keys());
   const categoryValue = currentParams.get("category");
   const keywordValue = currentParams.get("keyword");
   const pagingValue = currentParams.get("paging");
@@ -159,7 +158,7 @@ const initialRender = (stylishAPI, mutex) => {
     mutex.currentPage = pagingValue;
   }
 
-  if (currentParamKey.includes("keyword")) {
+  if (currentParams.has("keyword")) {
     fetchProduct(stylishAPI, "search", keywordValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
@@ -170,7 +169,7 @@ const initialRender = (stylishAPI, mutex) => {
       .catch(handleRenderFail);
   }
 
-  else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
+  else if (currentParams.has("category") && categoryTypesList.includes(categoryValue)) {
     fetchProduct(stylishAPI, "category", categoryValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
@@ -323,16 +322,15 @@ const handleKeywordRender = (data, keywordValue) => {
 const fetchNextPaging = async (stylishAPI, next_paging) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const currentParams = new URLSearchParams(window.location.search);
-  const currentParamKey = Array.from(currentParams.keys());
   const categoryValue = currentParams.get("category");
   const keywordValue = currentParams.get("keyword");
 
-  if (currentParamKey.includes("keyword")) {
+  if (currentParams.has("keyword")) {
     const response = await fetchProduct(stylishAPI, "search", keywordValue, next_paging);
     return response
   }
 
-  else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
+  else if (currentParams.has("category") && categoryTypesList.includes(categoryValue)) {
     const response = await fetchProduct(stylishAPI, "category", categoryValue, next_paging);
     return response
   }
@@ -384,26 +382,24 @@ const renderMoreProducts = ({ data }) => {
   });
 }
 
-const handleScrolling = (stylishAPI, mutex) => {
+const handleScrolling = async (stylishAPI, mutex) => {
   mutex.isScrolled = true;
   displayInlineBlock('scroll-loader');
-  setTimeout(async () => {
     try {
-      const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
-      mutex.currentPage++;
-      if (nextPageData.next_paging) {
-        mutex.next_paging = nextPageData.next_paging
-      } else {
-        mutex.next_paging = 0
-      }
-      renderMoreProducts(nextPageData);
-    } catch (Error) {
-      console.error("Handling failed. Message: ", Error);
-    } finally {
-      hideElement('scroll-loader');
-      mutex.isScrolled = false;
+    const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
+    mutex.currentPage++;
+    if (nextPageData.next_paging) {
+      mutex.next_paging = nextPageData.next_paging
+    } else {
+      mutex.next_paging = 0
     }
-  }, 1500);
+    renderMoreProducts(nextPageData);
+  } catch (Error) {
+    console.error("Handling failed. Message: ", Error);
+  } finally {
+    hideElement('scroll-loader');
+    mutex.isScrolled = false;
+  }
 }
 
 export {

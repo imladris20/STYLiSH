@@ -37,8 +37,6 @@ window.addEventListener("popstate", () => {
 document.addEventListener("click", (event) => {
   mutex.currentPage = 0;
   handleCategoryClicked(stylishAPI, mutex, event);
-  mutex.currentPage = 0;
-  handleCategoryClicked(stylishAPI, mutex, event);
 });
 
 /** Ensure search form block display well when resize window width */
