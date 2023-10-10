@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "stylish-polien-w2p1",
-    "public": "public",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
