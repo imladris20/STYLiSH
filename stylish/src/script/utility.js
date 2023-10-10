@@ -17,6 +17,11 @@ const displayElement = (elementWithClass) => {
   target.style.display = "block";
 };
 
+const displayInlineBlock = (elementWithClass) => {
+  const target = document.querySelector(`.${elementWithClass}`);
+  target.style.display = "inline-block";
+};
+
 const hideElement = (elementWithClass) => {
   const target = document.querySelector(`.${elementWithClass}`);
   if (target) {
@@ -127,23 +132,24 @@ const renderProduct = (apiSourceData) => {
 
   productContainer.append(productGrid);
 
-  main.append(productContainer);
+  main.insertBefore(productContainer, document.querySelector(".scroll-loader"));
 };
 
 const handleRenderSuccess = (data) => {
   renderProduct(data);
   hideElement("loading-gif");
+  hideElement("scroll-loader");
 }
 
 const handleRenderFail = (error) => {
   console.error("Something went wrong", error);
   hideElement("loading-gif");
+  hideElement("scroll-loader");
 }
 
 const initialRender = (stylishAPI, mutex) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
   const currentParams = new URLSearchParams(window.location.search);
-  const currentParamKey = Array.from(currentParams.keys());
   const categoryValue = currentParams.get("category");
   const keywordValue = currentParams.get("keyword");
   const pagingValue = currentParams.get("paging");
@@ -152,7 +158,7 @@ const initialRender = (stylishAPI, mutex) => {
     mutex.currentPage = pagingValue;
   }
 
-  if (currentParamKey.includes("keyword")) {
+  if (currentParams.has("keyword")) {
     fetchProduct(stylishAPI, "search", keywordValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
@@ -163,7 +169,7 @@ const initialRender = (stylishAPI, mutex) => {
       .catch(handleRenderFail);
   }
 
-  else if (currentParamKey.includes("category") && categoryTypesList.includes(categoryValue)) {
+  else if (currentParams.has("category") && categoryTypesList.includes(categoryValue)) {
     fetchProduct(stylishAPI, "category", categoryValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
@@ -301,12 +307,98 @@ const switchSearchBar = (mutex, event, elementsToChange) => {
 const handleKeywordRender = (data, keywordValue) => {
   if (!data || data.length === 0) {
     hideElement("loading-gif");
+    hideElement("scroll-loader")
     removeClassedElement("keyword-not-exist")
     removeClassedElement("main__product-container");
     showInvalidKeyword(keywordValue);
   } else {
     removeClassedElement("main__product-container");
     handleRenderSuccess(data)
+  }
+}
+
+//* Infinite Scrolling related  */
+
+const fetchNextPaging = async (stylishAPI, next_paging) => {
+  const categoryTypesList = ["women", "men", "accessories", "all"];
+  const currentParams = new URLSearchParams(window.location.search);
+  const categoryValue = currentParams.get("category");
+  const keywordValue = currentParams.get("keyword");
+
+  if (currentParams.has("keyword")) {
+    const response = await fetchProduct(stylishAPI, "search", keywordValue, next_paging);
+    return response
+  }
+
+  else if (currentParams.has("category") && categoryTypesList.includes(categoryValue)) {
+    const response = await fetchProduct(stylishAPI, "category", categoryValue, next_paging);
+    return response
+  }
+
+  else {
+    const response = await fetchProduct(stylishAPI, "category", "all", next_paging);
+    return response;
+  }
+}
+
+const renderMoreProducts = ({ data }) => {
+
+  const productList = document.querySelector(".product-list");
+
+  data.forEach(({ main_image, colors, title, price }) => {
+    const productItem = createClassedElement("div", "product-item column-flex");
+    const productItem_img = createClassedElement("img", "product-item__img full-width");
+    const productItem_colorBox = createClassedElement("ul", "product-item__color-container row-flex flex-x-start");
+    const productItem_title = createClassedElement("p", "product-item__title");
+    const productItem_price = createClassedElement("p", "product-item__price");
+
+    //  Set image
+    productItem_img.src = main_image;
+    productItem_img.alt = "product item";
+
+    //  Produce and set colors
+    colors.forEach((color) => {
+      const productItem_color = createClassedElement(
+        "li",
+        "product-item__color-grid bd-lightgrey pointer"
+      );
+      productItem_color.style.backgroundColor = `#${color.code}`;
+      productItem_colorBox.append(productItem_color);
+    });
+
+    //  Set title
+    productItem_title.textContent = title;
+
+    //  Set price
+    productItem_price.textContent = `TWD.${price}`;
+
+    productItem.append(
+      productItem_img,
+      productItem_colorBox,
+      productItem_title,
+      productItem_price
+    );
+    productList.append(productItem);
+  });
+}
+
+const handleScrolling = async (stylishAPI, mutex) => {
+  mutex.isScrolled = true;
+  displayInlineBlock('scroll-loader');
+    try {
+    const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
+    mutex.currentPage++;
+    if (nextPageData.next_paging) {
+      mutex.next_paging = nextPageData.next_paging
+    } else {
+      mutex.next_paging = 0
+    }
+    renderMoreProducts(nextPageData);
+  } catch (Error) {
+    console.error("Handling failed. Message: ", Error);
+  } finally {
+    hideElement('scroll-loader');
+    mutex.isScrolled = false;
   }
 }
 
@@ -317,4 +409,7 @@ export {
   searchElements,
   search_button,
   switchSearchBar,
+  renderMoreProducts,
+  fetchNextPaging,
+  handleScrolling,
 };

@@ -5,6 +5,7 @@ import {
   searchElements,
   search_button,
   switchSearchBar,
+  handleScrolling
 } from "./utility.js";
 
 const stylishAPI = {
@@ -20,6 +21,7 @@ const mutex = {
   isSearchBarShowed: false,
   currentPage: 0,
   next_paging: 0,
+  isScrolled: false
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -46,3 +48,16 @@ window.addEventListener("resize", () => {
 search_button.addEventListener("click", (event) => {
   switchSearchBar(mutex, event, searchElements);
 });
+
+/** Make scrolling could trigger fetching more products if they exist */
+window.addEventListener("scroll", () => {
+
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  if (scrollTop + clientHeight >= (scrollHeight - 5) && mutex.next_paging > 0) {
+    if (mutex.isScrolled) {
+      return;
+    }
+    handleScrolling(stylishAPI, mutex);
+  }
+}, { passive: true });
