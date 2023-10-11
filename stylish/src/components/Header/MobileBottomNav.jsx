@@ -40,7 +40,7 @@ export const CartLinkImage = styled.div`
   width: 44px;
   height: 44px;
   background-size: cover;
-  background-image: url("/images/cart-mobile.png");
+  background-image: url("/cart-mobile.png");
   transition: background-image 0.3s ease;
 `;
 
@@ -69,7 +69,7 @@ export const ProfileLinkImage = styled.div`
   width: 44px;
   height: 44px;
   background-size: cover;
-  background-image: url("/images/member-mobile.png");
+  background-image: url("/member-mobile.png");
   transition: background-image 0.3s ease;
 `;
 
