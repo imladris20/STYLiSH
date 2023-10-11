@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { devices } from '../../assets/device'
-import CategoryNavigation from './CategoryNavigation'
+import { devices } from "../../assets/device";
+import CategoryNavigation from "./CategoryNavigation";
 
 const Top_Header__left_section_wrapper = styled.div`
   width: 100%;
@@ -33,11 +33,7 @@ const Header__left_section_wrapper = () => {
   return (
     <Top_Header__left_section_wrapper>
       <Main_logo>
-        <Main_logo__img
-          id="all"
-          src="/images/logo.png"
-          alt="stylish"
-        />
+        <Main_logo__img id="all" src="/images/logo.png" alt="stylish" />
       </Main_logo>
       <CategoryNavigation />
     </Top_Header__left_section_wrapper>

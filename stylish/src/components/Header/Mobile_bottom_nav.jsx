@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { devices } from '../../assets/device';
+import { devices } from "../../assets/device";
 
 const TopMobile_bottom_nav = styled.nav`
   width: 100%;
@@ -9,7 +9,7 @@ const TopMobile_bottom_nav = styled.nav`
   left: 0;
   height: 60px;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     display: none;
   }
 `;
@@ -31,12 +31,12 @@ const Mobile_bottom_nav__list_item = styled.li`
   flex: 1;
 `;
 
-const Icon_link = styled.a`
+export const Icon_link = styled.a`
   position: relative;
   cursor: pointer;
 `;
 
-const Cart_link__image = styled.div`
+export const Cart_link__image = styled.div`
   width: 44px;
   height: 44px;
   background-size: cover;
@@ -44,10 +44,10 @@ const Cart_link__image = styled.div`
   transition: background-image 0.3s ease;
 `;
 
-const Cart_link__counter = styled.div`
+export const Cart_link__counter = styled.div`
   border-radius: 100%;
   position: absolute;
-  background-color: #8B572A;
+  background-color: #8b572a;
   color: white;
   height: 24px;
   width: 24px;
@@ -65,7 +65,7 @@ const Mobile_bottom_nav__devider = styled.li`
   color: grey;
 `;
 
-const Profile_link__image = styled.div`
+export const Profile_link__image = styled.div`
   width: 44px;
   height: 44px;
   background-size: cover;
@@ -93,7 +93,7 @@ const Mobile_bottom_nav = () => {
         </Mobile_bottom_nav__list_item>
       </Mobile_bottom_nav__list>
     </TopMobile_bottom_nav>
-  )
-}
+  );
+};
 
 export default Mobile_bottom_nav;

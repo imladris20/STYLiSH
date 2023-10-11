@@ -34,6 +34,9 @@ const Header__wrapper = styled.div`
 
 const HeaderSpaceSection = styled.div`
   height: 102px;
+  @media ${devices.desktopS} {
+    height: 140px;
+  }
 `;
 
 const Header = () => {
