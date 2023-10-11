@@ -359,7 +359,7 @@ input::placeholder {
 }
 
 .carousel__dots-container {
-  width: 55.2px;
+  gap: 8.8px;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
@@ -770,7 +770,7 @@ Media Queries
   }
 
   .carousel__dots-container {
-    width: 138px;
+    gap: 22px;
     bottom: 34px;
   }
 

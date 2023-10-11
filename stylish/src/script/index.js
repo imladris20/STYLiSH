@@ -11,7 +11,7 @@ import {
   createDots,
   showCampaign,
   startAutoSwitch,
-  stopAutoSwitch
+  stopAutoSwitch,
 } from "./utility.js";
 
 const stylishAPI = {
@@ -20,8 +20,8 @@ const stylishAPI = {
   endpoints: {
     productList: "products",
     productSearch: "products/search",
-    campaigns: "marketing/campaigns"
-  }
+    campaigns: "marketing/campaigns",
+  },
 };
 
 const mutex = {
@@ -29,17 +29,17 @@ const mutex = {
   currentPage: 0,
   next_paging: 0,
   isScrolled: false,
-  campaignIndex: 1,
-  autoInterval: null
-}
+  campaignIndex: 0,
+  autoInterval: null,
+};
 
-document.addEventListener("DOMContentLoaded", async() => {
+document.addEventListener("DOMContentLoaded", async () => {
   const response = await fetchCampaigns(stylishAPI);
-  await renderCarousel(response);
-  await createDots(response, mutex);
-  await initialRender(stylishAPI, mutex);
-  await showCampaign(1, mutex);
-  await startAutoSwitch(mutex);
+  renderCarousel(response);
+  createDots(response, mutex);
+  initialRender(stylishAPI, mutex);
+  showCampaign(0, mutex);
+  startAutoSwitch(mutex);
 });
 
 window.addEventListener("popstate", () => {
@@ -64,18 +64,25 @@ search_button.addEventListener("click", (event) => {
 });
 
 /** Make scrolling could trigger fetching more products if they exist */
-window.addEventListener("scroll", () => {
+window.addEventListener(
+  "scroll",
+  () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-  if (scrollTop + clientHeight >= (scrollHeight - 5) && mutex.next_paging > 0) {
-    if (mutex.isScrolled) {
-      return;
+    if (scrollTop + clientHeight >= scrollHeight - 5 && mutex.next_paging > 0) {
+      if (mutex.isScrolled) {
+        return;
+      }
+      handleScrolling(stylishAPI, mutex);
     }
-    handleScrolling(stylishAPI, mutex);
-  }
-}, { passive: true });
+  },
+  { passive: true }
+);
 
 /** carousel campaigns optional effects */
-document.querySelector(".carousel").addEventListener("mouseenter", () => stopAutoSwitch(mutex));
-document.querySelector(".carousel").addEventListener("mouseleave", () => startAutoSwitch(mutex));
+document
+  .querySelector(".carousel")
+  .addEventListener("mouseenter", () => stopAutoSwitch(mutex));
+document
+  .querySelector(".carousel")
+  .addEventListener("mouseleave", () => startAutoSwitch(mutex));
