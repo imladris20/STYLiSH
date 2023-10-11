@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import React from "react";
 import { devices } from "../../assets/device";
 
-const Top_CategoryNavigation = styled.nav`
+const Top = styled.nav`
   width: 100%;
 
   @media ${devices.desktopS} {
@@ -9,7 +10,7 @@ const Top_CategoryNavigation = styled.nav`
   }
 `;
 
-const Category_nav__list = styled.ul`
+const CategoryNavList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -25,7 +26,7 @@ const Category_nav__list = styled.ul`
   }
 `;
 
-const Category_nav__list_item = styled.li`
+const CategoryNavListItem = styled.li`
   flex: 1;
   text-align: center;
 
@@ -36,7 +37,7 @@ const Category_nav__list_item = styled.li`
   }
 `;
 
-const Category_nav__list_item_link = styled.a`
+const CategoryNavListItemLink = styled.a`
   cursor: pointer;
   color: #828282;
 
@@ -45,7 +46,7 @@ const Category_nav__list_item_link = styled.a`
   }
 `;
 
-const Category_nav__list_devider = styled.li`
+const CategoryNavListDevider = styled.li`
   text-align: center;
   color: grey;
 
@@ -58,28 +59,29 @@ const Category_nav__list_devider = styled.li`
 `;
 
 const CategoryNavigation = () => {
+
+  const category = ["women", "men", "accessories"];
+  const zhCategory = ["女裝", "男裝", "配件"];
+
+  const arr = category.map( (item, index) => {
+    return (
+      <React.Fragment key={index}>
+        <CategoryNavListItem>
+          <CategoryNavListItemLink id={`${item}`}>
+            {zhCategory[index]}
+          </CategoryNavListItemLink>
+        </CategoryNavListItem>
+        {index !== 2 ? <CategoryNavListDevider>|</CategoryNavListDevider> : null}
+      </React.Fragment>
+    )
+  })
+
   return (
-    <Top_CategoryNavigation>
-      <Category_nav__list>
-        <Category_nav__list_item>
-          <Category_nav__list_item_link id="women">
-            女裝
-          </Category_nav__list_item_link>
-        </Category_nav__list_item>
-        <Category_nav__list_devider>|</Category_nav__list_devider>
-        <Category_nav__list_item>
-          <Category_nav__list_item_link id="men">
-            男裝
-          </Category_nav__list_item_link>
-        </Category_nav__list_item>
-        <Category_nav__list_devider>|</Category_nav__list_devider>
-        <Category_nav__list_item>
-          <Category_nav__list_item_link id="accessories">
-            配件
-          </Category_nav__list_item_link>
-        </Category_nav__list_item>
-      </Category_nav__list>
-    </Top_CategoryNavigation>
+    <Top>
+      <CategoryNavList>
+        {arr}
+      </CategoryNavList>
+    </Top>
   );
 };
 

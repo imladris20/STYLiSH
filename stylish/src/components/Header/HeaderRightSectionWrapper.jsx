@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
 import {
-  Icon_link,
-  Cart_link__image,
-  Cart_link__counter,
-  Profile_link__image,
-} from "./Mobile_bottom_nav";
+  IconLink,
+  CartLinkImage,
+  CartLinkCounter,
+  ProfileLinkImage,
+} from "./MobileBottomNav";
 
-const Top_Header__right_section_wrapper = styled.div`
+const Top = styled.div`
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -20,7 +20,7 @@ const Top_Header__right_section_wrapper = styled.div`
   }
 `;
 
-const Search_containter = styled.div`
+const SearchContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -28,7 +28,7 @@ const Search_containter = styled.div`
   flex: 1;
 `;
 
-const Search_form = styled.form`
+const SearchForm = styled.form`
   display: flex;
   flex-direction: row;
   position: relative;
@@ -47,7 +47,7 @@ const Search_form = styled.form`
   }
 `;
 
-const Search_form__input = styled.input`
+const SearchFormInput = styled.input`
   color: #8b572a;
   font-size: 20px;
   border: none;
@@ -62,7 +62,7 @@ const Search_form__input = styled.input`
   }
 `;
 
-const Search_form__submit = styled.input`
+const SearchFormSubmit = styled.input`
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -77,14 +77,14 @@ const Search_form__submit = styled.input`
   }
 `;
 
-const Wider_Icon_link = styled(Icon_link)`
+const WiderCartLink = styled(IconLink)`
   display: none;
   @media ${devices.desktopS} {
     display: initial;
   }
 `;
 
-const Wider_Cart_link__image = styled(Cart_link__image)`
+const WiderCartLinkImage = styled(CartLinkImage)`
   @media ${devices.desktopS} {
     background-image: url("/images/cart.png");
 
@@ -94,7 +94,7 @@ const Wider_Cart_link__image = styled(Cart_link__image)`
   }
 `;
 
-const Wider_Profile_link__image = styled(Profile_link__image)`
+const WiderProfileLinkImage = styled(ProfileLinkImage)`
   @media ${devices.desktopS} {
     background-image: url("/images/member.png");
     &:hover {
@@ -103,33 +103,33 @@ const Wider_Profile_link__image = styled(Profile_link__image)`
   }
 `;
 
-const Header__right_section_wrapper = () => {
+const HeaderRightSectionWrapper = () => {
   return (
-    <Top_Header__right_section_wrapper id="header__right-section-wrapper">
-      <Search_containter>
-        <Search_form method="get" id="search-form" className="search-form">
-          <Search_form__input
+    <Top id="header__right-section-wrapper">
+      <SearchContainer>
+        <SearchForm method="get" id="search-form" className="search-form">
+          <SearchFormInput
             type="text"
-            id="search-form__input"
+            id="searchFormInput"
             name="keyword"
           />
-          <Search_form__submit
-            id="search-form__submit"
+          <SearchFormSubmit
+            id="searchFormSubmit"
             type="submit"
-            className="search-form__submit"
+            className="searchFormSubmit"
             value=""
           />
-        </Search_form>
-      </Search_containter>
-      <Wider_Icon_link>
-        <Wider_Cart_link__image />
-        <Cart_link__counter>1</Cart_link__counter>
-      </Wider_Icon_link>
-      <Wider_Icon_link>
-        <Wider_Profile_link__image />
-      </Wider_Icon_link>
-    </Top_Header__right_section_wrapper>
+        </SearchForm>
+      </SearchContainer>
+      <WiderCartLink>
+        <WiderCartLinkImage />
+        <CartLinkCounter>1</CartLinkCounter>
+      </WiderCartLink>
+      <WiderCartLink>
+        <WiderProfileLinkImage />
+      </WiderCartLink>
+    </Top>
   );
 };
 
-export default Header__right_section_wrapper;
+export default HeaderRightSectionWrapper;

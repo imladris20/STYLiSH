@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { devices } from "../../assets/device";
 import CategoryNavigation from "./CategoryNavigation";
 
-const Top_Header__left_section_wrapper = styled.div`
+const Top = styled.div`
   width: 100%;
 
   @media ${devices.desktopS} {
@@ -12,11 +12,11 @@ const Top_Header__left_section_wrapper = styled.div`
   }
 `;
 
-const Main_logo = styled.a`
+const MainLogo = styled.a`
   cursor: pointer;
 `;
 
-const Main_logo__img = styled.img`
+const MainLogoImage = styled.img`
   width: 129px;
   height: 24px;
   margin-top: 14px;
@@ -29,15 +29,15 @@ const Main_logo__img = styled.img`
   }
 `;
 
-const Header__left_section_wrapper = () => {
+const HeaderLeftSectionWrapper = () => {
   return (
-    <Top_Header__left_section_wrapper>
-      <Main_logo>
-        <Main_logo__img id="all" src="/images/logo.png" alt="stylish" />
-      </Main_logo>
+    <Top>
+      <MainLogo>
+        <MainLogoImage id="all" src="/images/logo.png" alt="stylish" />
+      </MainLogo>
       <CategoryNavigation />
-    </Top_Header__left_section_wrapper>
+    </Top>
   );
 };
 
-export default Header__left_section_wrapper;
+export default HeaderLeftSectionWrapper;

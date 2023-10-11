@@ -1,19 +1,21 @@
 import styled from "styled-components";
 import { devices } from "../assets/device";
-import Footer__linklist from "./Footer/Footer_linklist";
-import Footer__socialmedia from "./Footer/Footer_socialmedia";
+import FooterLinkList from "./Footer/FooterLinkList";
+import FooterSocialMedia from "./Footer/FooterSocialMedia";
 
 const StylishFooter = styled.footer`
   width: 100%;
   background-color: #313538;
   margin-bottom: 60px;
+  position: fixed;
+  bottom: 0px;
 
   @media ${devices.desktopS} {
     margin-bottom: 0px;
   }
 `;
 
-const Footer__wrapper = styled.div`
+const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,7 +37,7 @@ const Footer__wrapper = styled.div`
   }
 `;
 
-const Footer__link_wrapper = styled.div`
+const FooterLinkWrapper = styled.div`
   display: flex;
   flex-direction: row;
   position: relative;
@@ -53,7 +55,7 @@ const Footer__link_wrapper = styled.div`
   }
 `;
 
-const Footer__copyright_text = styled.span`
+const FooterCopyright = styled.span`
   color: #828282;
   font-size: 10px;
   transform: scale(0.833);
@@ -67,15 +69,15 @@ const Footer__copyright_text = styled.span`
 const Footer = () => {
   return (
     <StylishFooter>
-      <Footer__wrapper>
-        <Footer__link_wrapper>
-          <Footer__linklist />
-          <Footer__socialmedia />
-        </Footer__link_wrapper>
-        <Footer__copyright_text>
+      <FooterWrapper>
+        <FooterLinkWrapper>
+          <FooterLinkList />
+          <FooterSocialMedia />
+        </FooterLinkWrapper>
+        <FooterCopyright>
           &copy; 2018. All rights reserved.
-        </Footer__copyright_text>
-      </Footer__wrapper>
+        </FooterCopyright>
+      </FooterWrapper>
     </StylishFooter>
   );
 };
