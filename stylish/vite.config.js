@@ -7,11 +7,11 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        stylish: './newindex.html',
+        stylish: './index.html',
       },
     },
   },
   server: {
-    open: '/newindex.html'
+    open: '/index.html'
   }
 })

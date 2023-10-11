@@ -66,7 +66,7 @@ const SearchFormSubmit = styled.input`
   cursor: pointer;
   width: 40px;
   height: 40px;
-  background: transparent url(/images/search.png) no-repeat center center;
+  background: transparent url(/search.png) no-repeat center center;
   background-size: contain;
   border: none;
   align-self: center;
@@ -86,19 +86,19 @@ const WiderCartLink = styled(IconLink)`
 
 const WiderCartLinkImage = styled(CartLinkImage)`
   @media ${devices.desktopS} {
-    background-image: url("/images/cart.png");
+    background-image: url("/cart.png");
 
     &:hover {
-      background-image: url("/images/cart-hover.png");
+      background-image: url("/cart-hover.png");
     }
   }
 `;
 
 const WiderProfileLinkImage = styled(ProfileLinkImage)`
   @media ${devices.desktopS} {
-    background-image: url("/images/member.png");
+    background-image: url("/member.png");
     &:hover {
-      background-image: url("/images/member-hover.png");
+      background-image: url("/member-hover.png");
     }
   }
 `;

@@ -33,7 +33,7 @@ const HeaderLeftSectionWrapper = () => {
   return (
     <Top>
       <MainLogo>
-        <MainLogoImage id="all" src="/images/logo.png" alt="stylish" />
+        <MainLogoImage id="all" src="/logo.png" alt="stylish" />
       </MainLogo>
       <CategoryNavigation />
     </Top>
