@@ -265,11 +265,11 @@ input::placeholder {
 }
 
 .profile-link__image {
-  background-image: url("../../images/member-mobile.png");
+  background-image: url("../../public/member-mobile.png");
 }
 
 .cart-link__image {
-  background-image: url("../../images/cart-mobile.png");
+  background-image: url("../../public/cart-mobile.png");
 }
 
 .header__right-section-wrapper {
@@ -296,7 +296,7 @@ input::placeholder {
 .search-form__submit {
   width: 40px;
   height: 40px;
-  background: transparent url("../../images/search.png") no-repeat center center;
+  background: transparent url("../../public/search.png") no-repeat center center;
   background-size: contain;
   border: none;
   align-self: center;
@@ -375,7 +375,7 @@ input::placeholder {
   margin: 490px auto;
   width: 64px;
   height: 64px;
-  background: url("../../images/loading.gif") center/cover no-repeat;
+  background: url("../../public/loading.gif") center/cover no-repeat;
 }
 
 .keyword-not-exist {
@@ -551,7 +551,6 @@ Media Queries
 ==================================== */
 
 @media (min-width: 1280px) {
-
   /** Wider Common CSS setting **/
   .wider-hide {
     display: none;
@@ -676,19 +675,19 @@ Media Queries
   }
 
   .cart-link__image {
-    background-image: url("../../images/cart.png");
+    background-image: url("../../public/cart.png");
   }
 
   .cart-link__image:hover {
-    background-image: url("../../images/cart-hover.png");
+    background-image: url("../../public/cart-hover.png");
   }
 
   .profile-link__image {
-    background-image: url("../../images/member.png");
+    background-image: url("../../public/member.png");
   }
 
   .profile-link__image:hover {
-    background-image: url("../../images/member-hover.png");
+    background-image: url("../../public/member-hover.png");
   }
 
   /** Footer **/

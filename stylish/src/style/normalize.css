@@ -174,7 +174,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -184,7 +185,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
@@ -350,52 +352,52 @@ template {
 
 /*  myown definition
     ======================================================================*/
-    * {
-      box-sizing: border-box;
-    }
-    
-    body,
-    div,
-    ul,
-    li,
-    nav,
-    form,
-    input,
-    header,
-    footer,
-    main,
-    a,
-    p {
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: "Noto Sans TC", sans-serif;
-      text-align: center;
-      min-height: 100vh;
-    }
-    
-    nav,
-    ul {
-      list-style: none;
-    }
-    
-    p,
-    a {
-      text-align: center;
-    }
-    
-    a {
-      text-decoration: none;
-    }
-    
-    input {
-      font-family: inherit;
-      outline: none;
-    }
-    
-    input::placeholder {
-      color: #8b572a;
-      font-size: 20px;
-    }
+* {
+  box-sizing: border-box;
+}
+
+body,
+div,
+ul,
+li,
+nav,
+form,
+input,
+header,
+footer,
+main,
+a,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  text-align: center;
+  min-height: 100vh;
+}
+
+nav,
+ul {
+  list-style: none;
+}
+
+p,
+a {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  font-family: inherit;
+  outline: none;
+}
+
+input::placeholder {
+  color: #8b572a;
+  font-size: 20px;
+}
