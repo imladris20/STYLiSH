@@ -1,6 +1,8 @@
 const search_button = document.getElementById("search-form__submit");
 const search_form = document.getElementById("search-form");
-const header__right_section_wrapper = document.getElementById("header__right-section-wrapper");
+const header__right_section_wrapper = document.getElementById(
+  "header__right-section-wrapper"
+);
 const search_container = document.getElementById("search-container");
 const search_form__input = document.getElementById("search-form__input");
 
@@ -55,8 +57,8 @@ const notFound = () => {
 
   notExistBlock.append(notExistImg);
   main.append(notExistBlock);
-  console.error("There is no result for this url.")
-}
+  console.error("There is no result for this url.");
+};
 
 async function fetchData(url) {
   try {
@@ -69,15 +71,24 @@ async function fetchData(url) {
   }
 }
 
-const fetchProduct = async ({ host, version, endpoints }, currentParamKey, queryValue, pageToFetch) => {
+const fetchProduct = async (
+  { host, version, endpoints },
+  currentParamKey,
+  queryValue,
+  pageToFetch
+) => {
   // displayElement("loading-gif");
   switch (currentParamKey) {
     case "category":
-      return await (fetchData(`${host}/${version}/${endpoints.productList}/${queryValue}?paging=${pageToFetch}`))
+      return await fetchData(
+        `${host}/${version}/${endpoints.productList}/${queryValue}?paging=${pageToFetch}`
+      );
     case "search":
-      return await (fetchData(`${host}/${version}/${endpoints.productSearch}?keyword=${queryValue}&paging=${pageToFetch}`))
+      return await fetchData(
+        `${host}/${version}/${endpoints.productSearch}?keyword=${queryValue}&paging=${pageToFetch}`
+      );
     default:
-      console.error("fetchProduct failed")
+      console.error("fetchProduct failed");
   }
 };
 
@@ -96,8 +107,14 @@ const renderProduct = (apiSourceData) => {
 
   apiSourceData.forEach(({ main_image, colors, title, price }) => {
     const productItem = createClassedElement("div", "product-item column-flex");
-    const productItem_img = createClassedElement("img", "product-item__img full-width");
-    const productItem_colorBox = createClassedElement("ul", "product-item__color-container row-flex flex-x-start");
+    const productItem_img = createClassedElement(
+      "img",
+      "product-item__img full-width"
+    );
+    const productItem_colorBox = createClassedElement(
+      "ul",
+      "product-item__color-container row-flex flex-x-start"
+    );
     const productItem_title = createClassedElement("p", "product-item__title");
     const productItem_price = createClassedElement("p", "product-item__price");
 
@@ -139,13 +156,13 @@ const handleRenderSuccess = (data) => {
   renderProduct(data);
   hideElement("loading-gif");
   hideElement("scroll-loader");
-}
+};
 
 const handleRenderFail = (error) => {
   console.error("Something went wrong", error);
   hideElement("loading-gif");
   hideElement("scroll-loader");
-}
+};
 
 const initialRender = (stylishAPI, mutex) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
@@ -164,12 +181,13 @@ const initialRender = (stylishAPI, mutex) => {
         if (next_paging) {
           mutex.next_paging = next_paging;
         }
-        handleKeywordRender(data, keywordValue)
+        handleKeywordRender(data, keywordValue);
       })
       .catch(handleRenderFail);
-  }
-
-  else if (currentParams.has("category") && categoryTypesList.includes(categoryValue)) {
+  } else if (
+    currentParams.has("category") &&
+    categoryTypesList.includes(categoryValue)
+  ) {
     fetchProduct(stylishAPI, "category", categoryValue, mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
@@ -178,20 +196,18 @@ const initialRender = (stylishAPI, mutex) => {
         handleCategoryRender(data, categoryValue);
       })
       .catch(handleRenderFail);
-  }
-
-  else {
+  } else {
     console.error("There's no valid queries.");
     fetchProduct(stylishAPI, "category", "all", mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
           mutex.next_paging = next_paging;
         }
-        handleRenderSuccess(data)
+        handleRenderSuccess(data);
       })
       .catch(handleRenderFail);
   }
-}
+};
 
 //* Category related */
 const highlightCategoryTagStyle = (categoryToChange) => {
@@ -202,7 +218,7 @@ const highlightCategoryTagStyle = (categoryToChange) => {
     selectedElement.classList.replace("tx-grey82", "tx-white");
     selectedElement.classList.replace("wider-tx-black3a", "wider-tx-brown");
   }
-}
+};
 
 const resetCategoryTagClassList = () => {
   const women = document.getElementById("women");
@@ -223,15 +239,15 @@ const switchCategoryQuery = (categoryValue) => {
   const currentParams = new URLSearchParams(currentUrl.search);
   //  add category key and value into ueries of currentUrl
   hideElement("keyword-not-exist");
-  currentParams.delete('keyword');
-  currentParams.delete('paging');
+  currentParams.delete("keyword");
+  currentParams.delete("paging");
   currentParams.set("category", categoryValue);
   currentUrl.search = currentParams.toString();
   window.history.pushState({}, "", currentUrl.toString());
 };
 
 const handleCategoryRender = (data, categoryValue) => {
-  removeClassedElement("keyword-not-exist")
+  removeClassedElement("keyword-not-exist");
   if (data.length) {
     highlightCategoryTagStyle(categoryValue);
     handleRenderSuccess(data);
@@ -239,7 +255,7 @@ const handleCategoryRender = (data, categoryValue) => {
     console.error("Invalid paging number");
     notFound();
   }
-}
+};
 
 const handleCategoryClicked = (stylishAPI, mutex, event) => {
   const categoryTypesList = ["women", "men", "accessories", "all"];
@@ -255,7 +271,7 @@ const handleCategoryClicked = (stylishAPI, mutex, event) => {
       })
       .catch(handleRenderFail);
   }
-}
+};
 
 //* Searching related */
 const widerEnsure = (mutex, elementsToChange) => {
@@ -267,10 +283,9 @@ const widerEnsure = (mutex, elementsToChange) => {
   } else {
     mutex.isSearchBarShowed = false;
   }
-}
+};
 
 const showInvalidKeyword = (keywordValue) => {
-
   const main = document.querySelector("main");
   const notExistBlock = createClassedElement("div", "keyword-not-exist");
   const notExistText = createClassedElement("h1", "keyword-not-exist__text");
@@ -284,7 +299,7 @@ const showInvalidKeyword = (keywordValue) => {
   notExistText.textContent = `找不到符合「${keywordValue}」的商品`;
   notExistBlock.append(notExistText, notExistImg);
   main.append(notExistBlock);
-  console.error("There is no result for this keyword")
+  console.error("There is no result for this keyword");
 };
 
 const switchSearchBar = (mutex, event, elementsToChange) => {
@@ -302,20 +317,20 @@ const switchSearchBar = (mutex, event, elementsToChange) => {
       elementsToChange[0].submit();
     }
   }
-}
+};
 
 const handleKeywordRender = (data, keywordValue) => {
   if (!data || data.length === 0) {
     hideElement("loading-gif");
-    hideElement("scroll-loader")
-    removeClassedElement("keyword-not-exist")
+    hideElement("scroll-loader");
+    removeClassedElement("keyword-not-exist");
     removeClassedElement("main__product-container");
     showInvalidKeyword(keywordValue);
   } else {
     removeClassedElement("main__product-container");
-    handleRenderSuccess(data)
+    handleRenderSuccess(data);
   }
-}
+};
 
 //* Infinite Scrolling related  */
 
@@ -326,29 +341,48 @@ const fetchNextPaging = async (stylishAPI, next_paging) => {
   const keywordValue = currentParams.get("keyword");
 
   if (currentParams.has("keyword")) {
-    const response = await fetchProduct(stylishAPI, "search", keywordValue, next_paging);
-    return response
-  }
-
-  else if (currentParams.has("category") && categoryTypesList.includes(categoryValue)) {
-    const response = await fetchProduct(stylishAPI, "category", categoryValue, next_paging);
-    return response
-  }
-
-  else {
-    const response = await fetchProduct(stylishAPI, "category", "all", next_paging);
+    const response = await fetchProduct(
+      stylishAPI,
+      "search",
+      keywordValue,
+      next_paging
+    );
+    return response;
+  } else if (
+    currentParams.has("category") &&
+    categoryTypesList.includes(categoryValue)
+  ) {
+    const response = await fetchProduct(
+      stylishAPI,
+      "category",
+      categoryValue,
+      next_paging
+    );
+    return response;
+  } else {
+    const response = await fetchProduct(
+      stylishAPI,
+      "category",
+      "all",
+      next_paging
+    );
     return response;
   }
-}
+};
 
 const renderMoreProducts = ({ data }) => {
-
   const productList = document.querySelector(".product-list");
 
   data.forEach(({ main_image, colors, title, price }) => {
     const productItem = createClassedElement("div", "product-item column-flex");
-    const productItem_img = createClassedElement("img", "product-item__img full-width");
-    const productItem_colorBox = createClassedElement("ul", "product-item__color-container row-flex flex-x-start");
+    const productItem_img = createClassedElement(
+      "img",
+      "product-item__img full-width"
+    );
+    const productItem_colorBox = createClassedElement(
+      "ul",
+      "product-item__color-container row-flex flex-x-start"
+    );
     const productItem_title = createClassedElement("p", "product-item__title");
     const productItem_price = createClassedElement("p", "product-item__price");
 
@@ -380,27 +414,175 @@ const renderMoreProducts = ({ data }) => {
     );
     productList.append(productItem);
   });
-}
+};
 
 const handleScrolling = async (stylishAPI, mutex) => {
   mutex.isScrolled = true;
-  displayInlineBlock('scroll-loader');
-    try {
+  displayInlineBlock("scroll-loader");
+  try {
     const nextPageData = await fetchNextPaging(stylishAPI, mutex.next_paging);
     mutex.currentPage++;
     if (nextPageData.next_paging) {
-      mutex.next_paging = nextPageData.next_paging
+      mutex.next_paging = nextPageData.next_paging;
     } else {
-      mutex.next_paging = 0
+      mutex.next_paging = 0;
     }
     renderMoreProducts(nextPageData);
   } catch (Error) {
     console.error("Handling failed. Message: ", Error);
   } finally {
-    hideElement('scroll-loader');
+    hideElement("scroll-loader");
     mutex.isScrolled = false;
   }
+};
+
+//* Campaigns Carousel related */
+
+const fetchCampaigns = async ({ host, version, endpoints }) => {
+  const data = await fetchData(`${host}/${version}/${endpoints.campaigns}`);
+  return data;
+};
+
+const renderCarousel = ({ data }) => {
+  const carousel = document.querySelector(".carousel");
+
+  data.forEach(({ picture, story }) => {
+    const campaignItem = createClassedElement(
+      "div",
+      "campaignItem fade relative wider-row-flex flex-align-center flex-space-center pointer"
+    );
+    const campaignItem__image = createClassedElement(
+      "img",
+      "campaignItem__image full-width"
+    );
+    const campaignItem__story_container = createClassedElement(
+      "div",
+      "campaignItem__story-container full-width wider-absolute"
+    );
+    const campaignItem__story = createClassedElement(
+      "div",
+      "campaignItem__story absolute text-left tx-black wider-tx-black07"
+    );
+    const campaignItem__story_description = createClassedElement(
+      "p",
+      "campaignItem__story-description text-left margin-block-none"
+    );
+    const campaignItem__story_quote = createClassedElement(
+      "h4",
+      "campaignItem__story-quote wider-tx-size20 text-left margin-block-none"
+    );
+
+    //  make campaignItem redirect to corresponding link after clicked
+    campaignItem.addEventListener("click", () => {
+      window.open(picture, "_blank");
+    });
+
+    //  set Image
+    campaignItem__image.src = picture;
+    campaignItem__image.alt = "campaign item";
+
+    //  set Story
+    story = story.replace(/\r\n/g, "<br />");
+    const lastIndexOfLineBreak = story.lastIndexOf("<br />");
+    if (lastIndexOfLineBreak !== -1) {
+      campaignItem__story_description.innerHTML = `${story.slice(
+        0,
+        lastIndexOfLineBreak
+      )}`;
+      campaignItem__story_quote.textContent = story.slice(
+        lastIndexOfLineBreak + 6
+      );
+    } else {
+      console.error("Campaign Story is not as expected.");
+    }
+
+    campaignItem__story.append(
+      campaignItem__story_description,
+      campaignItem__story_quote
+    );
+    campaignItem__story_container.append(campaignItem__story);
+    campaignItem.append(campaignItem__image, campaignItem__story_container);
+    carousel.append(campaignItem);
+  });
+};
+
+const createDots = ({ data }, mutex) => {
+  const carousel = document.querySelector(".carousel");
+
+  const carousel__dots_container = createClassedElement(
+    "div",
+    "carousel__dots-container row-flex flex-space-between flex-align-center absolute"
+  );
+
+  for (let i = 0; i < data.length; i++) {
+    const carousel__dot_link = createClassedElement(
+      "a",
+      "carousel__dot-link pointer"
+    );
+    const carousel__dot = createClassedElement(
+      "div",
+      "carousel__dot radius-100 bg-white wider-bg-white"
+    );
+
+    carousel__dot_link.append(carousel__dot);
+    carousel__dot_link.addEventListener("click", () => {
+      switchCampaign(i, mutex);
+    });
+    carousel__dots_container.append(carousel__dot_link);
+  }
+
+  carousel.append(carousel__dots_container);
+};
+
+const nextCampaign = (amount, mutex) => {
+  mutex.campaignIndex += amount;
+  showCampaign(mutex.campaignIndex, mutex);
+};
+
+function switchCampaign(number, mutex) {
+  mutex.campaignIndex = number;
+  showCampaign(mutex.campaignIndex, mutex);
 }
+
+const autoSwitch = (mutex) => {
+  nextCampaign(1, mutex);
+};
+
+function startAutoSwitch(mutex) {
+  mutex.autoInterval = setInterval(() => autoSwitch(mutex), 5000);
+}
+
+function stopAutoSwitch(mutex) {
+  clearInterval(mutex.autoInterval);
+}
+
+const showCampaign = (number, mutex) => {
+  let campaigns = document.getElementsByClassName("campaignItem");
+  let dots = document.getElementsByClassName("carousel__dot");
+
+  //  if overflow, reset
+  if (number >= campaigns.length) {
+    mutex.campaignIndex = 0;
+  }
+
+  //  hide all campaigns
+  for (let i = 0; i < campaigns.length; i++) {
+    campaigns[i].classList.remove("wider-row-flex");
+    campaigns[i].classList.add("mobile-hide", "wider-hide");
+  }
+
+  //  set all dots to white
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].classList.remove("bg-brown");
+    dots[i].classList.add("bg-white", "wider-bg-white");
+  }
+
+  //  display only currentindex and color corresponding dot to brown.
+  campaigns[mutex.campaignIndex].classList.remove("wider-hide", "mobile-hide");
+  campaigns[mutex.campaignIndex].classList.add("wider-row-flex");
+  dots[mutex.campaignIndex].classList.remove("bg-white", "wider-bg-white");
+  dots[mutex.campaignIndex].classList.add("bg-brown");
+};
 
 export {
   initialRender,
@@ -409,7 +591,11 @@ export {
   searchElements,
   search_button,
   switchSearchBar,
-  renderMoreProducts,
-  fetchNextPaging,
   handleScrolling,
+  fetchCampaigns,
+  renderCarousel,
+  createDots,
+  showCampaign,
+  startAutoSwitch,
+  stopAutoSwitch,
 };
