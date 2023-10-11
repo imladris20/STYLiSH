@@ -578,10 +578,7 @@ const showCampaign = (number, mutex) => {
   }
 
   //  display only currentindex and color corresponding dot to brown.
-  campaigns[mutex.campaignIndex].classList.remove(
-    "wider-hide",
-    "mobile-hide"
-  );
+  campaigns[mutex.campaignIndex].classList.remove("wider-hide", "mobile-hide");
   campaigns[mutex.campaignIndex].classList.add("wider-row-flex");
   dots[mutex.campaignIndex].classList.remove("bg-white", "wider-bg-white");
   dots[mutex.campaignIndex].classList.add("bg-brown");
