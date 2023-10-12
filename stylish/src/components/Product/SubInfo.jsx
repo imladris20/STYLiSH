@@ -12,7 +12,7 @@ const SubInfoContainer = styled.div`
   @media ${devices.desktopS} {
     margin-top: 40px;
     margin-left: 6px;
-    line-height: 33px;
+    line-height: 30px;
     font-size: 24px;
     height: 240px;
   }

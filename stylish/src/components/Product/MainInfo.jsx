@@ -10,7 +10,7 @@ export const MainInfoContainer = styled.div`
   height: auto;
   align-items: flex-start;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     margin-top: 0px;
     margin-left: 40px;
     margin-right: 0px;
@@ -25,6 +25,12 @@ const Title = styled.h1`
   line-height: 24px;
   letter-spacing: 4px;
   margin: 0;
+
+  @media ${devices.desktopS} {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 6.4px;
+  }
 `;
 
 const ProductId = styled.h3`
@@ -36,8 +42,11 @@ const ProductId = styled.h3`
   word-wrap: break-word;
   margin: 10px 0 0 0;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     margin-top: 16px;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 4px;
   }
 `;
 
@@ -48,19 +57,21 @@ const Price = styled.h2`
   line-height: 24px;
   margin: 20px 0 10px 0;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     margin-top: 40px;
     margin-bottom: 20px;
+    font-size: 30px;
+    line-height: 36px;
   }
 `;
 
 const MainInfoSplit = styled.hr`
-  ${'' /* border-color: #3f3a3a; */}
+  ${"" /* border-color: #3f3a3a; */}
   width: 100%;
   margin: 0;
 
-  @media ${devices.desktopS}{
-    ${'' /* border-color: unset; */}
+  @media ${devices.desktopS} {
+    ${"" /* border-color: unset; */}
   }
 `;
 
