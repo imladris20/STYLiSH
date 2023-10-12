@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { devices } from "../../assets/device";
 const ColorContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -8,6 +8,11 @@ const ColorContainer = styled.div`
   height: 36px;
   gap: 12px;
   margin-bottom: 28px;
+
+  @media ${devices.desktopS}{
+    width: 232px;
+    margin-bottom: 30px;
+  }
 `;
 
 const ColorText = styled.h4`
@@ -18,6 +23,14 @@ const ColorText = styled.h4`
   line-height: 17px;
   letter-spacing: 2.8px;
   display: block;
+  white-space: nowrap;
+  margin: 0;
+
+  @media ${devices.desktopS} {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 4px;
+  }
 `;
 
 const ColorBoxContainer = styled.div`
@@ -26,7 +39,7 @@ const ColorBoxContainer = styled.div`
   align-items: center;
   flex: 1;
   justify-content: space-between;
-  gap: 27px;
+  gap: 32px;
 `;
 
 const ColorInput = styled.input`

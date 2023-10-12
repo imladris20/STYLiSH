@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 
 const SizeContainer = styled.div`
   display: flex;
@@ -8,6 +9,11 @@ const SizeContainer = styled.div`
   height: 36px;
   gap: 6px;
   margin-bottom: 30px;
+
+  @media ${devices.desktopS} {
+    margin-bottom: 22px;
+    width: 240px;
+  }
 `;
 
 const SizeText = styled.h4`
@@ -17,6 +23,14 @@ const SizeText = styled.h4`
   line-height: 17px;
   letter-spacing: 2.8px;
   display: block;
+  white-space: nowrap;
+  margin: 0;
+
+  @media ${devices.desktopS} {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 4px;
+  }
 `;
 
 const SizeBoxContainer = styled.div`
@@ -27,6 +41,10 @@ const SizeBoxContainer = styled.div`
   flex: 1;
   gap: 15px;
   position: relative;
+
+  @media ${devices.desktopS} {
+    gap: 20px;
+  }
 `;
 
 const SizeInput = styled.input`
@@ -36,8 +54,8 @@ const SizeInput = styled.input`
   height: 36px;
   border-radius: 100%;
 
-  &:checked{
-    background-color:black;
+  &:checked {
+    background-color: black;
   }
 `;
 
@@ -48,18 +66,25 @@ export const LabelS = styled.div`
   border-radius: 0;
   justify-content: center;
   position: absolute;
-  left: 12px;
-`
+  left: 13px;
+`;
 
-const LabelM =styled(LabelS)`
+const LabelM = styled(LabelS)`
   left: 65px;
-  color: #3F3A3A;
-`
+  color: #3f3a3a;
 
-const LabelL =styled(LabelS)`
+  @media ${devices.desktopS} {
+    left: 75px;
+  }
+`;
+
+const LabelL = styled(LabelS)`
   left: 121px;
   color: rgba(63, 58, 58, 0.25);
-`
+  @media ${devices.desktopS} {
+    left: 140px;
+  }
+`;
 
 const SizeSelection = () => {
   return (
@@ -67,11 +92,16 @@ const SizeSelection = () => {
       <SizeText>尺寸｜</SizeText>
       <SizeBoxContainer>
         <LabelS>S</LabelS>
-        <SizeInput type="radio" name="size" value="S" bgColor="#3F3A3A"/>
+        <SizeInput type="radio" name="size" value="S" bgColor="#000" />
         <LabelM>M</LabelM>
-        <SizeInput type="radio" name="size" value="M" bgColor="#ECECEC"/>
+        <SizeInput type="radio" name="size" value="M" bgColor="#ECECEC" />
         <LabelL>L</LabelL>
-        <SizeInput type="radio" name="size" value="L" bgColor="rgba(236, 236, 236, 0.25)"/>
+        <SizeInput
+          type="radio"
+          name="size"
+          value="L"
+          bgColor="rgba(236, 236, 236, 0.25)"
+        />
       </SizeBoxContainer>
     </SizeContainer>
   );

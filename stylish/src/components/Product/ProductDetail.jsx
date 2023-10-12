@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 
 const DetailContainer = styled.div`
   margin: 0px 24px 0px 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media ${devices.desktopS}{
+    margin: 0;
+    gap: 30px;
+  }
+  
 `;
 
 const Description = styled.p`
@@ -13,6 +20,11 @@ const Description = styled.p`
   line-height: 25px;
   word-wrap: break-word;
   text-align: justify;
+
+  @media ${devices.desktopS}{
+    font-size: 20px;
+    line-height: 30px;
+  }
 `;
 
 const DetailImage = styled.img`

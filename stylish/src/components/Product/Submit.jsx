@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 
 const SubmitBtn = styled.input`
   background-color: black;
@@ -10,6 +11,13 @@ const SubmitBtn = styled.input`
   font-weight: 400;
   line-height: 30px;
   letter-spacing: 3.2px;
+
+  @media ${devices.desktopS} {
+    font-size: 20px;
+    letter-spacing: 4px;
+    height: 64px;
+    border: 1px #979797 solid;
+  }
 `;
 
 const Submit = () => {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import { devices } from "../../assets/device";
+import { devices } from "../../assets/device";
 
 export const MainInfoContainer = styled.div`
   display: flex;
@@ -9,6 +9,13 @@ export const MainInfoContainer = styled.div`
   margin-right: 24px;
   height: auto;
   align-items: flex-start;
+
+  @media ${devices.desktopS}{
+    margin-top: 0px;
+    margin-left: 40px;
+    margin-right: 0px;
+    width: 360px;
+  }
 `;
 
 const Title = styled.h1`
@@ -28,6 +35,10 @@ const ProductId = styled.h3`
   letter-spacing: 3.2px;
   word-wrap: break-word;
   margin: 10px 0 0 0;
+
+  @media ${devices.desktopS}{
+    margin-top: 16px;
+  }
 `;
 
 const Price = styled.h2`
@@ -36,12 +47,21 @@ const Price = styled.h2`
   font-weight: 400;
   line-height: 24px;
   margin: 20px 0 10px 0;
+
+  @media ${devices.desktopS}{
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
 `;
 
 const MainInfoSplit = styled.hr`
-  color: #3f3a3a;
+  ${'' /* border-color: #3f3a3a; */}
   width: 100%;
   margin: 0;
+
+  @media ${devices.desktopS}{
+    ${'' /* border-color: unset; */}
+  }
 `;
 
 const MainInfo = () => {
