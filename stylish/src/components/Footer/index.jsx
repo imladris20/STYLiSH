@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { devices } from "../assets/device";
-import FooterLinkList from "./Footer/FooterLinkList";
-import FooterSocialMedia from "./Footer/FooterSocialMedia";
+import { devices } from "../../assets/device";
+import FooterLinkList from "./FooterLinkList";
+import FooterSocialMedia from "./FooterSocialMedia";
 
 const StylishFooter = styled.footer`
   width: 100%;

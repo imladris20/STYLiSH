@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { devices } from "../assets/device";
-import MainInfo, { MainInfoContainer } from "./Product/MainInfo";
-import Color from "./Product/ColorSelection";
-import Size from "./Product/SizeSelection";
-import Quantity from "./Product/QuantitySelection";
-import Submit from "./Product/Submit";
-import SubInfo from "./Product/SubInfo";
-import InfoDevider from "./Product/MoreInfo";
-import ProductDetail from "./Product/ProductDetail"
+import { devices } from "../../assets/device";
+import MainInfo, { MainInfoContainer } from "./MainInfo";
+import Color from "./ColorSelection";
+import Size from "./SizeSelection";
+import Quantity from "./QuantitySelection";
+import Submit from "./Submit";
+import SubInfo from "./SubInfo";
+import InfoDevider from "./MoreInfo";
+import ProductDetail from "./ProductDetail"
 
 const MainContainer = styled.div`
   display: flex;
