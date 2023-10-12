@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { devices } from "../assets/device";
 import HeaderLeftSectionWrapper from "./Header/HeaderLeftSectionWrapper";
 import MobileBottomNav from "./Header/MobileBottomNav";
-import HeaderRightSectionWrapper from "./Header/HeaderRightSectionWrapper.jsx";
+import HeaderRightSectionWrapper from "./Header/HeaderRightSectionWrapper";
 
 const StylishHeader = styled.header`
   width: 100%;

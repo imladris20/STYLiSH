@@ -43,7 +43,7 @@ const FooterSocialMedia = () => {
     return (
       <React.Fragment key={index}>
         <FooterSocialMediaLink>
-          <FooterSocialMediaImage src={`/${link}.png`} alt={`${link}`} />
+          <FooterSocialMediaImage src={`/${link}.png`} alt={link} />
         </FooterSocialMediaLink>
       </React.Fragment>
     );

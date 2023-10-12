@@ -105,18 +105,15 @@ const WiderProfileLinkImage = styled(ProfileLinkImage)`
 
 const HeaderRightSectionWrapper = () => {
   return (
-    <Top id="header__right-section-wrapper">
+    <Top>
       <SearchContainer>
-        <SearchForm method="get" id="search-form" className="search-form">
+        <SearchForm method="get">
           <SearchFormInput
             type="text"
-            id="searchFormInput"
             name="keyword"
           />
           <SearchFormSubmit
-            id="searchFormSubmit"
             type="submit"
-            className="searchFormSubmit"
             value=""
           />
         </SearchForm>
