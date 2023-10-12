@@ -1,14 +1,18 @@
 import styled from "styled-components";
 // import { devices } from "../assets/device";
-import MainInfo from "./Product/MainInfo";
-import { MainInfoContainer } from "./Product/MainInfo.jsx";
+import MainInfo, { MainInfoContainer } from "./Product/MainInfo";
 import Color from "./Product/ColorSelection";
 import Size from "./Product/SizeSelection";
+import Quantity from "./Product/QuantitySelection";
+import Submit from "./Product/Submit";
+import SubInfo from "./Product/SubInfo";
+import InfoDevider from "./Product/MoreInfo";
+import ProductDetail from "./Product/ProductDetail"
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  margin-bottom: 32px;
 `;
 
 const MainImage = styled.img`
@@ -17,16 +21,16 @@ const MainImage = styled.img`
 `;
 
 const SelectionForm = styled.form`
-  height: 286px;
+  height: auto;
   width: 100%;
-  border: 3px solid lightgreen;
+  ${"" /* border: 3px solid lightgreen; */}
   margin: 30px 0 0 0;
   text-align: left;
 `;
 
 const Product = () => {
   return (
-    <>0
+    <>
       <main>
         <MainContainer>
           <div>
@@ -37,23 +41,14 @@ const Product = () => {
             <SelectionForm action="/" method="post">
               <Color />
               <Size />
-              {/* <label htmlFor="quantity">quantity：</label>
-              <input
-                type="number"
-                name="quantity"
-                id="quantity"
-                value="1"
-                min="1"
-              />
-              <input type="submit" value="add cart" /> */}
+              <Quantity />
+              <Submit />
             </SelectionForm>
+            <SubInfo />
           </MainInfoContainer>
+          <InfoDevider />
+          <ProductDetail />
         </MainContainer>
-        <h1>我</h1>
-        <h1>好</h1>
-        <h1>想</h1>
-        <h1>睡</h1>
-        <h1>覺</h1>
       </main>
     </>
   );

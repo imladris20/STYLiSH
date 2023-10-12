@@ -4,10 +4,10 @@ import styled from "styled-components";
 export const MainInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 17px;
   margin-left: 24px;
   margin-right: 24px;
-  border: 2px solid red;
-  height: 480px;
+  height: auto;
   align-items: flex-start;
 `;
 

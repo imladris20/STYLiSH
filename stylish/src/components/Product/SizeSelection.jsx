@@ -67,7 +67,7 @@ const SizeSelection = () => {
       <SizeText>尺寸｜</SizeText>
       <SizeBoxContainer>
         <LabelS>S</LabelS>
-        <SizeInput type="radio" name="size" value="S" bgColor="#ECECEC"/>
+        <SizeInput type="radio" name="size" value="S" bgColor="#3F3A3A"/>
         <LabelM>M</LabelM>
         <SizeInput type="radio" name="size" value="M" bgColor="#ECECEC"/>
         <LabelL>L</LabelL>
