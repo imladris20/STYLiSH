@@ -60,7 +60,7 @@ const QuantityInput = styled.input`
 
   @media ${devices.desktopS} {
     font-size: 16px;
-    width: 16px;
+    width: 32px;
     line-height: 32px;
 
     &::placeholder {
