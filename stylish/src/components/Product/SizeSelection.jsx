@@ -57,7 +57,7 @@ const SizeBox = styled.label`
   border-radius: 100%;
 `;
 
-export const SizeLabel = styled.div`
+const SizeLabel = styled.div`
   font-size: 20px;
   font-weight: 400;
   line-height: 36px;
