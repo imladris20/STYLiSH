@@ -64,7 +64,7 @@ const SizeInput = styled.input`
   grid-column-start: 1;
   grid-row-start: 1;
   cursor: pointer;
-  background-color: ${(color) => color};
+  background-color: ${({ color }) => color};
 
   &:checked {
     background-color: black;

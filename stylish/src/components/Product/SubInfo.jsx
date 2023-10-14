@@ -13,7 +13,7 @@ const SubInfoContainer = styled.div`
     margin-top: 40px;
     margin-left: 6px;
     line-height: 30px;
-    font-size: 24px;
+    font-size: 20px;
     height: 240px;
   }
 `;
