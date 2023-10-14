@@ -66,7 +66,7 @@ const SizeLabel = styled.div`
   grid-column-start: 1;
   grid-row-start: 1;
   cursor: pointer;
-  z-index: 999;
+  z-index: 99;
 `;
 
 const SizeInput = styled.input`
