@@ -66,13 +66,8 @@ const Price = styled.h2`
 `;
 
 const MainInfoSplit = styled.hr`
-  ${"" /* border-color: #3f3a3a; */}
   width: 100%;
   margin: 0;
-
-  @media ${devices.desktopS} {
-    ${"" /* border-color: unset; */}
-  }
 `;
 
 const MainInfo = () => {

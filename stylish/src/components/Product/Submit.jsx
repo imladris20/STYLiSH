@@ -11,6 +11,7 @@ const SubmitBtn = styled.input`
   font-weight: 400;
   line-height: 30px;
   letter-spacing: 3.2px;
+  cursor: pointer;
 
   @media ${devices.desktopS} {
     font-size: 20px;
@@ -21,7 +22,7 @@ const SubmitBtn = styled.input`
 `;
 
 const Submit = () => {
-  return <SubmitBtn type="submit" value="加入購物車" />;
+  return <SubmitBtn type="button" value="加入購物車" />;
 };
 
 export default Submit;

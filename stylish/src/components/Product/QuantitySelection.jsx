@@ -34,6 +34,7 @@ const QuantityText = styled.h4`
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 4px;
+    padding-right: 24px;
   }
 `;
 
@@ -43,10 +44,14 @@ const QuantityInput = styled.input`
   text-align: center;
   color: #8b572a;
   font-size: 20px;
-  width: 20px;
+  width: 40px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
+
+  &::placeholder {
+    font-size: 20px;
+  }
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -57,7 +62,10 @@ const QuantityInput = styled.input`
     font-size: 16px;
     width: 16px;
     line-height: 32px;
-    text-align: start;
+
+    &::placeholder {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -76,11 +84,8 @@ const QuatityBtn = styled.p`
 `;
 
 const WiderTopContainer = styled.div`
-  ${'' /* visibility: Hidden; */}
-
   @media ${devices.desktopS} {
     display: flex;
-    gap: 8px;
     flex-direction: row;
     visibility: unset;
     align-items: center;
@@ -88,8 +93,7 @@ const WiderTopContainer = styled.div`
     width: 252px;
     margin-bottom: 26px;
   }
-
-`
+`;
 
 const Quantity = () => {
   return (

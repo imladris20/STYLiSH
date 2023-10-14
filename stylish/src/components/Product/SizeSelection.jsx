@@ -7,7 +7,6 @@ const SizeContainer = styled.div`
   align-items: center;
   width: 200px;
   height: 36px;
-  gap: 6px;
   margin-bottom: 30px;
 
   @media ${devices.desktopS} {
@@ -25,34 +24,47 @@ const SizeText = styled.h4`
   display: block;
   white-space: nowrap;
   margin: 0;
+  padding-right: 12px;
 
   @media ${devices.desktopS} {
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 4px;
+    padding-right: 22px;
   }
 `;
 
-const SizeBoxContainer = styled.div`
+const SizeBoxesContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  gap: 15px;
-  position: relative;
 
   @media ${devices.desktopS} {
     gap: 20px;
   }
 `;
 
+const SizeBox = styled.label`
+  height: 36px;
+  width: 36px;
+  color: #3f3a3a;
+  background: #ececec;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+`;
+
 const SizeInput = styled.input`
   appearance: none;
-  background-color: ${(props) => props.bgColor};
   width: 36px;
   height: 36px;
   border-radius: 100%;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  cursor: pointer;
+  background-color: ${(color) => color};
 
   &:checked {
     background-color: black;
@@ -60,49 +72,48 @@ const SizeInput = styled.input`
 `;
 
 export const LabelS = styled.div`
-  display: flex;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 36px;
   color: white;
-  flex-direction: row;
   border-radius: 0;
-  justify-content: center;
-  position: absolute;
-  left: 13px;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  cursor: pointer;
+  z-index: 999;
 `;
 
 const LabelM = styled(LabelS)`
-  left: 65px;
   color: #3f3a3a;
-
-  @media ${devices.desktopS} {
-    left: 75px;
-  }
 `;
 
 const LabelL = styled(LabelS)`
-  left: 121px;
   color: rgba(63, 58, 58, 0.25);
-  @media ${devices.desktopS} {
-    left: 140px;
-  }
 `;
 
 const SizeSelection = () => {
   return (
     <SizeContainer>
       <SizeText>尺寸｜</SizeText>
-      <SizeBoxContainer>
-        <LabelS>S</LabelS>
-        <SizeInput type="radio" name="size" value="S" bgColor="#000" />
-        <LabelM>M</LabelM>
-        <SizeInput type="radio" name="size" value="M" bgColor="#ECECEC" />
-        <LabelL>L</LabelL>
-        <SizeInput
-          type="radio"
-          name="size"
-          value="L"
-          bgColor="rgba(236, 236, 236, 0.25)"
-        />
-      </SizeBoxContainer>
+      <SizeBoxesContainer>
+        <SizeBox>
+          <LabelS>S</LabelS>
+          <SizeInput type="radio" name="size" value="S" color="#000" />
+        </SizeBox>
+        <SizeBox>
+          <LabelM>M</LabelM>
+          <SizeInput type="radio" name="size" value="M" color="#ECECEC" />
+        </SizeBox>
+        <SizeBox>
+          <LabelL>L</LabelL>
+          <SizeInput
+            type="radio"
+            name="size"
+            value="L"
+            color="rgba(236, 236, 236, 0.25)"
+          />
+        </SizeBox>
+      </SizeBoxesContainer>
     </SizeContainer>
   );
 };

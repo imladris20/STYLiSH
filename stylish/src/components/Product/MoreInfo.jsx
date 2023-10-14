@@ -10,7 +10,7 @@ const MoreInfoContainer = styled.div`
   flex-wrap: nowrap;
   justify-content: flex-start;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     margin: 50.33px 0 28px 0;
   }
 `;
@@ -24,20 +24,15 @@ const MoreInfoText = styled.span`
   margin: 0 35px 0 0;
   white-space: nowrap;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     font-size: 20px;
     letter-spacing: 3.2px;
   }
 `;
 
 const MoreInfoSplit = styled.hr`
-  ${'' /* border-color: #3f3a3a; */}
   width: 100%;
   margin: 0;
-  
-  @media ${devices.desktopS}{
-    ${'' /* border-color: unset; */}
-  }
 `;
 
 const MoreInfo = () => {

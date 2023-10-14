@@ -6,10 +6,9 @@ const ColorContainer = styled.div`
   align-items: center;
   width: 194px;
   height: 36px;
-  gap: 12px;
   margin-bottom: 28px;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     width: 232px;
     margin-bottom: 30px;
   }
@@ -22,6 +21,7 @@ const ColorText = styled.h4`
   font-weight: 400;
   line-height: 17px;
   letter-spacing: 2.8px;
+  padding-right: 18px;
   display: block;
   white-space: nowrap;
   margin: 0;
@@ -30,6 +30,7 @@ const ColorText = styled.h4`
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 4px;
+    padding-right: 28px;
   }
 `;
 
@@ -38,16 +39,21 @@ const ColorBoxContainer = styled.div`
   flex-direction: row;
   align-items: center;
   flex: 1;
-  justify-content: space-between;
-  gap: 32px;
+  justify-content: flex-start;
+  gap: 27px;
+
+  @media ${devices.desktopS} {
+    gap: 32px;
+  }
 `;
 
 const ColorInput = styled.input`
   appearance: none;
-  background-color: ${(props) => props.bgColor};
+  background-color: ${({ color }) => color};
   border: 1px solid #d3d3d3;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 
   &:checked {
     outline: 1px solid #979797;
@@ -60,9 +66,9 @@ const ColorSelection = () => {
     <ColorContainer>
       <ColorText>顏色｜</ColorText>
       <ColorBoxContainer>
-        <ColorInput type="radio" name="color" bgColor="#fff" />
-        <ColorInput type="radio" name="color" bgColor="#dfb" />
-        <ColorInput type="radio" name="color" bgColor="#ccc" />
+        <ColorInput type="radio" name="color" color="#fff" />
+        <ColorInput type="radio" name="color" color="#dfb" />
+        <ColorInput type="radio" name="color" color="#ccc" />
       </ColorBoxContainer>
     </ColorContainer>
   );
