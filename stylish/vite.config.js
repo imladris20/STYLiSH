@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { resolve } from "node:path";
 import fs from "fs";
 import path from "path";
 
@@ -21,12 +20,6 @@ export default defineConfig({
       },
     },
   ],
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
-      "#root": resolve(__dirname),
-    },
-  },
   server: {
     open: "/index.html",
   },

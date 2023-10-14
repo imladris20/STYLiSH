@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import React from "react";
 
 const SubInfoContainer = styled.div`
   color: #3f3a3a;
@@ -18,22 +19,30 @@ const SubInfoContainer = styled.div`
   }
 `;
 
-const SubInfo = () => {
+const SubInfo = ({ note, texture, description, wash, place }) => {
+  const split = description.split(/\r\n/);
+
+  const newDescription = split.map((element, index) => {
+    return (
+      <React.Fragment key={index}>
+        {element}
+        <br />
+      </React.Fragment>
+    );
+  });
+
   return (
     <SubInfoContainer>
-      實品顏色依單品照為主
+      {note}
       <br />
       <br />
-      棉 100%
+      {texture}
       <br />
-      厚薄：薄
+      {newDescription}
       <br />
-      彈性：無
+      清洗：{wash}
       <br />
-      <br />
-      清洗：手洗，溫水
-      <br />
-      產地：中國
+      產地：{place}
     </SubInfoContainer>
   );
 };
