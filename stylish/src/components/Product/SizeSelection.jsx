@@ -61,7 +61,7 @@ const SizeLabel = styled.div`
   font-size: 20px;
   font-weight: 400;
   line-height: 36px;
-  color: ${({ isselected }) => (isselected ? "white" : "#3f3a3a")};
+  color: ${({ $isSelected }) => ($isSelected ? "white" : "#3f3a3a")};
   border-radius: 0;
   grid-column-start: 1;
   grid-row-start: 1;
@@ -93,7 +93,7 @@ const SizeSelection = ({ sizes }) => {
   const arr = sizes.map((element, index) => {
     return (
       <SizeBox key={index}>
-        <SizeLabel isselected={index === isSelected}>{element}</SizeLabel>
+        <SizeLabel $isSelected={index === isSelected}>{element}</SizeLabel>
         <SizeInput
           type="radio"
           name="size"

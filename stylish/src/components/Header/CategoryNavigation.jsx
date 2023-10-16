@@ -67,7 +67,7 @@ const CategoryNavigation = () => {
       <React.Fragment key={index}>
         <CategoryNavListItem>
           <CategoryNavListItemLink
-            id={`${item}`}
+            id={item}
             href={`../index.html?category=${item}`}
           >
             {zhCategory[index]}

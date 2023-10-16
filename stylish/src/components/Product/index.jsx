@@ -51,8 +51,7 @@ const WiderTopContainer = styled.div`
 `;
 
 const Product = () => {
-  // const [isFetched, setIsFetched] = useState(false);
-  let { id } = useParams();
+  const { id } = useParams();
 
   const redirect = useNavigate();
   const [product, setProduct] = useState({});

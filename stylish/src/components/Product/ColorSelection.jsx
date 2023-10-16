@@ -62,7 +62,7 @@ const ColorInput = styled.input`
 `;
 
 const ColorSelection = ({ colors }) => {
-  let arr = colors.map((element) => {
+  const arr = colors.map((element) => {
     return (
       <ColorInput
         key={element.code}
@@ -72,8 +72,6 @@ const ColorSelection = ({ colors }) => {
       />
     );
   });
-
-  // (arr);
 
   return (
     <ColorContainer>
