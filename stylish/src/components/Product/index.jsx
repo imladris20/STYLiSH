@@ -101,9 +101,13 @@ const Product = () => {
     setMaxQuantity(finalSelection[0].stock);
   };
 
-  console.log("Available Size: ", availableSize);
+  const [amountToSubmit, setAmountToSubmit] = useState(0);
 
-  console.log("Max Quantity of selected color and size: ", maxQuantity);
+  const handleAmountToSubmitChange = (number) => {
+    setAmountToSubmit(number);
+  };
+
+  console.log("Amount about to Submit: ", amountToSubmit);
 
   return (
     <>
@@ -132,8 +136,11 @@ const Product = () => {
                     availableSize={availableSize}
                     onSizeChange={handleSizeChange}
                   />
-                  <Quantity maxQuantity={maxQuantity} />
-                  <Submit />
+                  <Quantity
+                    maxQuantity={maxQuantity}
+                    onAmountChange={handleAmountToSubmitChange}
+                  />
+                  <Submit amountToSubmit={amountToSubmit} />
                 </SelectionForm>
                 <SubInfo
                   note={product.note}

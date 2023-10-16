@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import { useEffect, useContext } from "react";
+import UserContext from "../../context/UserContext";
 import {
   IconLink,
   CartLinkImage,
@@ -104,23 +106,18 @@ const WiderProfileLinkImage = styled(ProfileLinkImage)`
 `;
 
 const HeaderRightSectionWrapper = () => {
+  const { cartCount, actions } = useContext(UserContext);
   return (
     <Top>
       <SearchContainer>
         <SearchForm method="get">
-          <SearchFormInput
-            type="text"
-            name="keyword"
-          />
-          <SearchFormSubmit
-            type="submit"
-            value=""
-          />
+          <SearchFormInput type="text" name="keyword" />
+          <SearchFormSubmit type="submit" value="" />
         </SearchForm>
       </SearchContainer>
       <WiderCartLink>
         <WiderCartLinkImage />
-        <CartLinkCounter>1</CartLinkCounter>
+        <CartLinkCounter>{cartCount}</CartLinkCounter>
       </WiderCartLink>
       <WiderCartLink>
         <WiderProfileLinkImage />

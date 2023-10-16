@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { devices } from "../../assets/device";
+import UserContext from "../../context/UserContext";
 
 const SubmitBtn = styled.input`
   background-color: black;
@@ -21,8 +23,24 @@ const SubmitBtn = styled.input`
   }
 `;
 
-const Submit = () => {
-  return <SubmitBtn type="button" value="加入購物車" />;
+const Submit = ({ amountToSubmit }) => {
+  const { cartCount, actions } = useContext(UserContext);
+
+  function addCartCounter(number) {
+    const currentCartCounter = localStorage.getItem("cartCount") || 0;
+
+    const newCount = parseInt(currentCartCounter, 10) + number;
+
+    localStorage.setItem("cartCount", newCount);
+
+    actions.setCartCount(newCount);
+  }
+
+  const handleClick = () => {
+    addCartCounter(amountToSubmit);
+  };
+
+  return <SubmitBtn type="button" value="加入購物車" onClick={handleClick} />;
 };
 
 export default Submit;

@@ -96,11 +96,11 @@ const WiderTopContainer = styled.div`
   }
 `;
 
-const Quantity = ({ maxQuantity }) => {
-  const [amount, setAmount] = useState(1);
+const Quantity = ({ maxQuantity, onAmountChange }) => {
+  const [amount, setAmount] = useState(0);
 
   useEffect(() => {
-    setAmount(1);
+    setAmount(0);
   }, [maxQuantity]);
 
   const checkInput = (event) => {
@@ -112,10 +112,9 @@ const Quantity = ({ maxQuantity }) => {
       );
     }
 
-    console.log("range: ", event.target.min, event.target.max);
-    console.log("checking finish");
-
     setAmount(event.target.value);
+
+    onAmountChange(event.target.value);
   };
 
   return (
@@ -126,6 +125,7 @@ const Quantity = ({ maxQuantity }) => {
           onClick={() => {
             if (amount > 0) {
               setAmount(Number(amount) - 1);
+              onAmountChange(Number(amount) - 1);
             }
           }}
         >
@@ -143,6 +143,7 @@ const Quantity = ({ maxQuantity }) => {
           onClick={() => {
             if (amount < maxQuantity) {
               setAmount(Number(amount) + 1);
+              onAmountChange(Number(amount) + 1);
             }
           }}
         >
