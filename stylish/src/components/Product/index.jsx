@@ -1,5 +1,11 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+//  Components
 import { devices } from "../../assets/device";
+import Loading from "../Loading";
 import MainInfo, { MainInfoContainer } from "./MainInfo";
 import Color from "./ColorSelection";
 import Size from "./SizeSelection";
@@ -7,14 +13,14 @@ import Quantity from "./QuantitySelection";
 import Submit from "./Submit";
 import SubInfo from "./SubInfo";
 import InfoDevider from "./MoreInfo";
-import ProductDetail from "./ProductDetail"
+import ProductDetail from "./ProductDetail";
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 32px;
 
-  @media ${devices.desktopS}{
+  @media ${devices.desktopS} {
     margin: 65px auto 49px auto;
     max-width: 960px;
   }
@@ -45,28 +51,71 @@ const WiderTopContainer = styled.div`
 `;
 
 const Product = () => {
+  const { id } = useParams();
+
+  const redirect = useNavigate();
+  const [product, setProduct] = useState({});
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getProduct = async (id) => {
+      try {
+        setLoading(true);
+        const data = await axios.get(
+          `https://api.appworks-school.tw/api/1.0/products/details?id=${id}`
+        );
+        const product = await data.data.data;
+        if (!product) {
+          throw "Invalid ID";
+        }
+        setProduct(product);
+        setLoading(false);
+      } catch (error) {
+        console.error(new Error(error));
+        return redirect("/product/invalidid");
+      }
+    };
+
+    getProduct(id);
+  }, [id]);
+
   return (
     <>
       <main>
-        <MainContainer>
-          <WiderTopContainer>
-            <div>
-              <MainImage src="/product-placeholder.jpeg" />
-            </div>
-            <MainInfoContainer>
-              <MainInfo />
-              <SelectionForm action="/" method="post">
-                <Color />
-                <Size />
-                <Quantity />
-                <Submit />
-              </SelectionForm>
-              <SubInfo />
-            </MainInfoContainer>
-          </WiderTopContainer>
-          <InfoDevider />
-          <ProductDetail />
-        </MainContainer>
+        {loading ? (
+          <Loading />
+        ) : (
+          <MainContainer>
+            <WiderTopContainer>
+              <div>
+                <MainImage src={product.main_image} />
+              </div>
+              <MainInfoContainer>
+                <MainInfo
+                  title={product.title}
+                  id={product.id}
+                  price={product.price}
+                />
+                <SelectionForm action="/" method="post">
+                  <Color colors={product.colors} />
+                  <Size sizes={product.sizes} />
+                  <Quantity />
+                  <Submit />
+                </SelectionForm>
+                <SubInfo
+                  note={product.note}
+                  texture={product.texture}
+                  description={product.description}
+                  wash={product.wash}
+                  place={product.place}
+                />
+              </MainInfoContainer>
+            </WiderTopContainer>
+            <InfoDevider />
+            <ProductDetail story={product.story} images={product.images} />
+          </MainContainer>
+        )}
       </main>
     </>
   );

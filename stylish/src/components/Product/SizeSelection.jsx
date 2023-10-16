@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import { useState } from "react";
 
 const SizeContainer = styled.div`
   display: flex;
@@ -38,8 +39,8 @@ const SizeBoxesContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   flex: 1;
+  gap: 15px;
 
   @media ${devices.desktopS} {
     gap: 20px;
@@ -56,6 +57,18 @@ const SizeBox = styled.label`
   border-radius: 100%;
 `;
 
+const SizeLabel = styled.div`
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 36px;
+  color: ${({ $isSelected }) => ($isSelected ? "white" : "#3f3a3a")};
+  border-radius: 0;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  cursor: pointer;
+  z-index: 99;
+`;
+
 const SizeInput = styled.input`
   appearance: none;
   width: 36px;
@@ -64,56 +77,36 @@ const SizeInput = styled.input`
   grid-column-start: 1;
   grid-row-start: 1;
   cursor: pointer;
-  background-color: ${({ color }) => color};
 
   &:checked {
     background-color: black;
   }
 `;
 
-export const LabelS = styled.div`
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 36px;
-  color: white;
-  border-radius: 0;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  cursor: pointer;
-  z-index: 999;
-`;
+const SizeSelection = ({ sizes }) => {
+  const [isSelected, setSelected] = useState(null);
 
-const LabelM = styled(LabelS)`
-  color: #3f3a3a;
-`;
+  const clickHandler = (index) => {
+    setSelected(index);
+  };
 
-const LabelL = styled(LabelS)`
-  color: rgba(63, 58, 58, 0.25);
-`;
+  const arr = sizes.map((element, index) => {
+    return (
+      <SizeBox key={index}>
+        <SizeLabel $isSelected={index === isSelected}>{element}</SizeLabel>
+        <SizeInput
+          type="radio"
+          name="size"
+          onClick={() => clickHandler(index)}
+        />
+      </SizeBox>
+    );
+  });
 
-const SizeSelection = () => {
   return (
     <SizeContainer>
       <SizeText>尺寸｜</SizeText>
-      <SizeBoxesContainer>
-        <SizeBox>
-          <LabelS>S</LabelS>
-          <SizeInput type="radio" name="size" value="S" color="#000" />
-        </SizeBox>
-        <SizeBox>
-          <LabelM>M</LabelM>
-          <SizeInput type="radio" name="size" value="M" color="#ECECEC" />
-        </SizeBox>
-        <SizeBox>
-          <LabelL>L</LabelL>
-          <SizeInput
-            type="radio"
-            name="size"
-            value="L"
-            color="rgba(236, 236, 236, 0.25)"
-          />
-        </SizeBox>
-      </SizeBoxesContainer>
+      <SizeBoxesContainer>{arr}</SizeBoxesContainer>
     </SizeContainer>
   );
 };

@@ -70,12 +70,12 @@ const MainInfoSplit = styled.hr`
   margin: 0;
 `;
 
-const MainInfo = () => {
+const MainInfo = ({ title, id, price }) => {
   return (
     <>
-      <Title>前開衩扭結洋裝</Title>
-      <ProductId>201807201824</ProductId>
-      <Price>TWD.799</Price>
+      <Title>{title}</Title>
+      <ProductId>{id}</ProductId>
+      <Price>TWD.{price}</Price>
       <MainInfoSplit />
     </>
   );

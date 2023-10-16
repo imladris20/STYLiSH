@@ -32,7 +32,7 @@ const MainLogoImage = styled.img`
 const HeaderLeftSectionWrapper = () => {
   return (
     <Top>
-      <MainLogo>
+      <MainLogo href="../index.html?category=all">
         <MainLogoImage src="/logo.png" alt="stylish" />
       </MainLogo>
       <CategoryNavigation />

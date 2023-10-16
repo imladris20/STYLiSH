@@ -61,15 +61,22 @@ const ColorInput = styled.input`
   }
 `;
 
-const ColorSelection = () => {
+const ColorSelection = ({ colors }) => {
+  const arr = colors.map((element) => {
+    return (
+      <ColorInput
+        key={element.code}
+        type="radio"
+        name="color"
+        color={`#${element.code}`}
+      />
+    );
+  });
+
   return (
     <ColorContainer>
       <ColorText>顏色｜</ColorText>
-      <ColorBoxContainer>
-        <ColorInput type="radio" name="color" color="#fff" />
-        <ColorInput type="radio" name="color" color="#dfb" />
-        <ColorInput type="radio" name="color" color="#ccc" />
-      </ColorBoxContainer>
+      <ColorBoxContainer>{arr}</ColorBoxContainer>
     </ColorContainer>
   );
 };

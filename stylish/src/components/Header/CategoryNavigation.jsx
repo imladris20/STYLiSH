@@ -59,28 +59,30 @@ const CategoryNavListDevider = styled.li`
 `;
 
 const CategoryNavigation = () => {
-
   const category = ["women", "men", "accessories"];
   const zhCategory = ["女裝", "男裝", "配件"];
 
-  const arr = category.map( (item, index) => {
+  const arr = category.map((item, index) => {
     return (
       <React.Fragment key={index}>
         <CategoryNavListItem>
-          <CategoryNavListItemLink id={`${item}`}>
+          <CategoryNavListItemLink
+            id={item}
+            href={`../index.html?category=${item}`}
+          >
             {zhCategory[index]}
           </CategoryNavListItemLink>
         </CategoryNavListItem>
-        {index !== 2 ? <CategoryNavListDevider>|</CategoryNavListDevider> : null}
+        {index !== 2 ? (
+          <CategoryNavListDevider>|</CategoryNavListDevider>
+        ) : null}
       </React.Fragment>
-    )
-  })
+    );
+  });
 
   return (
     <Top>
-      <CategoryNavList>
-        {arr}
-      </CategoryNavList>
+      <CategoryNavList>{arr}</CategoryNavList>
     </Top>
   );
 };

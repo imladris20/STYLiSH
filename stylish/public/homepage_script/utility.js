@@ -105,18 +105,27 @@ const renderProduct = (apiSourceData) => {
   );
   const productGrid = createClassedElement("div", "product-list grid");
 
-  apiSourceData.forEach(({ main_image, colors, title, price }) => {
-    const productItem = createClassedElement("div", "product-item column-flex");
+  apiSourceData.forEach(({ id, main_image, colors, title, price }) => {
+    const productItem = createClassedElement(
+      "div",
+      "product-item column-flex pointer"
+    );
     const productItem_img = createClassedElement(
       "img",
-      "product-item__img full-width"
+      "product-item__img full-width pointer"
     );
     const productItem_colorBox = createClassedElement(
       "ul",
-      "product-item__color-container row-flex flex-x-start"
+      "product-item__color-container row-flex flex-x-start pointer"
     );
-    const productItem_title = createClassedElement("p", "product-item__title");
-    const productItem_price = createClassedElement("p", "product-item__price");
+    const productItem_title = createClassedElement(
+      "p",
+      "product-item__title pointer"
+    );
+    const productItem_price = createClassedElement(
+      "p",
+      "product-item__price pointer"
+    );
 
     //  Set image
     productItem_img.src = main_image;
@@ -144,6 +153,11 @@ const renderProduct = (apiSourceData) => {
       productItem_title,
       productItem_price
     );
+
+    productItem.addEventListener("click", () => {
+      window.open(`./product/${id}`, "_self");
+    });
+
     productGrid.append(productItem);
   });
 
@@ -373,18 +387,27 @@ const fetchNextPaging = async (stylishAPI, next_paging) => {
 const renderMoreProducts = ({ data }) => {
   const productList = document.querySelector(".product-list");
 
-  data.forEach(({ main_image, colors, title, price }) => {
-    const productItem = createClassedElement("div", "product-item column-flex");
+  data.forEach(({ id, main_image, colors, title, price }) => {
+    const productItem = createClassedElement(
+      "div",
+      "product-item column-flex pointer"
+    );
     const productItem_img = createClassedElement(
       "img",
-      "product-item__img full-width"
+      "product-item__img full-width pointer"
     );
     const productItem_colorBox = createClassedElement(
       "ul",
-      "product-item__color-container row-flex flex-x-start"
+      "product-item__color-container row-flex flex-x-start pointer"
     );
-    const productItem_title = createClassedElement("p", "product-item__title");
-    const productItem_price = createClassedElement("p", "product-item__price");
+    const productItem_title = createClassedElement(
+      "p",
+      "product-item__title pointer"
+    );
+    const productItem_price = createClassedElement(
+      "p",
+      "product-item__price pointer"
+    );
 
     //  Set image
     productItem_img.src = main_image;
@@ -412,6 +435,11 @@ const renderMoreProducts = ({ data }) => {
       productItem_title,
       productItem_price
     );
+
+    productItem.addEventListener("click", () => {
+      window.open(`./product/${id}`, "_self");
+    });
+
     productList.append(productItem);
   });
 };
@@ -446,7 +474,7 @@ const fetchCampaigns = async ({ host, version, endpoints }) => {
 const renderCarousel = ({ data }) => {
   const carousel = document.querySelector(".carousel");
 
-  data.forEach(({ picture, story }) => {
+  data.forEach(({ product_id, picture, story }) => {
     const campaignItem = createClassedElement(
       "div",
       "campaignItem fade relative wider-row-flex flex-align-center flex-space-center pointer"
@@ -474,7 +502,7 @@ const renderCarousel = ({ data }) => {
 
     //  make campaignItem redirect to corresponding link after clicked
     campaignItem.addEventListener("click", () => {
-      window.open(picture, "_blank");
+      window.open(`./product/${product_id}`, "_self");
     });
 
     //  set Image
