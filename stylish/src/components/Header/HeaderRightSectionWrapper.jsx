@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import {
   IconLink,

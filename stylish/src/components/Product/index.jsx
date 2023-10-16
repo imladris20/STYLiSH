@@ -52,8 +52,8 @@ const WiderTopContainer = styled.div`
 
 const Product = () => {
   const { id } = useParams();
-
   const redirect = useNavigate();
+
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [variants, setVariants] = useState({});
@@ -82,8 +82,10 @@ const Product = () => {
   }, [id]);
 
   const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
   const [maxQuantity, setMaxQuantity] = useState(null);
   const [availableSize, setAvailableSize] = useState([]);
+  // const [isFormReset, setIsFormReset] = useState(false)
 
   const handleColorChange = (colorcode) => {
     setSelectedColor(colorcode);
@@ -95,6 +97,7 @@ const Product = () => {
   };
 
   const handleSizeChange = (size) => {
+    setSelectedSize(size);
     const finalSelection = variants.filter(
       (variant) => variant.color_code === selectedColor && variant.size === size
     );
@@ -108,6 +111,14 @@ const Product = () => {
   };
 
   console.log("Amount about to Submit: ", amountToSubmit);
+
+  useEffect(() => {
+    console.log("Form reset because of change of variants");
+    setSelectedColor(null);
+    setSelectedSize(null);
+    setMaxQuantity(null);
+    setAvailableSize([]);
+  }, [variants]);
 
   return (
     <>
@@ -130,6 +141,7 @@ const Product = () => {
                   <Color
                     colors={product.colors}
                     onColorChange={handleColorChange}
+                    selectedColor={selectedColor}
                   />
                   <Size
                     sizes={product.sizes}
@@ -140,7 +152,13 @@ const Product = () => {
                     maxQuantity={maxQuantity}
                     onAmountChange={handleAmountToSubmitChange}
                   />
-                  <Submit amountToSubmit={amountToSubmit} />
+                  <Submit
+                    selectedColor={selectedColor}
+                    selectedSize={selectedSize}
+                    amountToSubmit={amountToSubmit}
+                    variants={variants}
+                    setVariants={setVariants}
+                  />
                 </SelectionForm>
                 <SubInfo
                   note={product.note}

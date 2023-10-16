@@ -23,7 +23,13 @@ const SubmitBtn = styled.input`
   }
 `;
 
-const Submit = ({ amountToSubmit }) => {
+const Submit = ({
+  amountToSubmit,
+  variants,
+  setVariants,
+  selectedColor,
+  selectedSize,
+}) => {
   const { cartCount, actions } = useContext(UserContext);
 
   function addCartCounter(number) {
@@ -38,6 +44,23 @@ const Submit = ({ amountToSubmit }) => {
 
   const handleClick = () => {
     addCartCounter(amountToSubmit);
+
+    const updatedVariants = variants.map((variant) => {
+      if (
+        variant.color_code === selectedColor &&
+        variant.size === selectedSize
+      ) {
+        const updatedStock = variant.stock - amountToSubmit;
+        const newStock = Math.max(updatedStock, 0);
+        return { ...variant, stock: newStock };
+      } else {
+        return { ...variant };
+      }
+    });
+
+    console.log("Variants should be update to: ", updatedVariants);
+
+    setVariants(updatedVariants);
   };
 
   return <SubmitBtn type="button" value="加入購物車" onClick={handleClick} />;
