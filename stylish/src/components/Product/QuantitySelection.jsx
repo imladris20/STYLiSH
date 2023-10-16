@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import { useState, useEffect } from "react";
 
 const QuantityContainer = styled.div`
   display: flex;
@@ -95,14 +96,58 @@ const WiderTopContainer = styled.div`
   }
 `;
 
-const Quantity = () => {
+const Quantity = ({ maxQuantity }) => {
+  const [amount, setAmount] = useState(1);
+
+  useEffect(() => {
+    setAmount(1);
+  }, [maxQuantity]);
+
+  const checkInput = (event) => {
+    const value = event.target.value;
+    if (value < event.target.min || value > event.target.max) {
+      event.target.value = Math.min(
+        Math.max(value, event.target.min),
+        event.target.max
+      );
+    }
+
+    console.log("range: ", event.target.min, event.target.max);
+    console.log("checking finish");
+
+    setAmount(event.target.value);
+  };
+
   return (
     <WiderTopContainer>
       <QuantityText>數量｜</QuantityText>
       <QuantityContainer>
-        <QuatityBtn>-</QuatityBtn>
-        <QuantityInput type="number" name="quantity" placeholder="1" />
-        <QuatityBtn>+</QuatityBtn>
+        <QuatityBtn
+          onClick={() => {
+            if (amount > 0) {
+              setAmount(Number(amount) - 1);
+            }
+          }}
+        >
+          -
+        </QuatityBtn>
+        <QuantityInput
+          min="0"
+          max={maxQuantity}
+          type="number"
+          name="quantity"
+          value={amount}
+          onInput={checkInput}
+        />
+        <QuatityBtn
+          onClick={() => {
+            if (amount < maxQuantity) {
+              setAmount(Number(amount) + 1);
+            }
+          }}
+        >
+          +
+        </QuatityBtn>
       </QuantityContainer>
     </WiderTopContainer>
   );

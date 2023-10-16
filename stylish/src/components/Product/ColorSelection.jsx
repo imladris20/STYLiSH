@@ -69,6 +69,7 @@ const ColorSelection = ({ colors }) => {
         type="radio"
         name="color"
         color={`#${element.code}`}
+        onChange={() => onColorChange(element.code)}
       />
     );
   });

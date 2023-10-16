@@ -55,8 +55,8 @@ const Product = () => {
 
   const redirect = useNavigate();
   const [product, setProduct] = useState({});
-
   const [loading, setLoading] = useState(true);
+  const [variants, setVariants] = useState({});
 
   useEffect(() => {
     const getProduct = async (id) => {
@@ -70,6 +70,7 @@ const Product = () => {
           throw "Invalid ID";
         }
         setProduct(product);
+        setVariants(product.variants);
         setLoading(false);
       } catch (error) {
         console.error(new Error(error));
@@ -79,6 +80,30 @@ const Product = () => {
 
     getProduct(id);
   }, [id]);
+
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [maxQuantity, setMaxQuantity] = useState(null);
+  const [availableSize, setAvailableSize] = useState([]);
+
+  const handleColorChange = (colorcode) => {
+    setSelectedColor(colorcode);
+    setAvailableSize([]);
+    setMaxQuantity(null);
+    setAvailableSize(
+      variants.filter((variant) => variant.color_code === colorcode)
+    );
+  };
+
+  const handleSizeChange = (size) => {
+    const finalSelection = variants.filter(
+      (variant) => variant.color_code === selectedColor && variant.size === size
+    );
+    setMaxQuantity(finalSelection[0].stock);
+  };
+
+  console.log("Available Size: ", availableSize);
+
+  console.log("Max Quantity of selected color and size: ", maxQuantity);
 
   return (
     <>
@@ -98,9 +123,16 @@ const Product = () => {
                   price={product.price}
                 />
                 <SelectionForm action="/" method="post">
-                  <Color colors={product.colors} />
-                  <Size sizes={product.sizes} />
-                  <Quantity />
+                  <Color
+                    colors={product.colors}
+                    onColorChange={handleColorChange}
+                  />
+                  <Size
+                    sizes={product.sizes}
+                    availableSize={availableSize}
+                    onSizeChange={handleSizeChange}
+                  />
+                  <Quantity maxQuantity={maxQuantity} />
                   <Submit />
                 </SelectionForm>
                 <SubInfo
