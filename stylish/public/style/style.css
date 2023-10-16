@@ -262,6 +262,7 @@ input::placeholder {
   place-items: center;
   right: 0px;
   bottom: 0px;
+  line-height: 22px;
 }
 
 .profile-link__image {
