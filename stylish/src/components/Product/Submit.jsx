@@ -58,8 +58,6 @@ const Submit = ({
       }
     });
 
-    console.log("Variants should be update to: ", updatedVariants);
-
     setVariants(updatedVariants);
   };
 

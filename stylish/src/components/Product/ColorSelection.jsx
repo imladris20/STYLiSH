@@ -71,8 +71,6 @@ const ColorSelection = ({ colors, onColorChange, selectedColor }) => {
         .forEach((input) => {
           input.checked = false;
         });
-
-      console.log("reset color checked state");
     }
   }, [selectedColor]);
 

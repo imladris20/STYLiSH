@@ -110,10 +110,7 @@ const Product = () => {
     setAmountToSubmit(number);
   };
 
-  console.log("Amount about to Submit: ", amountToSubmit);
-
   useEffect(() => {
-    console.log("Form reset because of change of variants");
     setSelectedColor(null);
     setSelectedSize(null);
     setMaxQuantity(null);
