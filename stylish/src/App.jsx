@@ -1,5 +1,6 @@
 import { GlobalStyle } from "./assets/GlobalStyles";
 import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 //  App Components
 import Header from "./components/Header";

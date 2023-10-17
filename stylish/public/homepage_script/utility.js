@@ -52,7 +52,7 @@ const notFound = () => {
   const notExistImg = createClassedElement("img", "keyword-not-exist__img");
 
   //  Set image
-  notExistImg.src = "./public/no-product.png";
+  notExistImg.src = "/no-product.png";
   notExistImg.alt = "invalid keyword";
 
   notExistBlock.append(notExistImg);
@@ -306,7 +306,7 @@ const showInvalidKeyword = (keywordValue) => {
   const notExistImg = createClassedElement("img", "keyword-not-exist__img");
 
   //  Set image
-  notExistImg.src = "./public/no-product.png";
+  notExistImg.src = "/no-product.png";
   notExistImg.alt = "invalid keyword";
 
   //  Set text
@@ -317,6 +317,20 @@ const showInvalidKeyword = (keywordValue) => {
 };
 
 const switchSearchBar = (mutex, event, elementsToChange) => {
+  const searchDistracter = document.querySelector(".search-distracter");
+  searchDistracter.classList.replace("mobile-hide", "mobile-show");
+
+  function clickHandler() {
+    elementsToChange.forEach((element) => {
+      element.classList.toggle(element.id + "--clicked");
+    });
+    mutex.isSearchBarShowed = !mutex.isSearchBarShowed;
+    searchDistracter.classList.replace("mobile-show", "mobile-hide");
+    searchDistracter.removeEventListener("click", clickHandler);
+  }
+
+  searchDistracter.addEventListener("click", clickHandler);
+
   if (window.innerWidth > 1279) {
     elementsToChange[0].submit();
   } else {

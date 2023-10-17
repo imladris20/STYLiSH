@@ -29,8 +29,9 @@ const Submit = ({
   setVariants,
   selectedColor,
   selectedSize,
+  product,
 }) => {
-  const { cartCount, actions } = useContext(UserContext);
+  const { cartCount, list, actions } = useContext(UserContext);
 
   function addCartCounter(number) {
     const currentCartCounter = localStorage.getItem("cartCount") || 0;
@@ -43,6 +44,31 @@ const Submit = ({
   }
 
   const handleClick = () => {
+    const currentList = JSON.parse(localStorage.getItem("list")) || [];
+
+    const newListItem = {
+      id: product.id,
+      name: product.title,
+      price: product.price,
+      color: product.colors.find((color) => color.code === selectedColor),
+      size: selectedSize,
+      qty: amountToSubmit,
+      serialNo: `${product.id}+${selectedColor}+${selectedSize}`,
+      image: product.main_image,
+    };
+
+    const existingItem = currentList.find(
+      (item) => item.serialNo === newListItem.serialNo
+    );
+
+    if (!existingItem) {
+      currentList.push(newListItem);
+    } else {
+      existingItem.qty += newListItem.qty;
+    }
+
+    localStorage.setItem("list", JSON.stringify(currentList));
+
     addCartCounter(amountToSubmit);
 
     const updatedVariants = variants.map((variant) => {
