@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import UserContext from "../../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -85,7 +86,7 @@ const Product = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [maxQuantity, setMaxQuantity] = useState(null);
   const [availableSize, setAvailableSize] = useState([]);
-  // const [isFormReset, setIsFormReset] = useState(false)
+  const { list, actions } = useContext(UserContext);
 
   const handleColorChange = (colorcode) => {
     setSelectedColor(colorcode);
@@ -108,6 +109,22 @@ const Product = () => {
 
   const handleAmountToSubmitChange = (number) => {
     setAmountToSubmit(number);
+
+    const newListItem = {
+      id: product.id,
+      name: product.title,
+      price: product.price,
+      color: {
+        code: selectedColor,
+        name: "淺藍",
+      },
+      size: selectedSize,
+      qty: number,
+    };
+
+    const newList = [...list].push(newListItem);
+
+    actions.setList(newList);
   };
 
   useEffect(() => {
