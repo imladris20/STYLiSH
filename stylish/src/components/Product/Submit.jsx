@@ -25,11 +25,10 @@ const SubmitBtn = styled.input`
 
 const Submit = ({
   amountToSubmit,
-  variants,
-  setVariants,
   selectedColor,
   selectedSize,
   product,
+  setProduct,
 }) => {
   const { cartCount, list, actions } = useContext(UserContext);
 
@@ -71,7 +70,7 @@ const Submit = ({
 
     addCartCounter(amountToSubmit);
 
-    const updatedVariants = variants.map((variant) => {
+    const updatedVariants = product.variants.map((variant) => {
       if (
         variant.color_code === selectedColor &&
         variant.size === selectedSize
@@ -84,7 +83,7 @@ const Submit = ({
       }
     });
 
-    setVariants(updatedVariants);
+    setProduct({ ...product, variants: updatedVariants });
   };
 
   return <SubmitBtn type="button" value="加入購物車" onClick={handleClick} />;

@@ -77,7 +77,7 @@ export const ProfileLinkImage = styled.div`
 `;
 
 const MobileBottomNav = () => {
-  const { cartCount, actions } = useContext(UserContext);
+  const { cartCount } = useContext(UserContext);
   return (
     <Top>
       <MobileBottomNavList>

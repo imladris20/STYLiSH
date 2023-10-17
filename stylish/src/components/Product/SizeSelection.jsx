@@ -93,14 +93,7 @@ const SizeSelection = ({ sizes, availableSize, onSizeChange }) => {
   );
 
   useEffect(() => {
-    document
-      .querySelectorAll('input[type="radio"][name="size"]')
-      .forEach((input) => {
-        input.checked = false;
-      });
-
     setSelected(null);
-
     setIsOutOfstock(
       availableSize.map((element) => {
         return element.stock === 0;
@@ -124,6 +117,7 @@ const SizeSelection = ({ sizes, availableSize, onSizeChange }) => {
         <SizeInput
           type="radio"
           name="size"
+          checked={index === $isSelected}
           onClick={() => clickHandler(index)}
           $isOutOfstock={$isOutOfstock[index]}
           onChange={() => onSizeChange(element)}

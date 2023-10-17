@@ -147,13 +147,11 @@ const Distracter = styled.div`
 `;
 
 const HeaderRightSectionWrapper = () => {
-  const { cartCount, isWide, actions } = useContext(UserContext);
+  const { cartCount, isWide } = useContext(UserContext);
   const [shouldSubmit, setShouldSubmit] = useState(false);
 
   const handleSubmit = (event) => {
-    if (shouldSubmit || isWide) {
-      console.log("表單已提交");
-    } else {
+    if (!shouldSubmit && !isWide) {
       event.preventDefault();
       setShouldSubmit(true);
     }
@@ -172,7 +170,7 @@ const HeaderRightSectionWrapper = () => {
           onClick={handleClickonDistracter}
         />
         <SearchForm
-          action="../../homepage.html"
+          action="../../index.html"
           method="get"
           onSubmit={handleSubmit}
           $shouldSubmit={shouldSubmit}

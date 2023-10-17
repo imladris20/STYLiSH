@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
-import { useEffect } from "react";
 
 const ColorContainer = styled.div`
   display: flex;
@@ -64,16 +63,6 @@ const ColorInput = styled.input`
 `;
 
 const ColorSelection = ({ colors, onColorChange, selectedColor }) => {
-  useEffect(() => {
-    if (!selectedColor) {
-      document
-        .querySelectorAll('input[type="radio"][name="color"]')
-        .forEach((input) => {
-          input.checked = false;
-        });
-    }
-  }, [selectedColor]);
-
   let arr = colors.map((element) => {
     return (
       <ColorInput
@@ -82,6 +71,7 @@ const ColorSelection = ({ colors, onColorChange, selectedColor }) => {
         name="color"
         color={`#${element.code}`}
         onChange={() => onColorChange(element.code)}
+        checked={selectedColor === element.code}
       />
     );
   });

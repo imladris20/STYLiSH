@@ -56,7 +56,6 @@ const Product = () => {
 
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
-  const [variants, setVariants] = useState({});
 
   useEffect(() => {
     const getProduct = async (id) => {
@@ -70,7 +69,6 @@ const Product = () => {
           throw "Invalid ID";
         }
         setProduct(product);
-        setVariants(product.variants);
         setLoading(false);
       } catch (error) {
         console.error(new Error(error));
@@ -91,13 +89,13 @@ const Product = () => {
     setAvailableSize([]);
     setMaxQuantity(null);
     setAvailableSize(
-      variants.filter((variant) => variant.color_code === colorcode)
+      product.variants.filter((variant) => variant.color_code === colorcode)
     );
   };
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
-    const finalSelection = variants.filter(
+    const finalSelection = product.variants.filter(
       (variant) => variant.color_code === selectedColor && variant.size === size
     );
     setMaxQuantity(finalSelection[0].stock);
@@ -114,7 +112,7 @@ const Product = () => {
     setSelectedSize(null);
     setMaxQuantity(null);
     setAvailableSize([]);
-  }, [variants]);
+  }, [product.variants]);
 
   return (
     <>
@@ -152,8 +150,7 @@ const Product = () => {
                     selectedColor={selectedColor}
                     selectedSize={selectedSize}
                     amountToSubmit={amountToSubmit}
-                    variants={variants}
-                    setVariants={setVariants}
+                    setProduct={setProduct}
                     product={product}
                   />
                 </SelectionForm>

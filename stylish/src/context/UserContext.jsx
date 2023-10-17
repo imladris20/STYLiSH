@@ -29,9 +29,9 @@ export const UserProvider = (props) => {
   return (
     <UserContext.Provider
       value={{
-        cartCount: cartCount,
-        list: list,
-        isWide: isWide,
+        cartCount,
+        list,
+        isWide,
         actions: {
           setCartCount,
           setList,
