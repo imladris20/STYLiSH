@@ -15,8 +15,8 @@ const Top = styled.div`
   position: fixed;
   top: 6px;
   right: 10px;
-  width: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "100%" : "unset"};
+  width: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "100%" : "unset"};
 
   @media ${devices.desktopS} {
     position: unset;
@@ -27,16 +27,16 @@ const Top = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "flex-start" : "flex-end"};
+  justify-content: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "flex-start" : "flex-end"};
   align-items: center;
   flex: 1;
-  background-color: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "white" : "unset"};
-  width: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "inherit" : "unset"};
-  margin-left: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "20px" : "unset"};
+  background-color: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "white" : "unset"};
+  width: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "inherit" : "unset"};
+  margin-left: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "20px" : "unset"};
 `;
 
 const SearchForm = styled.form`
@@ -45,17 +45,17 @@ const SearchForm = styled.form`
   position: relative;
   justify-content: space-between;
   align-items: center;
-  width: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "inherit" : "60px"};
+  width: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "inherit" : "60px"};
   height: 40px;
   padding-left: 6px;
   padding-right: 6px;
-  border-radius: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "20px" : "unset"};
-  border: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "1px #979797 solid" : "unset"};
-  gap: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "5px" : "unset"};
+  border-radius: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "20px" : "unset"};
+  border: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "1px #979797 solid" : "unset"};
+  gap: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "5px" : "unset"};
 
   @media ${devices.desktopS} {
     height: 44px;
@@ -70,18 +70,18 @@ const SearchFormInput = styled.input`
   color: #8b572a;
   font-size: 20px;
   border: none;
-  flex-grow: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "1" : "unset"};
-  visibility: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "unset" : "hidden"};
-  line-height: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "24px" : "0px"};
-  padding-left: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "14px" : "0px"};
-  width: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "150px" : "0px"};
-  height: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "25px" : "0px"};
+  flex-grow: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "1" : "unset"};
+  visibility: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "unset" : "hidden"};
+  line-height: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "24px" : "0px"};
+  padding-left: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "14px" : "0px"};
+  width: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "150px" : "0px"};
+  height: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "25px" : "0px"};
 
   @media ${devices.desktopS} {
     visibility: unset;
@@ -134,14 +134,14 @@ const WiderProfileLinkImage = styled(ProfileLinkImage)`
 `;
 
 const Distracter = styled.div`
-  display: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "block" : "none"};
-  width: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "1278px" : "unset"};
-  height: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "2000px" : "unset"};
-  position: ${({ $shouldSubmit, $isWide }) =>
-    $shouldSubmit && !$isWide ? "fixed" : "unset"};
+  display: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "block" : "none"};
+  width: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "1278px" : "unset"};
+  height: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "2000px" : "unset"};
+  position: ${({ $isMobileSearchBarShow }) =>
+    $isMobileSearchBarShow ? "fixed" : "unset"};
   top: 0;
   left: 0;
 `;
@@ -150,6 +150,8 @@ const HeaderRightSectionWrapper = () => {
   const { cartCount, isWide } = useContext(UserContext);
   const [shouldSubmit, setShouldSubmit] = useState(false);
 
+  const isMobileSearchBarShow = shouldSubmit && !isWide;
+
   const handleSubmit = (event) => {
     if (!shouldSubmit && !isWide) {
       event.preventDefault();
@@ -157,36 +159,32 @@ const HeaderRightSectionWrapper = () => {
     }
   };
 
-  const handleClickonDistracter = () => {
+  const handleClickOnDistracter = () => {
     setShouldSubmit(!shouldSubmit);
   };
 
   return (
-    <Top $shouldSubmit={shouldSubmit} $isWide={isWide}>
-      <SearchContainer $shouldSubmit={shouldSubmit} $isWide={isWide}>
+    <Top $isMobileSearchBarShow={isMobileSearchBarShow}>
+      <SearchContainer $isMobileSearchBarShow={isMobileSearchBarShow}>
         <Distracter
-          $shouldSubmit={shouldSubmit}
-          $isWide={isWide}
-          onClick={handleClickonDistracter}
+          $isMobileSearchBarShow={isMobileSearchBarShow}
+          onClick={handleClickOnDistracter}
         />
         <SearchForm
           action="../../index.html"
           method="get"
           onSubmit={handleSubmit}
-          $shouldSubmit={shouldSubmit}
-          $isWide={isWide}
+          $isMobileSearchBarShow={isMobileSearchBarShow}
         >
           <SearchFormInput
             type="text"
             name="keyword"
-            $shouldSubmit={shouldSubmit}
-            $isWide={isWide}
+            $isMobileSearchBarShow={isMobileSearchBarShow}
           />
           <SearchFormSubmit
             type="submit"
             value=""
-            $shouldSubmit={shouldSubmit}
-            $isWide={isWide}
+            $isMobileSearchBarShow={isMobileSearchBarShow}
           />
         </SearchForm>
       </SearchContainer>
