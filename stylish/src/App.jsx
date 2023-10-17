@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Product from "./components/Product";
 import NotFound from "./components/NotFound";
 import InvalidProduct from "./components/Product/InvalidProduct";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path=":id" element={<Product />} />
           <Route path="invalidid" element={<InvalidProduct />} />
         </Route>
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

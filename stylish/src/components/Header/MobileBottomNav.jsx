@@ -82,11 +82,11 @@ const MobileBottomNav = () => {
     <Top>
       <MobileBottomNavList>
         <MobileBottomNavListItem>
-          <IconLink>
-            <CartLinkImage />
-            <CartLinkCounter>{cartCount}</CartLinkCounter>
+          <IconLink href="/checkout">
+            <CartLinkImage href="/checkout" />
+            <CartLinkCounter href="/checkout">{cartCount}</CartLinkCounter>
           </IconLink>
-          <IconLinkText>購物車</IconLinkText>
+          <IconLinkText href="/checkout">購物車</IconLinkText>
         </MobileBottomNavListItem>
         <MobileBottomNavDevider>|</MobileBottomNavDevider>
         <MobileBottomNavListItem>

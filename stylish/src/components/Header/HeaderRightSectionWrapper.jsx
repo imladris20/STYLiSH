@@ -188,9 +188,9 @@ const HeaderRightSectionWrapper = () => {
           />
         </SearchForm>
       </SearchContainer>
-      <WiderCartLink>
-        <WiderCartLinkImage />
-        <CartLinkCounter>{cartCount}</CartLinkCounter>
+      <WiderCartLink href="/checkout">
+        <WiderCartLinkImage href="/checkout" />
+        <CartLinkCounter href="/checkout">{cartCount}</CartLinkCounter>
       </WiderCartLink>
       <WiderCartLink>
         <WiderProfileLinkImage />
