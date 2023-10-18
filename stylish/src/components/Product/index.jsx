@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 //  Components
 import { devices } from "../../assets/device";
 import Loading from "../Loading";
-import MainInfo, { MainInfoContainer } from "./MainInfo";
 import Color from "./ColorSelection";
-import Size from "./SizeSelection";
-import Quantity from "./QuantitySelection";
-import Submit from "./Submit";
-import SubInfo from "./SubInfo";
+import MainInfo, { MainInfoContainer } from "./MainInfo";
 import InfoDevider from "./MoreInfo";
 import ProductDetail from "./ProductDetail";
+import Quantity from "./QuantitySelection";
+import Size from "./SizeSelection";
+import SubInfo from "./SubInfo";
+import Submit from "./Submit";
 
 const MainContainer = styled.div`
   display: flex;

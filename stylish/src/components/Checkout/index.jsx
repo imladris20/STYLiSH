@@ -1,16 +1,15 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Cart from "./Cart";
+import FinalCheckout from "./FinalCheckout";
 import Order from "./Order";
 import Payment from "./Payment";
-import FinalCheckout from "./FinalCheckout";
-import { useState } from "react";
 
 const TopContainer = styled.div`
   width: auto;
-  height: 1889px;
   display: flex;
   flex-direction: column;
-  margin: 20px 24px 0px 24px;
+  margin: 20px 24px 28px 24px;
 `;
 
 const Checkout = () => {
