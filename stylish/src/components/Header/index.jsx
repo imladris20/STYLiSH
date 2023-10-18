@@ -36,12 +36,12 @@ const HeaderSpaceSection = styled.div`
   }
 `;
 
-const Header = () => {
+const Header = ({ isWide }) => {
   return (
     <>
       <StylishHeader>
         <HeaderWrapper>
-          <HeaderLeftSectionWrapper />
+          <HeaderLeftSectionWrapper isWide={isWide} />
           <MobileBottomNav />
           <HeaderRightSectionWrapper />
         </HeaderWrapper>

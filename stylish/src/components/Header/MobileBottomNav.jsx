@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
 
 const Top = styled.nav`
   width: 100%;
@@ -54,6 +56,7 @@ export const CartLinkCounter = styled.div`
   place-items: center;
   right: 0px;
   bottom: 0px;
+  line-height: 22px;
 `;
 
 const IconLinkText = styled.a`
@@ -74,13 +77,14 @@ export const ProfileLinkImage = styled.div`
 `;
 
 const MobileBottomNav = () => {
+  const { cartCount } = useContext(UserContext);
   return (
     <Top>
       <MobileBottomNavList>
         <MobileBottomNavListItem>
           <IconLink>
             <CartLinkImage />
-            <CartLinkCounter>1</CartLinkCounter>
+            <CartLinkCounter>{cartCount}</CartLinkCounter>
           </IconLink>
           <IconLinkText>購物車</IconLinkText>
         </MobileBottomNavListItem>

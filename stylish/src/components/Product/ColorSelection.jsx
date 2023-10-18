@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+
 const ColorContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -61,7 +62,7 @@ const ColorInput = styled.input`
   }
 `;
 
-const ColorSelection = ({ colors }) => {
+const ColorSelection = ({ colors, onColorChange, selectedColor }) => {
   const arr = colors.map((element) => {
     return (
       <ColorInput
@@ -69,6 +70,8 @@ const ColorSelection = ({ colors }) => {
         type="radio"
         name="color"
         color={`#${element.code}`}
+        onChange={() => onColorChange(element.code)}
+        checked={selectedColor === element.code}
       />
     );
   });

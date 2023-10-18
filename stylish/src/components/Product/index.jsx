@@ -52,10 +52,9 @@ const WiderTopContainer = styled.div`
 
 const Product = () => {
   const { id } = useParams();
-
   const redirect = useNavigate();
-  const [product, setProduct] = useState({});
 
+  const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -80,6 +79,41 @@ const Product = () => {
     getProduct(id);
   }, [id]);
 
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [maxQuantity, setMaxQuantity] = useState(null);
+  const [availableSize, setAvailableSize] = useState([]);
+
+  const handleColorChange = (colorcode) => {
+    setSelectedColor(colorcode);
+    setAvailableSize([]);
+    setMaxQuantity(null);
+    setAvailableSize(
+      product.variants.filter((variant) => variant.color_code === colorcode)
+    );
+  };
+
+  const handleSizeChange = (size) => {
+    setSelectedSize(size);
+    const finalSelection = product.variants.filter(
+      (variant) => variant.color_code === selectedColor && variant.size === size
+    );
+    setMaxQuantity(finalSelection[0].stock);
+  };
+
+  const [amountToSubmit, setAmountToSubmit] = useState(0);
+
+  const handleAmountToSubmitChange = (number) => {
+    setAmountToSubmit(number);
+  };
+
+  useEffect(() => {
+    setSelectedColor(null);
+    setSelectedSize(null);
+    setMaxQuantity(null);
+    setAvailableSize([]);
+  }, [product.variants]);
+
   return (
     <>
       <main>
@@ -98,10 +132,27 @@ const Product = () => {
                   price={product.price}
                 />
                 <SelectionForm action="/" method="post">
-                  <Color colors={product.colors} />
-                  <Size sizes={product.sizes} />
-                  <Quantity />
-                  <Submit />
+                  <Color
+                    colors={product.colors}
+                    onColorChange={handleColorChange}
+                    selectedColor={selectedColor}
+                  />
+                  <Size
+                    sizes={product.sizes}
+                    availableSize={availableSize}
+                    onSizeChange={handleSizeChange}
+                  />
+                  <Quantity
+                    maxQuantity={maxQuantity}
+                    onAmountChange={handleAmountToSubmitChange}
+                  />
+                  <Submit
+                    selectedColor={selectedColor}
+                    selectedSize={selectedSize}
+                    amountToSubmit={amountToSubmit}
+                    setProduct={setProduct}
+                    product={product}
+                  />
                 </SelectionForm>
                 <SubInfo
                   note={product.note}

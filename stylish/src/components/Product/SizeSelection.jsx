@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/device";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SizeContainer = styled.div`
   display: flex;
@@ -55,18 +55,21 @@ const SizeBox = styled.label`
   display: grid;
   place-items: center;
   border-radius: 100%;
+  opacity: ${({ $isOutOfstock }) => ($isOutOfstock ? 0.25 : 1)};
 `;
 
 const SizeLabel = styled.div`
   font-size: 20px;
   font-weight: 400;
   line-height: 36px;
-  color: ${({ $isSelected }) => ($isSelected ? "white" : "#3f3a3a")};
+  color: ${({ $isSelected, $isOutOfstock }) =>
+    $isSelected && !$isOutOfstock ? "white" : "#3f3a3a"};
   border-radius: 0;
   grid-column-start: 1;
   grid-row-start: 1;
-  cursor: pointer;
+  cursor: ${({ $isOutOfstock }) => ($isOutOfstock ? "unset" : "pointer")};
   z-index: 99;
+  opacity: ${({ $isOutOfstock }) => ($isOutOfstock ? 0.25 : 1)};
 `;
 
 const SizeInput = styled.input`
@@ -76,15 +79,27 @@ const SizeInput = styled.input`
   border-radius: 100%;
   grid-column-start: 1;
   grid-row-start: 1;
-  cursor: pointer;
+  cursor: ${({ $isOutOfstock }) => ($isOutOfstock ? "unset" : "pointer")};
 
   &:checked {
-    background-color: black;
+    background-color: ${({ $isOutOfstock }) => !$isOutOfstock && "black"};
   }
 `;
 
-const SizeSelection = ({ sizes }) => {
-  const [isSelected, setSelected] = useState(null);
+const SizeSelection = ({ sizes, availableSize, onSizeChange }) => {
+  const [$isSelected, setSelected] = useState(null);
+  const [$isOutOfstock, setIsOutOfstock] = useState(
+    new Array(sizes.length).fill(false)
+  );
+
+  useEffect(() => {
+    setSelected(null);
+    setIsOutOfstock(
+      availableSize.map((element) => {
+        return element.stock === 0;
+      })
+    );
+  }, [availableSize]);
 
   const clickHandler = (index) => {
     setSelected(index);
@@ -92,12 +107,20 @@ const SizeSelection = ({ sizes }) => {
 
   const arr = sizes.map((element, index) => {
     return (
-      <SizeBox key={index}>
-        <SizeLabel $isSelected={index === isSelected}>{element}</SizeLabel>
+      <SizeBox key={index} $isOutOfstock={$isOutOfstock[index]}>
+        <SizeLabel
+          $isSelected={index === $isSelected}
+          $isOutOfstock={$isOutOfstock[index]}
+        >
+          {element}
+        </SizeLabel>
         <SizeInput
           type="radio"
           name="size"
+          checked={index === $isSelected}
           onClick={() => clickHandler(index)}
+          $isOutOfstock={$isOutOfstock[index]}
+          onChange={() => onSizeChange(element)}
         />
       </SizeBox>
     );

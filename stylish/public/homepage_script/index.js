@@ -34,6 +34,19 @@ const mutex = {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // Retrieve the value of 'cartCount' from localStorage
+  const cartCount = localStorage.getItem("cartCount");
+
+  // Find the cart-link__counter element in your DOM
+  const cartCounterElement = document.querySelectorAll(".cart-link__counter");
+
+  // Update the cart-link__counter element with the value from localStorage
+  if (cartCounterElement) {
+    cartCounterElement.forEach((element) => {
+      element.textContent = cartCount || 0;
+    });
+  }
+
   const response = await fetchCampaigns(stylishAPI);
   renderCarousel(response);
   createDots(response, mutex);

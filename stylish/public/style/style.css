@@ -262,6 +262,7 @@ input::placeholder {
   place-items: center;
   right: 0px;
   bottom: 0px;
+  line-height: 22px;
 }
 
 .profile-link__image {
@@ -277,8 +278,17 @@ input::placeholder {
   right: 10px;
 }
 
+.search-distracter {
+  width: 1278px;
+  height: 2000px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
 .search-form {
-  width: 214px;
+  width: 60px;
   height: 40px;
   padding-left: 6px;
   padding-right: 6px;
@@ -286,10 +296,10 @@ input::placeholder {
 
 .search-form__input {
   border: none;
-  line-height: 24px;
-  padding-left: 14px;
-  width: 150px;
-  height: 25px;
+  line-height: 0px;
+  padding-left: 0px;
+  width: 0px;
+  height: 0px;
   visibility: hidden;
 }
 
@@ -480,6 +490,10 @@ input::placeholder {
   display: none;
 }
 
+.mobile-show {
+  display: block;
+}
+
 /* ================================= 
 Scroll Loader
 ==================================== */
@@ -663,6 +677,10 @@ Media Queries
 
   .search-form__input {
     visibility: unset;
+    line-height: 24px;
+    padding-left: 14px;
+    width: 150px;
+    height: 25px;
   }
 
   .search-form__submit {
@@ -816,5 +834,9 @@ Media Queries
   .product-item__price {
     font-size: 20px;
     letter-spacing: 4px;
+  }
+
+  .search-distracter {
+    display: none;
   }
 }
