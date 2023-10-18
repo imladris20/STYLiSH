@@ -66,6 +66,7 @@ const FinalCheckoutButton = styled.button`
   border: none;
   margin-top: 36px;
   height: 44px;
+  cursor: pointer;
 
   @media ${devices.desktopS} {
     width: 240px;

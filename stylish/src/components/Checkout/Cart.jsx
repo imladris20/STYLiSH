@@ -171,7 +171,7 @@ const ItemSelectionsContainer = styled.div`
   display: grid;
   height: 59px;
   grid-template-rows: 17px 1fr;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 104px 1fr 104px;
 
   @media ${devices.desktopS} {
     grid-template-rows: 1fr;
