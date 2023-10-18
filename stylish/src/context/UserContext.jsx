@@ -21,6 +21,10 @@ export const UserProvider = (props) => {
 
   const [list, setList] = useState([]);
 
+  useEffect(() => {
+    setList(JSON.parse(localStorage.getItem("list")));
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
