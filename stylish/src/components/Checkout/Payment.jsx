@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 
 const TopContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+  @media ${devices.desktopS} {
+    margin-bottom: 40px;
+  }
 `;
 
 const PaymentHeadline = styled.h1`
@@ -16,6 +20,9 @@ const PaymentHeadline = styled.h1`
   margin-top: 0;
   margin-bottom: 10px;
   text-align: left;
+  @media ${devices.desktopS} {
+    margin-bottom: 16px;
+  }
 `;
 
 const PaymentContainer = styled.div`
@@ -23,6 +30,15 @@ const PaymentContainer = styled.div`
   flex-direction: column;
   padding-top: 20px;
   border-top: 1px #3f3a3a solid;
+  @media ${devices.desktopS} {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 120px 576px;
+    padding-top: 25px;
+    grid-row-gap: 30px;
+    align-items: center;
+    position: relative;
+  }
 `;
 
 const PaymentLabel = styled.label`
@@ -31,6 +47,12 @@ const PaymentLabel = styled.label`
   line-height: 17px;
   margin-bottom: 10px;
   text-align: left;
+  @media ${devices.desktopS} {
+    width: 120px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 19px;
+  }
 `;
 
 const PaymentTextInput = styled.input`
@@ -49,6 +71,11 @@ const PaymentTextInput = styled.input`
     font-weight: 400;
     line-height: 32px;
     word-wrap: break-word;
+  }
+
+  @media ${devices.desktopS} {
+    width: 576px;
+    margin: 0;
   }
 `;
 

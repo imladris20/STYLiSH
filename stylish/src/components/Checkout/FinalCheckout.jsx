@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 
 const TopContainer = styled.div`
   width: 100%;
@@ -65,6 +66,10 @@ const FinalCheckoutButton = styled.button`
   border: none;
   margin-top: 36px;
   height: 44px;
+
+  @media ${devices.desktopS} {
+    width: 240px;
+  }
 `;
 
 const FinalCheckout = () => {

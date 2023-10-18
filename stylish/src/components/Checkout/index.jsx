@@ -1,5 +1,5 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 import Cart from "./Cart";
 import FinalCheckout from "./FinalCheckout";
 import Order from "./Order";
@@ -10,10 +10,15 @@ const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 24px 28px 24px;
+
+  @media ${devices.desktopS} {
+    width: 1160px;
+    margin: 51px auto 148px auto;
+  }
 `;
 
 const Checkout = () => {
-  const [placeHolder, setPlaceHolder] = useState([
+  const placeHolder = [
     {
       id: 201807201824,
       name: "前開衩扭結洋裝",
@@ -47,7 +52,7 @@ const Checkout = () => {
       serialNo: "201807201824+CCCCCC+S",
       image: "https://api.appworks-school.tw/assets/201807201824/main.jpg",
     },
-  ]);
+  ];
 
   return (
     <>

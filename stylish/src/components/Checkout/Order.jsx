@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { devices } from "../../assets/device";
 
 const TopContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  @media ${devices.desktopS} {
+    margin-bottom: 50px;
+  }
 `;
 
 const OrderHeadline = styled.h1`
@@ -16,6 +20,10 @@ const OrderHeadline = styled.h1`
   margin-top: 0;
   margin-bottom: 10px;
   text-align: left;
+
+  @media ${devices.desktopS} {
+    margin-bottom: 16px;
+  }
 `;
 
 const OrderContainer = styled.div`
@@ -23,6 +31,15 @@ const OrderContainer = styled.div`
   flex-direction: column;
   padding-top: 20px;
   border-top: 1px #3f3a3a solid;
+  @media ${devices.desktopS} {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 120px 576px;
+    padding-top: 25px;
+    grid-row-gap: 30px;
+    align-items: center;
+    position: relative;
+  }
 `;
 
 const OrderLabel = styled.label`
@@ -31,6 +48,18 @@ const OrderLabel = styled.label`
   line-height: 17px;
   margin-bottom: 10px;
   text-align: left;
+  @media ${devices.desktopS} {
+    width: 120px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 19px;
+  }
+`;
+
+const NameLabel = styled(OrderLabel)`
+  @media ${devices.desktopS} {
+    margin-bottom: 29px;
+  }
 `;
 
 const OrderTextInput = styled.input`
@@ -41,6 +70,16 @@ const OrderTextInput = styled.input`
   margin-bottom: 20px;
   padding-left: 5px;
   font-size: 14px;
+  @media ${devices.desktopS} {
+    width: 576px;
+    margin: 0;
+  }
+`;
+
+const NameInput = styled(OrderTextInput)`
+  @media ${devices.desktopS} {
+    margin-bottom: 29px;
+  }
 `;
 
 const NameReminder = styled.h5`
@@ -52,12 +91,23 @@ const NameReminder = styled.h5`
   margin-top: -14px;
   margin-bottom: 20px;
   font-weight: 400;
+
+  @media ${devices.desktopS} {
+    position: absolute;
+    top: 67px;
+    right: 464px;
+    margin: 0px;
+  }
 `;
 
 const DeliveryContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 26px;
+
+  @media ${devices.desktopS} {
+    gap: 32px;
+  }
 `;
 
 const DeliveryText = styled.div`
@@ -69,6 +119,10 @@ const DeliveryText = styled.div`
   font-weight: 400;
   line-height: 26px;
   align-items: center;
+
+  @media ${devices.desktopS} {
+    font-size: 16px;
+  }
 `;
 
 const DeliveryRadio = styled.input`
@@ -84,6 +138,10 @@ const DeliveryRadio = styled.input`
     background-color: #8b572a;
     border: 1px solid #8b572a;
   }
+
+  @media ${devices.desktopS} {
+    margin-right: 8px;
+  }
 `;
 
 const Order = () => {
@@ -92,8 +150,8 @@ const Order = () => {
       <TopContainer>
         <OrderHeadline>訂購資料</OrderHeadline>
         <OrderContainer>
-          <OrderLabel>收件人姓名</OrderLabel>
-          <OrderTextInput type="text" name="name" required />
+          <NameLabel>收件人姓名</NameLabel>
+          <NameInput type="text" name="name" required />
           <NameReminder>
             務必填寫完整收件人姓名，避免包裹無法順利簽收
           </NameReminder>
