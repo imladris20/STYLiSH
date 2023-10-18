@@ -81,8 +81,9 @@ const Product = () => {
 
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [maxQuantity, setMaxQuantity] = useState(null);
+  const [currentMaxQuantity, setMaxQuantity] = useState(null);
   const [availableSize, setAvailableSize] = useState([]);
+  const [initialMaxQuantity, setInitialMaxQuantity] = useState(null);
 
   const handleColorChange = (colorcode) => {
     setSelectedColor(colorcode);
@@ -98,6 +99,9 @@ const Product = () => {
     const finalSelection = product.variants.filter(
       (variant) => variant.color_code === selectedColor && variant.size === size
     );
+    if (!initialMaxQuantity) {
+      setInitialMaxQuantity(finalSelection[0].stock);
+    }
     setMaxQuantity(finalSelection[0].stock);
   };
 
@@ -111,6 +115,7 @@ const Product = () => {
     setSelectedColor(null);
     setSelectedSize(null);
     setMaxQuantity(null);
+    setInitialMaxQuantity(null);
     setAvailableSize([]);
   }, [product.variants]);
 
@@ -143,7 +148,7 @@ const Product = () => {
                     onSizeChange={handleSizeChange}
                   />
                   <Quantity
-                    maxQuantity={maxQuantity}
+                    currentMaxQuantity={currentMaxQuantity}
                     onAmountChange={handleAmountToSubmitChange}
                   />
                   <Submit
@@ -152,6 +157,7 @@ const Product = () => {
                     amountToSubmit={amountToSubmit}
                     setProduct={setProduct}
                     product={product}
+                    initialMaxQuantity={initialMaxQuantity}
                   />
                 </SelectionForm>
                 <SubInfo
