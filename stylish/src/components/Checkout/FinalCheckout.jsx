@@ -69,6 +69,9 @@ const FinalCheckoutButton = styled.button`
 
   @media ${devices.desktopS} {
     width: 240px;
+    height: 64px;
+    font-size: 20px;
+    letter-spacing: 4px;
   }
 `;
 
