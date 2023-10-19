@@ -23,6 +23,10 @@ const CartHeadline = styled.h1`
   margin-bottom: 10px;
   text-align: left;
   display: inline;
+
+  @media ${devices.desktopS} {
+    margin-bottom: 16px;
+  }
 `;
 
 const CartListIndexContainer = styled.div`
@@ -36,6 +40,7 @@ const CartListIndexContainer = styled.div`
     flex-direction: row;
     gap: 160px;
     margin-right: 206px;
+    margin-top: 1px;
   }
 `;
 
@@ -50,7 +55,7 @@ const CartListContainer = styled.div`
 
   @media ${devices.desktopS} {
     border: 1px #979797 solid;
-    padding: 40px 30px;
+    padding: 39px 30px 39px 29px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -177,7 +182,7 @@ const ItemSelectionsContainer = styled.div`
     grid-template-rows: 1fr;
     grid-template-columns: repeat(3, 1fr);
     height: unset;
-    gap: 111px;
+    gap: 112px;
   }
 `;
 

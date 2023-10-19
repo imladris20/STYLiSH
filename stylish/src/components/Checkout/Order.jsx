@@ -22,7 +22,7 @@ const OrderHeadline = styled.h1`
   text-align: left;
 
   @media ${devices.desktopS} {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
   }
 `;
 
@@ -97,6 +97,8 @@ const NameReminder = styled.h5`
     top: 67px;
     right: 464px;
     margin: 0px;
+    font-size: 16px;
+    line-height: 19px;
   }
 `;
 

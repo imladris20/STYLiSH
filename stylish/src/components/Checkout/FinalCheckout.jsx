@@ -46,6 +46,11 @@ const CheckoutCurrency = styled(CheckoutLabel)`
 
 const CheckoutFinalLabel = styled(CheckoutLabel)`
   margin-right: 74px;
+  white-space: nowrap;
+
+  @media ${devices.desktopS} {
+    margin-right: 78px;
+  }
 `;
 
 const CheckoutValue = styled.h4`
@@ -87,6 +92,7 @@ const FinalCheckoutButton = styled.button`
     height: 64px;
     font-size: 20px;
     letter-spacing: 4px;
+    margin-top: 50px;
   }
 `;
 

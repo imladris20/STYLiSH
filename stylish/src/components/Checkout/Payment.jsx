@@ -7,7 +7,7 @@ const TopContainer = styled.div`
   flex-direction: column;
   margin-bottom: 3px;
   @media ${devices.desktopS} {
-    margin-bottom: 40px;
+    margin-bottom: 41px;
   }
 `;
 
@@ -34,7 +34,7 @@ const PaymentContainer = styled.div`
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 120px 576px;
-    padding-top: 25px;
+    padding-top: 23px;
     grid-row-gap: 30px;
     align-items: center;
     position: relative;
