@@ -20,7 +20,7 @@ const MainLogoImage = styled.img`
   width: 129px;
   height: 24px;
   margin-top: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 
   @media ${devices.desktopS} {
     width: 258px;

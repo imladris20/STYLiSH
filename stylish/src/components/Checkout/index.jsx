@@ -9,7 +9,7 @@ const TopContainer = styled.div`
   width: auto;
   display: flex;
   flex-direction: column;
-  margin: 22px 24px 28px 24px;
+  margin: 20px 24px 28px 24px;
 
   @media ${devices.desktopS} {
     width: 1160px;
