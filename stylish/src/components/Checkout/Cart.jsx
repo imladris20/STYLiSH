@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import Remove from "../../assets/image/trash.png";
 import UserContext from "../../context/UserContext";
 
 const TopContainer = styled.div`
@@ -320,7 +321,7 @@ const Cart = () => {
             </InfoTextContainer>
             <TrashContainer>
               <TrashImg
-                src="/trash.png"
+                src={Remove}
                 onClick={(event) => handleRemoveItem(event, index)}
               ></TrashImg>
             </TrashContainer>
