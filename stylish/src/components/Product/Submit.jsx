@@ -29,8 +29,9 @@ const Submit = ({
   selectedSize,
   product,
   setProduct,
+  initialMaxQuantity,
 }) => {
-  const { cartCount, list, actions } = useContext(UserContext);
+  const { actions } = useContext(UserContext);
 
   function addCartCounter(number) {
     const currentCartCounter = localStorage.getItem("cartCount") || 0;
@@ -52,6 +53,7 @@ const Submit = ({
       color: product.colors.find((color) => color.code === selectedColor),
       size: selectedSize,
       qty: amountToSubmit,
+      maxQty: initialMaxQuantity,
       serialNo: `${product.id}+${selectedColor}+${selectedSize}`,
       image: product.main_image,
     };

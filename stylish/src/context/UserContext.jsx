@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const UserContext = createContext(null);
 
@@ -10,15 +10,10 @@ export const UserProvider = (props) => {
   const [isWide, setIsWide] = useState(window.innerWidth >= 1280);
 
   useEffect(() => {
-    // 監聽視窗大小的變化
     const handleResize = () => {
       setIsWide(window.innerWidth >= 1280);
     };
-
-    // 在組件掛載後加入事件監聽器
     window.addEventListener("resize", handleResize);
-
-    // 在組件卸載時移除事件監聽器
     return () => {
       window.removeEventListener("resize", handleResize);
     };

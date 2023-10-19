@@ -96,12 +96,12 @@ const WiderTopContainer = styled.div`
   }
 `;
 
-const Quantity = ({ maxQuantity, onAmountChange }) => {
+const Quantity = ({ currentMaxQuantity, onAmountChange }) => {
   const [amount, setAmount] = useState(0);
 
   useEffect(() => {
     setAmount(0);
-  }, [maxQuantity]);
+  }, [currentMaxQuantity]);
 
   const checkInput = (event) => {
     const value = event.target.value;
@@ -133,7 +133,7 @@ const Quantity = ({ maxQuantity, onAmountChange }) => {
         </QuatityBtn>
         <QuantityInput
           min="0"
-          max={maxQuantity}
+          max={currentMaxQuantity}
           type="number"
           name="quantity"
           value={amount}
@@ -141,7 +141,7 @@ const Quantity = ({ maxQuantity, onAmountChange }) => {
         />
         <QuatityBtn
           onClick={() => {
-            if (amount < maxQuantity) {
+            if (amount < currentMaxQuantity) {
               setAmount(Number(amount) + 1);
               onAmountChange(Number(amount) + 1);
             }

@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 //  Components
 import { devices } from "../../assets/device";
 import Loading from "../Loading";
-import MainInfo, { MainInfoContainer } from "./MainInfo";
 import Color from "./ColorSelection";
-import Size from "./SizeSelection";
-import Quantity from "./QuantitySelection";
-import Submit from "./Submit";
-import SubInfo from "./SubInfo";
+import MainInfo, { MainInfoContainer } from "./MainInfo";
 import InfoDevider from "./MoreInfo";
 import ProductDetail from "./ProductDetail";
+import Quantity from "./QuantitySelection";
+import Size from "./SizeSelection";
+import SubInfo from "./SubInfo";
+import Submit from "./Submit";
 
 const MainContainer = styled.div`
   display: flex;
@@ -81,8 +81,9 @@ const Product = () => {
 
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [maxQuantity, setMaxQuantity] = useState(null);
+  const [currentMaxQuantity, setMaxQuantity] = useState(null);
   const [availableSize, setAvailableSize] = useState([]);
+  const [initialMaxQuantity, setInitialMaxQuantity] = useState(null);
 
   const handleColorChange = (colorcode) => {
     setSelectedColor(colorcode);
@@ -98,6 +99,9 @@ const Product = () => {
     const finalSelection = product.variants.filter(
       (variant) => variant.color_code === selectedColor && variant.size === size
     );
+    if (!initialMaxQuantity) {
+      setInitialMaxQuantity(finalSelection[0].stock);
+    }
     setMaxQuantity(finalSelection[0].stock);
   };
 
@@ -111,6 +115,7 @@ const Product = () => {
     setSelectedColor(null);
     setSelectedSize(null);
     setMaxQuantity(null);
+    setInitialMaxQuantity(null);
     setAvailableSize([]);
   }, [product.variants]);
 
@@ -143,7 +148,7 @@ const Product = () => {
                     onSizeChange={handleSizeChange}
                   />
                   <Quantity
-                    maxQuantity={maxQuantity}
+                    currentMaxQuantity={currentMaxQuantity}
                     onAmountChange={handleAmountToSubmitChange}
                   />
                   <Submit
@@ -152,6 +157,7 @@ const Product = () => {
                     amountToSubmit={amountToSubmit}
                     setProduct={setProduct}
                     product={product}
+                    initialMaxQuantity={initialMaxQuantity}
                   />
                 </SelectionForm>
                 <SubInfo
