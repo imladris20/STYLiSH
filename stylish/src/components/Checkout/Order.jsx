@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import InputContext from "../../context/InputContext";
 
 const TopContainer = styled.div`
   width: 100%;
@@ -147,13 +149,15 @@ const DeliveryRadio = styled.input`
 `;
 
 const Order = () => {
+  const { name, actions } = useContext(InputContext);
+
   return (
     <>
       <TopContainer>
         <OrderHeadline>訂購資料</OrderHeadline>
         <OrderContainer>
           <NameLabel>收件人姓名</NameLabel>
-          <NameInput type="text" name="name" required />
+          <NameInput type="text" name="name" value={name} required />
           <NameReminder>
             務必填寫完整收件人姓名，避免包裹無法順利簽收
           </NameReminder>
