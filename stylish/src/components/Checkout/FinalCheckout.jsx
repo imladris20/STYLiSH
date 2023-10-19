@@ -27,6 +27,7 @@ const CheckoutInfoRowContainer = styled.div`
 const Devider = styled.div`
   width: 100%;
   border: 1px #3f3a3a solid;
+  margin-top: -2px;
 `;
 
 const CheckoutLabel = styled.h5`
@@ -43,6 +44,10 @@ const CheckoutCurrency = styled(CheckoutLabel)`
   margin-right: 8px;
 `;
 
+const CheckoutFinalLabel = styled(CheckoutLabel)`
+  margin-right: 74px;
+`;
+
 const CheckoutValue = styled.h4`
   color: #3f3a3a;
   font-size: 30px;
@@ -51,6 +56,14 @@ const CheckoutValue = styled.h4`
   line-height: 36px;
   word-wrap: break-word;
   margin: 0;
+`;
+
+const ProductTotalValue = styled(CheckoutValue)`
+  padding-right: 5px;
+`;
+
+const DeliveryValue = styled(CheckoutValue)`
+  padding-right: 3px;
 `;
 
 const FinalCheckoutButton = styled.button`
@@ -67,6 +80,7 @@ const FinalCheckoutButton = styled.button`
   margin-top: 36px;
   height: 44px;
   cursor: pointer;
+  padding-left: 9px;
 
   @media ${devices.desktopS} {
     width: 240px;
@@ -84,16 +98,16 @@ const FinalCheckout = () => {
           <CheckoutInfoRowContainer>
             <CheckoutLabel>總金額</CheckoutLabel>
             <CheckoutCurrency>NT.</CheckoutCurrency>
-            <CheckoutValue>2397</CheckoutValue>
+            <ProductTotalValue>2397</ProductTotalValue>
           </CheckoutInfoRowContainer>
           <CheckoutInfoRowContainer>
             <CheckoutLabel>運費</CheckoutLabel>
             <CheckoutCurrency>NT.</CheckoutCurrency>
-            <CheckoutValue>30</CheckoutValue>
+            <DeliveryValue>30</DeliveryValue>
           </CheckoutInfoRowContainer>
           <Devider />
           <CheckoutInfoRowContainer>
-            <CheckoutLabel>應付金額</CheckoutLabel>
+            <CheckoutFinalLabel>應付金額</CheckoutFinalLabel>
             <CheckoutCurrency>NT.</CheckoutCurrency>
             <CheckoutValue>2427</CheckoutValue>
           </CheckoutInfoRowContainer>

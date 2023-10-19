@@ -79,7 +79,7 @@ const ItemMainInfoContainer = styled.div`
   grid-template-rows: 1fr;
   grid-template-columns: 114px 1fr 50px;
   grid-gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 19px;
 
   @media ${devices.desktopS} {
     margin: 0px;
@@ -197,7 +197,7 @@ const QuantitySelect = styled.select`
   width: 80px;
   align-self: end;
   justify-self: center;
-  padding-left: 16px;
+  padding-left: 11px;
   color: #3f3a3a;
   font-size: 14px;
   line-height: 16px;

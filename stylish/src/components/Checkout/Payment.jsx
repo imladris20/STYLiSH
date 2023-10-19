@@ -5,7 +5,7 @@ const TopContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
+  margin-bottom: 3px;
   @media ${devices.desktopS} {
     margin-bottom: 40px;
   }
@@ -71,6 +71,7 @@ const PaymentTextInput = styled.input`
     font-weight: 400;
     line-height: 32px;
     word-wrap: break-word;
+    padding-left: 1px;
   }
 
   @media ${devices.desktopS} {

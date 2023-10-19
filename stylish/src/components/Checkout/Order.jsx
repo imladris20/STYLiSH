@@ -5,7 +5,7 @@ const TopContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 19px;
   @media ${devices.desktopS} {
     margin-bottom: 50px;
   }
@@ -131,7 +131,7 @@ const DeliveryRadio = styled.input`
   height: 16px;
   width: 16px;
   border: 1px #979797 solid;
-  margin-right: 3px;
+  margin-right: 6px;
   line-height: 26px;
   cursor: pointer;
   &:checked {
