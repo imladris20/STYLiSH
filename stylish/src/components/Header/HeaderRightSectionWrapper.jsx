@@ -171,7 +171,7 @@ const HeaderRightSectionWrapper = () => {
           onClick={handleClickOnDistracter}
         />
         <SearchForm
-          action="../../homepage.html"
+          action="../../index.html"
           method="get"
           onSubmit={handleSubmit}
           $isMobileSearchBarShow={isMobileSearchBarShow}

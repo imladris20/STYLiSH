@@ -9,6 +9,8 @@ export const UserProvider = (props) => {
 
   const [isWide, setIsWide] = useState(window.innerWidth >= 1280);
 
+  const [totalPrice, setTotalPrice] = useState(0);
+
   useEffect(() => {
     const handleResize = () => {
       setIsWide(window.innerWidth >= 1280);
@@ -31,9 +33,11 @@ export const UserProvider = (props) => {
         cartCount,
         list,
         isWide,
+        totalPrice,
         actions: {
           setCartCount,
           setList,
+          setTotalPrice,
         },
       }}
     >

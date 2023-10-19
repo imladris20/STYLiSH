@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
 import UserContext from "../../context/UserContext";
@@ -241,50 +241,116 @@ const EmptyCart = styled.h1`
 `;
 
 const Cart = () => {
-  const { list } = useContext(UserContext);
+  const { list, totalPrice, actions } = useContext(UserContext);
+
+  const [currentQty, setCurrentQty] = useState([]);
+
+  const handleChangeQuantity = (event, index) => {
+    const updatedQty = [...currentQty];
+    updatedQty[index] = parseInt(event.target.value);
+    setCurrentQty(updatedQty);
+
+    const updatedList = [...list];
+    updatedList[index].qty = parseInt(event.target.value);
+    actions.setList(updatedList);
+    localStorage.setItem("list", JSON.stringify(updatedList));
+  };
+
+  const handleRemoveItem = (event, index) => {
+    console.log(event.target);
+    console.log("Remove item index: ", index);
+    const updatedList = [...list];
+    updatedList.splice(index, 1);
+    actions.setList(updatedList);
+    localStorage.setItem("list", JSON.stringify(updatedList));
+
+    const updatedQty = [...currentQty];
+    updatedQty.splice(index, 1);
+    setCurrentQty(updatedQty);
+  };
+
+  useEffect(() => {
+    if (list) {
+      const newTotalPrice = list.reduce((total, item, index) => {
+        const subTotal = (currentQty[index] || item.qty) * item.price;
+        return total + subTotal;
+      }, 0);
+
+      actions.setTotalPrice(newTotalPrice);
+
+      const newCartCount = currentQty.reduce((totalQty, subQty) => {
+        return totalQty + subQty;
+      }, 0);
+
+      actions.setCartCount(newCartCount);
+      localStorage.setItem("cartCount", JSON.stringify(newCartCount));
+    }
+  }, [list, currentQty]);
 
   console.log("Current list state: ", list);
+  console.log("Current Total Price: ", totalPrice);
 
   let items = null;
 
   if (list) {
-    items = list.map((element, index) => {
+    items = list.map((element, index, array) => {
+      console.log("it's mapping");
       const { id, name, price, color, size, qty, maxQty, image } = element;
 
       const options = [];
+
+      if (currentQty.length !== array.length) {
+        currentQty.push(qty);
+      }
 
       for (let i = 1; i <= maxQty; i++) {
         options.push(<option key={i}>{i}</option>);
       }
 
+      const correctQty = currentQty[index] || qty;
+      const subTotal = correctQty * price;
+
       return (
         <CartListItem key={index}>
           <ItemMainInfoContainer>
-            <ItemImage src={image} alt="item1"></ItemImage>
+            <a href={`product/${id}`}>
+              <ItemImage src={image} alt="item1"></ItemImage>
+            </a>
             <InfoTextContainer>
-              <ItemTitle>{name}</ItemTitle>
+              <a href={`product/${id}`}>
+                <ItemTitle>{name}</ItemTitle>
+              </a>
               <ItemID>{id}</ItemID>
               <ItemColor>顏色｜{color.name}</ItemColor>
               <ItemSize>尺寸｜{size}</ItemSize>
             </InfoTextContainer>
             <TrashContainer>
-              <TrashImg src="/trash.png"></TrashImg>
+              <TrashImg
+                src="/trash.png"
+                onClick={(event) => handleRemoveItem(event, index)}
+              ></TrashImg>
             </TrashContainer>
           </ItemMainInfoContainer>
           <ItemSelectionsContainer>
             <SelectionText>數量</SelectionText>
             <SelectionText>單價</SelectionText>
             <SelectionText>小計</SelectionText>
-            <QuantitySelect defaultValue={qty} name="quantity">
+            <QuantitySelect
+              value={currentQty[index]}
+              name="quantity"
+              onChange={(event) => handleChangeQuantity(event, index)}
+            >
               {options}
             </QuantitySelect>
             <ItemPrice>TWD.{price}</ItemPrice>
-            <ItemPrice>TWD.{price * qty}</ItemPrice>
+            <ItemPrice>TWD.{subTotal}</ItemPrice>
           </ItemSelectionsContainer>
         </CartListItem>
       );
     });
   }
+
+  console.log("Current Qty: ", currentQty);
 
   return (
     <>
@@ -296,7 +362,7 @@ const Cart = () => {
           <CartListIndexLabel>小計</CartListIndexLabel>
         </CartListIndexContainer>
         <CartListContainer>
-          {list ? (
+          {list.length ? (
             items
           ) : (
             <>
