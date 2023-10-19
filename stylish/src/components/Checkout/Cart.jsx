@@ -241,7 +241,7 @@ const EmptyCart = styled.h1`
 `;
 
 const Cart = () => {
-  const { list, totalPrice, actions } = useContext(UserContext);
+  const { list, actions } = useContext(UserContext);
 
   const [currentQty, setCurrentQty] = useState([]);
 
@@ -257,8 +257,6 @@ const Cart = () => {
   };
 
   const handleRemoveItem = (event, index) => {
-    console.log(event.target);
-    console.log("Remove item index: ", index);
     const updatedList = [...list];
     updatedList.splice(index, 1);
     actions.setList(updatedList);
@@ -287,14 +285,10 @@ const Cart = () => {
     }
   }, [list, currentQty]);
 
-  console.log("Current list state: ", list);
-  console.log("Current Total Price: ", totalPrice);
-
   let items = null;
 
   if (list) {
     items = list.map((element, index, array) => {
-      console.log("it's mapping");
       const { id, name, price, color, size, qty, maxQty, image } = element;
 
       const options = [];
@@ -349,9 +343,6 @@ const Cart = () => {
       );
     });
   }
-
-  console.log("Current Qty: ", currentQty);
-
   return (
     <>
       <TopContainer>
