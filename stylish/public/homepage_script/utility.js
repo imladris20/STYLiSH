@@ -627,17 +627,17 @@ const showCampaign = (number, mutex) => {
 };
 
 export {
-  initialRender,
+  createDots,
+  fetchCampaigns,
   handleCategoryClicked,
-  widerEnsure,
+  handleScrolling,
+  initialRender,
+  renderCarousel,
   searchElements,
   search_button,
-  switchSearchBar,
-  handleScrolling,
-  fetchCampaigns,
-  renderCarousel,
-  createDots,
   showCampaign,
   startAutoSwitch,
   stopAutoSwitch,
+  switchSearchBar,
+  widerEnsure,
 };

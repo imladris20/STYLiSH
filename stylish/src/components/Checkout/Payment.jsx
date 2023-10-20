@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import InputContext from "../../context/InputContext";
 
 const TopContainer = styled.div`
   width: 100%;
@@ -81,6 +83,8 @@ const PaymentTextInput = styled.input`
 `;
 
 const Payment = () => {
+  const { actions, cardNumber, isCardNumberBlank, isCardNumberInvalid } =
+    useContext(InputContext);
   return (
     <>
       <TopContainer>
@@ -91,7 +95,9 @@ const Payment = () => {
             type="text"
             name="cardnumber"
             placeholder="**** **** **** ****"
-            required
+            onFocus={actions.handleTimeInvalid}
+            value={cardNumber}
+            onChange={actions.handleCardNumberChange}
           />
           <PaymentLabel>有效期限</PaymentLabel>
           <PaymentTextInput
