@@ -111,8 +111,6 @@ const FinalCheckout = () => {
 
   const finalTotal = totalPrice + deliverFee;
 
-  console.log("isOrderInfoComplete", isOrderInfoComplete);
-
   return (
     <>
       <TopContainer>

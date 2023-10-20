@@ -62,6 +62,8 @@ export const InputProvider = (props) => {
       setIsPhoneBlank(true);
     } else if (inputValue.length < 10) {
       setIsPhoneInvalid(true);
+    } else {
+      setIsPhoneInvalid(false);
     }
   };
 
@@ -91,6 +93,8 @@ export const InputProvider = (props) => {
       setIsAddressBlank(true);
     } else if (inputValue.length < 11) {
       setIsAddressInvalid(true);
+    } else {
+      setIsAddressInvalid(false);
     }
   };
 
@@ -183,10 +187,8 @@ export const InputProvider = (props) => {
       deliveryRadio.includes(true)
     ) {
       setIsOrderInfoComplete(true);
-      console.log("could submit");
     } else {
       setIsOrderInfoComplete(false);
-      console.log("couldn't submit");
     }
   }, [
     isNameInvalid,

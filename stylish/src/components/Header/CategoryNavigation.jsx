@@ -68,7 +68,7 @@ const CategoryNavigation = () => {
         <CategoryNavListItem>
           <CategoryNavListItemLink
             id={item}
-            href={`../homepage.html?category=${item}`}
+            href={`../index.html?category=${item}`}
           >
             {zhCategory[index]}
           </CategoryNavListItemLink>
