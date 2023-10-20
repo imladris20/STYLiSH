@@ -8,8 +8,10 @@ const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 19px;
+  position: relative;
   @media ${devices.desktopS} {
     margin-bottom: 50px;
+    position: unset;
   }
 `;
 
@@ -33,6 +35,7 @@ const OrderContainer = styled.div`
   flex-direction: column;
   padding-top: 20px;
   border-top: 1px #3f3a3a solid;
+  position: relative;
   @media ${devices.desktopS} {
     display: grid;
     grid-template-rows: 1fr;
@@ -40,7 +43,6 @@ const OrderContainer = styled.div`
     padding-top: 25px;
     grid-row-gap: 30px;
     align-items: center;
-    position: relative;
   }
 `;
 
@@ -50,6 +52,7 @@ const OrderLabel = styled.label`
   line-height: 17px;
   margin-bottom: 10px;
   text-align: left;
+
   @media ${devices.desktopS} {
     width: 120px;
     margin: 0;
@@ -75,6 +78,10 @@ const OrderTextInput = styled.input`
   @media ${devices.desktopS} {
     width: 576px;
     margin: 0;
+  }
+  &::placeholder {
+    color: #cccccc;
+    font-size: 14px;
   }
 `;
 
@@ -148,8 +155,108 @@ const DeliveryRadio = styled.input`
   }
 `;
 
+const RequiredReminder = styled.p`
+  display: ${(props) => (props.$isNameBlank ? "block" : "none")};
+  position: absolute;
+  color: palevioletred;
+  font-size: 12px;
+  font-weight: 400;
+  top: 56px;
+  right: 10px;
+
+  @media ${devices.desktopS} {
+    top: 33px;
+    right: 400px;
+  }
+`;
+
+const NameInvalid = styled(RequiredReminder)`
+  display: ${(props) => (props.$isNameInvalid ? "block" : "none")};
+  @media ${devices.desktopS} {
+    right: 324px;
+  }
+`;
+
+const PhoneRequired = styled(RequiredReminder)`
+  display: ${(props) => (props.$isPhoneBlank ? "block" : "none")};
+  top: 157px;
+  @media ${devices.desktopS} {
+    top: 124px;
+  }
+`;
+
+const PhoneInvalid = styled(RequiredReminder)`
+  display: ${(props) => (props.$isPhoneInvalid ? "block" : "none")};
+  top: 157px;
+  @media ${devices.desktopS} {
+    top: 124px;
+    right: 324px;
+  }
+`;
+
+const AddressRequired = styled(RequiredReminder)`
+  display: ${(props) => (props.$isAddressBlank ? "block" : "none")};
+  top: 236px;
+  @media ${devices.desktopS} {
+    top: 186px;
+  }
+`;
+
+const AddressInvalid = styled(RequiredReminder)`
+  display: ${(props) => (props.$isAddressInvalid ? "block" : "none")};
+  top: 236px;
+  @media ${devices.desktopS} {
+    top: 186px;
+    right: 324px;
+  }
+`;
+
+const EmailRequired = styled(RequiredReminder)`
+  display: ${(props) => (props.$isEmailBlank ? "block" : "none")};
+  top: 315px;
+  @media ${devices.desktopS} {
+    top: 248px;
+  }
+`;
+
+const EmailInvalid = styled(RequiredReminder)`
+  display: ${(props) => (props.$isEmailInvalid ? "block" : "none")};
+  top: 315px;
+  @media ${devices.desktopS} {
+    top: 248px;
+    right: 324px;
+  }
+`;
+
+const TimeRequired = styled(RequiredReminder)`
+  display: ${(props) => (props.$isTimeBlank ? "block" : "none")};
+  top: 360px;
+  left: 65px;
+  right: unset;
+  @media ${devices.desktopS} {
+    top: 309px;
+    left: 600px;
+  }
+`;
+
 const Order = () => {
-  const { name, actions } = useContext(InputContext);
+  const {
+    name,
+    isNameBlank,
+    isNameInvalid,
+    phone,
+    isPhoneBlank,
+    isPhoneInvalid,
+    address,
+    isAddressBlank,
+    isAddressInvalid,
+    email,
+    isEmailBlank,
+    isEmailInvalid,
+    deliveryRadio,
+    isTimeBlank,
+    actions,
+  } = useContext(InputContext);
 
   return (
     <>
@@ -157,31 +264,98 @@ const Order = () => {
         <OrderHeadline>訂購資料</OrderHeadline>
         <OrderContainer>
           <NameLabel>收件人姓名</NameLabel>
-          <NameInput type="text" name="name" value={name} required />
+          <NameInput
+            type="text"
+            name="name"
+            value={name}
+            onChange={actions.handleNameChange}
+            onBlur={actions.handleNameInvalid}
+            placeholder="請輸入繁體中文或英文"
+          />
           <NameReminder>
             務必填寫完整收件人姓名，避免包裹無法順利簽收
           </NameReminder>
+          <RequiredReminder $isNameBlank={isNameBlank}>
+            你484沒填
+          </RequiredReminder>
+          <NameInvalid $isNameInvalid={isNameInvalid}>
+            你填寫的姓名似乎不完整
+          </NameInvalid>
           <OrderLabel>手機</OrderLabel>
-          <OrderTextInput type="text" name="phone" required />
+          <OrderTextInput
+            type="text"
+            name="phone"
+            value={phone}
+            onChange={actions.handlePhoneChange}
+            onBlur={actions.handlePhoneInvalid}
+            placeholder="請輸入0~9之間的數字"
+          />
+          <PhoneRequired $isPhoneBlank={isPhoneBlank}>你484沒填</PhoneRequired>
+          <PhoneInvalid $isPhoneInvalid={isPhoneInvalid}>
+            你填寫的電話似乎不完整
+          </PhoneInvalid>
           <OrderLabel>地址</OrderLabel>
-          <OrderTextInput type="text" name="address" required />
+          <OrderTextInput
+            type="text"
+            name="address"
+            value={address}
+            onChange={actions.handleAddressChange}
+            onBlur={actions.handleAddressInvalid}
+            placeholder="請填寫完整地址"
+          />
+
+          <AddressRequired $isAddressBlank={isAddressBlank}>
+            你484沒填
+          </AddressRequired>
+          <AddressInvalid $isAddressInvalid={isAddressInvalid}>
+            你填寫的地址似乎不完整
+          </AddressInvalid>
           <OrderLabel>Email</OrderLabel>
-          <OrderTextInput type="email" name="email" required />
+          <OrderTextInput
+            type="email"
+            name="email"
+            value={email}
+            onChange={actions.handleEmailChange}
+            onBlur={actions.handleEmailInvalid}
+            placeholder="請填寫完整email"
+          />
+          <EmailRequired $isEmailBlank={isEmailBlank}>你484沒填</EmailRequired>
+          <EmailInvalid $isEmailInvalid={isEmailInvalid}>
+            你填寫的email似乎怪怪的
+          </EmailInvalid>
           <OrderLabel>配送時間</OrderLabel>
           <DeliveryContainer>
             <DeliveryText>
-              <DeliveryRadio type="radio" name="time" />
+              <DeliveryRadio
+                type="radio"
+                name="time"
+                checked={deliveryRadio[0]}
+                onChange={() => actions.handleTimeChange(0)}
+              />
               08:00-12:00
             </DeliveryText>
             <DeliveryText>
-              <DeliveryRadio type="radio" name="time" />
+              <DeliveryRadio
+                type="radio"
+                name="time"
+                checked={deliveryRadio[1]}
+                onChange={() => actions.handleTimeChange(1)}
+              />
               14:00-18:00
             </DeliveryText>
             <DeliveryText>
-              <DeliveryRadio type="radio" name="time" />
+              <DeliveryRadio
+                type="radio"
+                name="time"
+                checked={deliveryRadio[2]}
+                onChange={() => actions.handleTimeChange(2)}
+              />
               不指定
             </DeliveryText>
           </DeliveryContainer>
+          <TimeRequired $isTimeBlank={isTimeBlank}>
+            請選擇配送時間！
+          </TimeRequired>
         </OrderContainer>
       </TopContainer>
     </>
