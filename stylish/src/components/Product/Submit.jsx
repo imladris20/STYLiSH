@@ -1,10 +1,10 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
-import { useContext } from "react";
 import { devices } from "../../assets/device";
 import UserContext from "../../context/UserContext";
 
 const SubmitBtn = styled.input`
-  background-color: black;
+  background-color: ${(props) => props.$buttonColor};
   width: 100%;
   height: 44px;
   color: #fff;
@@ -32,6 +32,8 @@ const Submit = ({
   initialMaxQuantity,
 }) => {
   const { actions } = useContext(UserContext);
+  const [reminder, setReminder] = useState("加入購物車");
+  const [buttonColor, setbuttonColor] = useState("black");
 
   function addCartCounter(number) {
     const currentCartCounter = localStorage.getItem("cartCount") || 0;
@@ -44,6 +46,16 @@ const Submit = ({
   }
 
   const handleClick = () => {
+    if (!initialMaxQuantity || amountToSubmit === 0) {
+      setReminder("顏色、尺寸與數量都要選好才能加入喔~");
+      setbuttonColor("grey");
+      setTimeout(() => {
+        setReminder("加入購物車");
+        setbuttonColor("black");
+      }, 2000);
+      return;
+    }
+
     const currentList = JSON.parse(localStorage.getItem("list")) || [];
 
     const newListItem = {
@@ -88,7 +100,14 @@ const Submit = ({
     setProduct({ ...product, variants: updatedVariants });
   };
 
-  return <SubmitBtn type="button" value="加入購物車" onClick={handleClick} />;
+  return (
+    <SubmitBtn
+      type="button"
+      value={reminder}
+      onClick={handleClick}
+      $buttonColor={buttonColor}
+    />
+  );
 };
 
 export default Submit;

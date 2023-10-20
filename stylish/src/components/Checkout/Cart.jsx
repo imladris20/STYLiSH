@@ -1,5 +1,8 @@
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import Remove from "../../assets/image/trash.png";
+import UserContext from "../../context/UserContext";
 
 const TopContainer = styled.div`
   width: 100%;
@@ -50,7 +53,6 @@ const CartListIndexLabel = styled(CartHeadline)`
 `;
 
 const CartListContainer = styled.div`
-  height: 793px;
   margin: 0px;
 
   @media ${devices.desktopS} {
@@ -88,10 +90,9 @@ const ItemMainInfoContainer = styled.div`
 
   @media ${devices.desktopS} {
     margin: 0px;
-    grid-template-columns: 114px 1fr;
+    grid-template-columns: 114px 354px;
     grid-column-gap: 16px;
     grid-row-gap: 0px;
-    margin-right: 242px;
   }
 `;
 
@@ -222,44 +223,127 @@ const ItemPrice = styled(ItemTextTemplate)`
   }
 `;
 
-const Cart = ({ placeHolder }) => {
-  const items = placeHolder.map((element, index) => {
-    const { id, name, price, color, size, qty, maxQty, image } = element;
+const EmptyCart = styled.h1`
+  /* border: 1px #979797 solid; */
+  height: 24px;
+  line-height: 22px;
+  margin: 20px 0 20px 0;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+  color: #aaaaaa;
 
-    const options = [];
+  @media ${devices.desktopS} {
+    /* text-align: center; */
+    font-size: 24px;
+    border: none;
+    height: 24px;
+  }
+`;
 
-    for (let i = 1; i <= maxQty; i++) {
-      options.push(<option key={i}>{i}</option>);
+const Cart = () => {
+  const { list, actions } = useContext(UserContext);
+
+  const [currentQty, setCurrentQty] = useState([]);
+
+  const handleChangeQuantity = (event, index) => {
+    const updatedQty = [...currentQty];
+    updatedQty[index] = parseInt(event.target.value);
+    setCurrentQty(updatedQty);
+
+    const updatedList = [...list];
+    updatedList[index].qty = parseInt(event.target.value);
+    actions.setList(updatedList);
+    localStorage.setItem("list", JSON.stringify(updatedList));
+  };
+
+  const handleRemoveItem = (event, index) => {
+    const updatedList = [...list];
+    updatedList.splice(index, 1);
+    actions.setList(updatedList);
+    localStorage.setItem("list", JSON.stringify(updatedList));
+
+    const updatedQty = [...currentQty];
+    updatedQty.splice(index, 1);
+    setCurrentQty(updatedQty);
+  };
+
+  useEffect(() => {
+    if (list) {
+      const newTotalPrice = list.reduce((total, item, index) => {
+        const subTotal = (currentQty[index] || item.qty) * item.price;
+        return total + subTotal;
+      }, 0);
+
+      actions.setTotalPrice(newTotalPrice);
+
+      const newCartCount = currentQty.reduce((totalQty, subQty) => {
+        return totalQty + subQty;
+      }, 0);
+
+      actions.setCartCount(newCartCount);
+      localStorage.setItem("cartCount", JSON.stringify(newCartCount));
     }
+  }, [list, currentQty]);
 
-    return (
-      <CartListItem key={index}>
-        <ItemMainInfoContainer>
-          <ItemImage src={image} alt="item1"></ItemImage>
-          <InfoTextContainer>
-            <ItemTitle>{name}</ItemTitle>
-            <ItemID>{id}</ItemID>
-            <ItemColor>顏色｜{color.name}</ItemColor>
-            <ItemSize>尺寸｜{size}</ItemSize>
-          </InfoTextContainer>
-          <TrashContainer>
-            <TrashImg src="/trash.png"></TrashImg>
-          </TrashContainer>
-        </ItemMainInfoContainer>
-        <ItemSelectionsContainer>
-          <SelectionText>數量</SelectionText>
-          <SelectionText>單價</SelectionText>
-          <SelectionText>小計</SelectionText>
-          <QuantitySelect defaultValue={qty} name="quantity">
-            {options}
-          </QuantitySelect>
-          <ItemPrice>TWD.{price}</ItemPrice>
-          <ItemPrice>TWD.{price * qty}</ItemPrice>
-        </ItemSelectionsContainer>
-      </CartListItem>
-    );
-  });
+  let items = null;
 
+  if (list) {
+    items = list.map((element, index, array) => {
+      const { id, name, price, color, size, qty, maxQty, image } = element;
+
+      const options = [];
+
+      if (currentQty.length !== array.length) {
+        currentQty.push(qty);
+      }
+
+      for (let i = 1; i <= maxQty; i++) {
+        options.push(<option key={i}>{i}</option>);
+      }
+
+      const correctQty = currentQty[index] || qty;
+      const subTotal = correctQty * price;
+
+      return (
+        <CartListItem key={index}>
+          <ItemMainInfoContainer>
+            <a href={`product/${id}`}>
+              <ItemImage src={image} alt="item1"></ItemImage>
+            </a>
+            <InfoTextContainer>
+              <a href={`product/${id}`}>
+                <ItemTitle>{name}</ItemTitle>
+              </a>
+              <ItemID>{id}</ItemID>
+              <ItemColor>顏色｜{color.name}</ItemColor>
+              <ItemSize>尺寸｜{size}</ItemSize>
+            </InfoTextContainer>
+            <TrashContainer>
+              <TrashImg
+                src={Remove}
+                onClick={(event) => handleRemoveItem(event, index)}
+              ></TrashImg>
+            </TrashContainer>
+          </ItemMainInfoContainer>
+          <ItemSelectionsContainer>
+            <SelectionText>數量</SelectionText>
+            <SelectionText>單價</SelectionText>
+            <SelectionText>小計</SelectionText>
+            <QuantitySelect
+              value={currentQty[index]}
+              name="quantity"
+              onChange={(event) => handleChangeQuantity(event, index)}
+            >
+              {options}
+            </QuantitySelect>
+            <ItemPrice>TWD.{price}</ItemPrice>
+            <ItemPrice>TWD.{subTotal}</ItemPrice>
+          </ItemSelectionsContainer>
+        </CartListItem>
+      );
+    });
+  }
   return (
     <>
       <TopContainer>
@@ -269,7 +353,16 @@ const Cart = ({ placeHolder }) => {
           <CartListIndexLabel>單價</CartListIndexLabel>
           <CartListIndexLabel>小計</CartListIndexLabel>
         </CartListIndexContainer>
-        <CartListContainer>{items}</CartListContainer>
+        <CartListContainer>
+          {list.length ? (
+            items
+          ) : (
+            <>
+              <EmptyCart>你的購物車空空如也 QQ</EmptyCart>
+              <EmptyCart>去逛逛、買點東西吧 ~~~</EmptyCart>
+            </>
+          )}
+        </CartListContainer>
       </TopContainer>
     </>
   );

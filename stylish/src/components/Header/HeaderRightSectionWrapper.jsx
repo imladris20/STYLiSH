@@ -1,11 +1,11 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
-import { useContext, useState } from "react";
 import UserContext from "../../context/UserContext";
 import {
-  IconLink,
-  CartLinkImage,
   CartLinkCounter,
+  CartLinkImage,
+  IconLink,
   ProfileLinkImage,
 } from "./MobileBottomNav";
 

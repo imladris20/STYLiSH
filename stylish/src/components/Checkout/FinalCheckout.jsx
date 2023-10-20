@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import UserContext from "../../context/UserContext";
 
 const TopContainer = styled.div`
   width: 100%;
@@ -97,6 +99,11 @@ const FinalCheckoutButton = styled.button`
 `;
 
 const FinalCheckout = () => {
+  const { totalPrice } = useContext(UserContext);
+  const deliverFee = 30;
+
+  const finalTotal = totalPrice + deliverFee;
+
   return (
     <>
       <TopContainer>
@@ -104,18 +111,18 @@ const FinalCheckout = () => {
           <CheckoutInfoRowContainer>
             <CheckoutLabel>總金額</CheckoutLabel>
             <CheckoutCurrency>NT.</CheckoutCurrency>
-            <ProductTotalValue>2397</ProductTotalValue>
+            <ProductTotalValue>{totalPrice}</ProductTotalValue>
           </CheckoutInfoRowContainer>
           <CheckoutInfoRowContainer>
             <CheckoutLabel>運費</CheckoutLabel>
             <CheckoutCurrency>NT.</CheckoutCurrency>
-            <DeliveryValue>30</DeliveryValue>
+            <DeliveryValue>{deliverFee}</DeliveryValue>
           </CheckoutInfoRowContainer>
           <Devider />
           <CheckoutInfoRowContainer>
             <CheckoutFinalLabel>應付金額</CheckoutFinalLabel>
             <CheckoutCurrency>NT.</CheckoutCurrency>
-            <CheckoutValue>2427</CheckoutValue>
+            <CheckoutValue>{finalTotal}</CheckoutValue>
           </CheckoutInfoRowContainer>
         </CheckoutInfoContainer>
         <FinalCheckoutButton>確認付款</FinalCheckoutButton>

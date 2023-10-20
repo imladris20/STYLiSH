@@ -3,11 +3,20 @@ import { createContext, useEffect, useState } from "react";
 const UserContext = createContext(null);
 
 export const UserProvider = (props) => {
+  function createInitializeList() {
+    if (localStorage.getItem("list")) {
+      return JSON.parse(localStorage.getItem("list"));
+    } else {
+      return [];
+    }
+  }
+
   const [cartCount, setCartCount] = useState(
     localStorage.getItem("cartCount") || 0
   );
-
   const [isWide, setIsWide] = useState(window.innerWidth >= 1280);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [list, setList] = useState(createInitializeList);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,17 +28,17 @@ export const UserProvider = (props) => {
     };
   }, []);
 
-  const [list, setList] = useState([]);
-
   return (
     <UserContext.Provider
       value={{
         cartCount,
         list,
         isWide,
+        totalPrice,
         actions: {
           setCartCount,
           setList,
+          setTotalPrice,
         },
       }}
     >
