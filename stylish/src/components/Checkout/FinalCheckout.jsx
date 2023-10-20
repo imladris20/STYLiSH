@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
+import InputContext from "../../context/InputContext";
 import UserContext from "../../context/UserContext";
 
 const TopContainer = styled.div`
@@ -89,6 +90,11 @@ const FinalCheckoutButton = styled.button`
   cursor: pointer;
   padding-left: 9px;
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #cccccc;
+  }
+
   @media ${devices.desktopS} {
     width: 240px;
     height: 64px;
@@ -100,9 +106,12 @@ const FinalCheckoutButton = styled.button`
 
 const FinalCheckout = () => {
   const { totalPrice } = useContext(UserContext);
+  const { isOrderInfoComplete } = useContext(InputContext);
   const deliverFee = 30;
 
   const finalTotal = totalPrice + deliverFee;
+
+  console.log("isOrderInfoComplete", isOrderInfoComplete);
 
   return (
     <>
@@ -125,7 +134,9 @@ const FinalCheckout = () => {
             <CheckoutValue>{finalTotal}</CheckoutValue>
           </CheckoutInfoRowContainer>
         </CheckoutInfoContainer>
-        <FinalCheckoutButton>確認付款</FinalCheckoutButton>
+        <FinalCheckoutButton disabled={!isOrderInfoComplete}>
+          確認付款
+        </FinalCheckoutButton>
       </TopContainer>
     </>
   );

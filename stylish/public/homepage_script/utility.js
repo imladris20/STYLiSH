@@ -211,6 +211,7 @@ const initialRender = (stylishAPI, mutex) => {
       })
       .catch(handleRenderFail);
   } else {
+    console.error("There's no valid queries.");
     fetchProduct(stylishAPI, "category", "all", mutex.currentPage)
       .then(({ data, next_paging }) => {
         if (next_paging) {
@@ -219,7 +220,6 @@ const initialRender = (stylishAPI, mutex) => {
         handleRenderSuccess(data);
       })
       .catch(handleRenderFail);
-    throw Error("There's no valid queries.");
   }
 };
 

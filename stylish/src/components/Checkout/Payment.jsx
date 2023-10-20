@@ -83,7 +83,8 @@ const PaymentTextInput = styled.input`
 `;
 
 const Payment = () => {
-  const { actions } = useContext(InputContext);
+  const { actions, cardNumber, isCardNumberBlank, isCardNumberInvalid } =
+    useContext(InputContext);
   return (
     <>
       <TopContainer>
@@ -95,7 +96,8 @@ const Payment = () => {
             name="cardnumber"
             placeholder="**** **** **** ****"
             onFocus={actions.handleTimeInvalid}
-            required
+            value={cardNumber}
+            onChange={actions.handleCardNumberChange}
           />
           <PaymentLabel>有效期限</PaymentLabel>
           <PaymentTextInput

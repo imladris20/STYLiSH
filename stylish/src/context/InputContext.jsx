@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const InputContext = createContext(null);
 
@@ -87,10 +87,10 @@ export const InputProvider = (props) => {
     if (isAddressBlank) {
       setIsAddressInvalid(false);
       return;
+    } else if (inputValue.length === 0) {
+      setIsAddressBlank(true);
     } else if (inputValue.length < 11) {
       setIsAddressInvalid(true);
-    } else {
-      setIsAddressInvalid(false);
     }
   };
 
@@ -115,6 +115,8 @@ export const InputProvider = (props) => {
     if (isEmailBlank) {
       setIsEmailInvalid(false);
       return;
+    } else if (inputValue.length === 0) {
+      setIsEmailBlank(true);
     } else if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(inputValue)) {
       setIsEmailInvalid(false);
     } else {
@@ -141,6 +143,59 @@ export const InputProvider = (props) => {
     }
   };
 
+  const [cardNumber, setCardNumber] = useState("");
+  const [isCardNumberBlank, setIsCardNumberBlank] = useState(false);
+  const [isCardNumberInvalid, setIsCardNumberInvalid] = useState(false);
+
+  const handleCardNumberChange = (event) => {
+    const inputValue = event.target.value;
+    if (/^[0-9]{0,16}$/.test(inputValue)) {
+      setCardNumber(inputValue);
+      if (inputValue === "") {
+        setIsCardNumberBlank(true);
+        setIsCardNumberInvalid(false);
+      } else {
+        setIsCardNumberBlank(false);
+      }
+    }
+  };
+
+  const handleCardNumberInvalid = (event) => {
+    const inputValue = event.target.value;
+    if (isCardNumberBlank) {
+      setIsCardNumberInvalid(false);
+      return;
+    } else if (inputValue.length === 0) {
+      setIsCardNumberBlank(true);
+    } else if (inputValue.length < 10) {
+      setIsCardNumberInvalid(true);
+    }
+  };
+
+  const [isOrderInfoComplete, setIsOrderInfoComplete] = useState(false);
+
+  useEffect(() => {
+    if (
+      !isNameInvalid &&
+      !isPhoneInvalid &&
+      !isAddressInvalid &&
+      !isEmailInvalid &&
+      deliveryRadio.includes(true)
+    ) {
+      setIsOrderInfoComplete(true);
+      console.log("could submit");
+    } else {
+      setIsOrderInfoComplete(false);
+      console.log("couldn't submit");
+    }
+  }, [
+    isNameInvalid,
+    isPhoneInvalid,
+    isAddressInvalid,
+    isEmailInvalid,
+    deliveryRadio,
+  ]);
+
   return (
     <InputContext.Provider
       value={{
@@ -158,6 +213,10 @@ export const InputProvider = (props) => {
         isEmailInvalid,
         deliveryRadio,
         isTimeBlank,
+        cardNumber,
+        isCardNumberBlank,
+        isCardNumberInvalid,
+        isOrderInfoComplete,
         actions: {
           handleNameChange,
           handleNameInvalid,
@@ -169,6 +228,8 @@ export const InputProvider = (props) => {
           handleEmailInvalid,
           handleTimeChange,
           handleTimeInvalid,
+          handleCardNumberChange,
+          handleCardNumberInvalid,
         },
       }}
     >
