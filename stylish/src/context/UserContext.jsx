@@ -18,6 +18,11 @@ export const UserProvider = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [list, setList] = useState(createInitializeList);
 
+  const [authResponse, setResponse] = useState({});
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
+
   useEffect(() => {
     const handleResize = () => {
       setIsWide(window.innerWidth >= 1280);
@@ -35,10 +40,14 @@ export const UserProvider = (props) => {
         list,
         isWide,
         totalPrice,
+        authResponse,
+        accessToken,
         actions: {
           setCartCount,
           setList,
           setTotalPrice,
+          setResponse,
+          setAccessToken,
         },
       }}
     >

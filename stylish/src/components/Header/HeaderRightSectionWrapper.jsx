@@ -171,7 +171,7 @@ const HeaderRightSectionWrapper = () => {
           onClick={handleClickOnDistracter}
         />
         <SearchForm
-          action="../../homepage.html"
+          action="../../index.html"
           method="get"
           onSubmit={handleSubmit}
           $isMobileSearchBarShow={isMobileSearchBarShow}
@@ -192,8 +192,8 @@ const HeaderRightSectionWrapper = () => {
         <WiderCartLinkImage href="/checkout" />
         <CartLinkCounter href="/checkout">{cartCount}</CartLinkCounter>
       </WiderCartLink>
-      <WiderCartLink>
-        <WiderProfileLinkImage />
+      <WiderCartLink href="/profile">
+        <WiderProfileLinkImage href="/profile" />
       </WiderCartLink>
     </Top>
   );

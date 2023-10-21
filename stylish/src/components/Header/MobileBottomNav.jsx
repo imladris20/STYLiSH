@@ -1,6 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { devices } from "../../assets/device";
-import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 
 const Top = styled.nav`
@@ -90,10 +90,10 @@ const MobileBottomNav = () => {
         </MobileBottomNavListItem>
         <MobileBottomNavDevider>|</MobileBottomNavDevider>
         <MobileBottomNavListItem>
-          <IconLink>
-            <ProfileLinkImage />
+          <IconLink href="/profile">
+            <ProfileLinkImage href="/profile" />
           </IconLink>
-          <IconLinkText>會員</IconLinkText>
+          <IconLinkText href="/profile">會員</IconLinkText>
         </MobileBottomNavListItem>
       </MobileBottomNavList>
     </Top>
